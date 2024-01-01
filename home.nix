@@ -6,6 +6,9 @@
   home.username = "ky";
   home.homeDirectory = "/home/ky";
 
+  imports = [
+    ./shell/bash.nix 
+  ];
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -63,17 +66,7 @@
   #  /etc/profiles/per-user/ky/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
-  };
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      "xd" = "echo xd";
-      "c" = "clear";
-      "listgens" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-      "deletegens" = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations";
-
-    };
+     EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.

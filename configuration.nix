@@ -13,7 +13,7 @@
 {
   imports = [ 
 		./hardware-configuration.nix
-    ]; 
+  ]; 
 
   hardware.opengl = {
   	enable = true;
@@ -56,7 +56,27 @@
 
   networking.hostName = "sig"; 
 
-  # Pick only one of the below networking options.
+  security.rtkit.enable = true;
+	security.polkit.enable = true;
+  systemd = {
+   user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+   };
+  };
+
+
+
+ # Pick only one of the below networking options.
   networking.networkmanager.enable = true;  
 
   time.timeZone = "America/Los_Angeles";
@@ -75,32 +95,46 @@
     enableGhostscriptFonts = true;
     packages = with pkgs; [
       inconsolata
-      jetbrains-mono
-	  noto-fonts-cjk-sans
-	  terminus_font
-	  mononoki
+      font-awesome
+	    noto-fonts-cjk-sans
+	    mononoki
     ];
   };
 
   services.xserver.enable = true;
+	services.xserver.displayManager.sessionCommands = ''
+    xset -dpms  # Disable Energy Star, as we are going to suspend anyway and it may hide "success" on that
+    xset s blank # `noblank` may be useful for debugging
+    xset s 300 # seconds
+    ${pkgs.lightlocker}/bin/light-locker --idle-hint &
+  '';
+	systemd.targets.hybrid-sleep.enable = true;
+  services.logind.extraConfig = ''
+    IdleAction=hybrid-sleep
+    IdleActionSec=20s
+  '';
   services.xserver.windowManager.qtile.enable = true;
+	services.xserver.windowManager.xmonad = {
+		enable = true;
+		enableContribAndExtras = true;
+	};
   services.picom.enable = true;
 
-  # services.xserver.xkb.layout = "us";
+  services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   services.printing.enable = true;
 
-  security.rtkit.enable = true;
   services.pipewire = {
   	enable = true;
-	alsa.enable = true;
+	  alsa.enable = true;
   	alsa.support32Bit = true;
   	pulse.enable = true;
   	jack.enable = true;
    };
+
    services.xbanish = {
-	enable = true;
+		 enable = true;
    };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -108,56 +142,66 @@
 
   users.users.ky = {
    isNormalUser = true;
-   extraGroups = [ "wheel" ]; 
+   extraGroups = [ "wheel" "libvirt" ]; 
    packages = with pkgs; [
     alacritty
-	betterlockscreen
-	discord
-	dmenu
-	flameshot
-	ghc
-	librewolf
-	mpv
-	nitrogen
-	obs-studio
-	pulsemixer
-	qbittorrent
-	stow
-	sxiv
-	thunderbird
-	vlc
-	vscodium
+	  betterlockscreen
+    bitwarden
+	  dmenu
+    feh
+	  flameshot
+	  ghc
+		haskellPackages.xmobar
+		htop
+	  librewolf
+	  mpv
+	  nitrogen
+	  obs-studio
+	  pulsemixer
+	  qbittorrent
+		rofi
+	  stow
+	  sxiv
+	  thunderbird
+		trayer
+		vesktop
+	  vlc
+	  vscodium
+		xdotool
    ];
   };
 
-
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-	bat
-	btop
-	cmatrix
-	git
-	killall
-	neofetch
-	neovim
-	pfetch-rs
-	ranger
-	unzip
-	vim
-	wget	
+		bat
+		btop
+		cmatrix
+		git
+		killall
+		neofetch
+		neovim
+		pfetch-rs
+    polkit_gnome
+		ranger
+		unzip
+		usbutils
+		vim
+		wget	
+		zip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-   programs.mtr.enable = true;
-   programs.gnupg.agent = {
-     enable = true;
-     enableSSHSupport = true;
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
    };
   programs.neovim = { 
       defaultEditor = true;
   };
-
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
