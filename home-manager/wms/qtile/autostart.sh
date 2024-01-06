@@ -1,1 +1,0 @@
-../../dots/qtile/.config/qtile/autostart.sh
