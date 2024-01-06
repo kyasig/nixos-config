@@ -11,6 +11,12 @@
 { config, lib, pkgs, ... }:
 
 {
+  system.activationScripts.diff = {
+    supportsDryActivation = true;
+    text = ''
+      ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+    '';
+  };
   imports = [ 
 		./hardware-configuration.nix
   ]; 
@@ -74,8 +80,6 @@
    };
   };
 
-
-
  # Pick only one of the below networking options.
   networking.networkmanager.enable = true;  
 
@@ -101,27 +105,18 @@
     ];
   };
 
+  powerManagement.enable = true;
+  services.tlp.enable = true;
+
+
   services.xserver.enable = true;
-	services.xserver.displayManager.sessionCommands = ''
-    xset -dpms  # Disable Energy Star, as we are going to suspend anyway and it may hide "success" on that
-    xset s blank # `noblank` may be useful for debugging
-    xset s 300 # seconds
-    ${pkgs.lightlocker}/bin/light-locker --idle-hint &
-  '';
-	systemd.targets.hybrid-sleep.enable = true;
-  services.logind.extraConfig = ''
-    IdleAction=hybrid-sleep
-    IdleActionSec=20s
-  '';
   services.xserver.windowManager.qtile.enable = true;
-	services.xserver.windowManager.xmonad = {
-		enable = true;
-		enableContribAndExtras = true;
-	};
-  services.picom.enable = true;
+  services.xserver.windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+  };
 
   services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   services.printing.enable = true;
 
@@ -139,59 +134,38 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
-
   users.users.ky = {
+   shell = pkgs.zsh;
    isNormalUser = true;
-   extraGroups = [ "wheel" "libvirt" ]; 
+   extraGroups = [ "wheel" "libvirt" "video" ]; 
    packages = with pkgs; [
-    alacritty
-	  betterlockscreen
     bitwarden
 	  dmenu
-    feh
-	  flameshot
 	  ghc
-		haskellPackages.xmobar
-		htop
-	  librewolf
 	  mpv
-	  nitrogen
 	  obs-studio
 	  pulsemixer
-	  qbittorrent
-		rofi
-	  stow
-	  sxiv
 	  thunderbird
-		trayer
 		vesktop
 	  vlc
 	  vscodium
-		xdotool
    ];
   };
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-		bat
-		btop
-		cmatrix
 		git
-		killall
-		neofetch
 		neovim
-		pfetch-rs
     polkit_gnome
-		ranger
 		unzip
-		usbutils
 		vim
 		wget	
-		zip
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
+
+  programs.zsh.enable = true;
   programs.mtr.enable = true;
   programs.gnupg.agent = {
     enable = true;
@@ -200,6 +174,8 @@
   programs.neovim = { 
       defaultEditor = true;
   };
+
+  programs.nano.enable = false;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   # List services that you want to enable:

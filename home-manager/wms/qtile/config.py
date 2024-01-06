@@ -1,0 +1,1 @@
+../../dots/qtile/.config/qtile/config.py
