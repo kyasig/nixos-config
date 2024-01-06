@@ -3,17 +3,24 @@
 
 	inputs = {
     nixpkgs.url = "github:NixOs/nixpkgs/nixos-23.11";
+
 		home-manager = {
 			url = "github:nix-community/home-manager/release-23.11";
 		  inputs.nixpkgs.follows = "nixpkgs";
 		};
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixkpgs.follows = "nixpkgs";
     };
   };
 
-	outputs = {self,nixpkgs,home-manager, ...}@inputs:
+	outputs = {
+    self,
+    nixpkgs,
+    home-manager, 
+    ...
+  }@inputs:
     let
       lib = nixpkgs.lib;
 			system = "x86_64-linux";

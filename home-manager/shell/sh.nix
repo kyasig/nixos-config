@@ -20,6 +20,7 @@ in
 {
 
  imports = [./starship.nix];
+
  programs.zsh = {
     enable = true;
     enableAutosuggestions = true;

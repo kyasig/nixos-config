@@ -21,6 +21,11 @@
 		./hardware-configuration.nix
   ]; 
 
+  
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    auto-optimise-store = true;
+  };
   hardware.opengl = {
   	enable = true;
 	  driSupport = true;
@@ -137,19 +142,8 @@
   users.users.ky = {
    shell = pkgs.zsh;
    isNormalUser = true;
-   extraGroups = [ "wheel" "libvirt" "video" ]; 
-   packages = with pkgs; [
-    bitwarden
-	  dmenu
-	  ghc
-	  mpv
-	  obs-studio
-	  pulsemixer
-	  thunderbird
-		vesktop
-	  vlc
-	  vscodium
-   ];
+   initialPassword = "xd";
+   extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"]; 
   };
 
   # List packages installed in system profile. To search, run:
@@ -212,6 +206,5 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
   
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 }
 
