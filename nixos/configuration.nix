@@ -1,13 +1,3 @@
-# _   _ _____  _____  ____
-#| \ | |_ _\ \/ / _ \/ ___|
-#|  \| || | \  / | | \___ \
-#| |\  || | /  \ |_| |___) |
-#|_| \_|___/_/\_\___/|____/
-
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 {
@@ -17,6 +7,7 @@
       ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
     '';
   };
+
   imports = [ 
 		./hardware-configuration.nix
   ]; 
@@ -85,7 +76,6 @@
    };
   };
 
- # Pick only one of the below networking options.
   networking.networkmanager.enable = true;  
 
   time.timeZone = "America/Los_Angeles";
@@ -115,7 +105,6 @@
 
 
   services.xserver.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
   services.xserver.windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
@@ -133,12 +122,9 @@
   	jack.enable = true;
    };
 
-   services.xbanish = {
-		 enable = true;
-   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true; #trackpad
+
   users.users.ky = {
    shell = pkgs.zsh;
    isNormalUser = true;
@@ -146,7 +132,6 @@
    extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"]; 
   };
 
-  # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
 		git
 		neovim
@@ -158,7 +143,6 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-
   programs.zsh.enable = true;
   programs.mtr.enable = true;
   programs.gnupg.agent = {
@@ -172,10 +156,24 @@
   programs.nano.enable = false;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
-  # List services that you want to enable:
+  
+  #I LOVE GAMING RAAAHH
+  programs.steam = {
+   enable = true;
+   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "steam"
+    "steam-original"
+    "steam-run"
+    "steamcmd"
+    "steam-tui"
+  ];
+  
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+   services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -183,28 +181,11 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
+  #keep false for flakes 
   system.copySystemConfiguration = false;
 
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "23.11"; # Did you read the comment?
+  
+  system.stateVersion = "23.11"; # dont change lol
   
 }
 
