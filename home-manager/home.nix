@@ -16,7 +16,6 @@
     #./wms/qtile/qtile.nix
     ./shell/sh.nix
     ./programs/firefox.nix
-    ./programs/steam.nix
   ];
   home.stateVersion = "23.11"; # dont change lol
 

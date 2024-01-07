@@ -1,7 +1,7 @@
 { config, lib, pkgs, ...}:
 {
   imports = [
-    ../picom/picom.nix
+    ../picom.nix
     ../../programs/rofi/rofi.nix
     ../../programs/alacritty.nix
   ];
@@ -17,4 +17,5 @@
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
   home.file.".config/xmobar/catppuccin-mocha-xmobarrc".source = ./catppuccin-mocha-xmobarrc;
+
 }
