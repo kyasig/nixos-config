@@ -2,7 +2,7 @@
 let 
   picomPackage = pkgs.picom;
 in{
-  services.picom = if picomPackage = pkgs.picom-allusive then{
+  services.picom = if picomPackage == pkgs.picom-allusive then{
     enable = true;
     package = picomPackage;
     vSync = true;
