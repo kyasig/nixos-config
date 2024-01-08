@@ -173,7 +173,7 @@ myStartupHook = do
 
 --------------------------- ---------------------------------------------
 -- Satus bar stuff
-mySB = statusBarProp "xmobar ~/.config/xmobar/catppuccin-mocha-xmobarrc" $ clickablePP myXmobarPP
+mySB = statusBarProp "xmobar ~/.config/xmobar/.xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
     { ppHiddenNoWindows = catforeground 

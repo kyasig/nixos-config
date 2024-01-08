@@ -2,6 +2,7 @@
 {
   imports = [
     ../picom.nix
+    ./xmobar.nix
     ../../programs/rofi.nix
     ../../programs/alacritty.nix
   ];
@@ -13,9 +14,8 @@
     pcmanfm
     trayer
     xdotool
-    xmobar
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
-  home.file.".config/xmobar/catppuccin-mocha-xmobarrc".source = ./catppuccin-mocha-xmobarrc;
 
+  programs.xmobar.enable = true;
 }
