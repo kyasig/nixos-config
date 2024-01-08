@@ -2,7 +2,7 @@
 {
   imports = [
     ../picom.nix
-    ../../programs/rofi/rofi.nix
+    ../../programs/rofi.nix
     ../../programs/alacritty.nix
   ];
   home.packages = with pkgs;[

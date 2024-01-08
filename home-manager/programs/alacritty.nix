@@ -1,6 +1,6 @@
 { pkgs, config,inputs, nix-colors, ... }: 
 let 
-  #colorScheme = inputs.nix-colors.colorSchemes.solarized-dark;
+ # colorScheme = inputs.nix-colors.colorSchemes.solarized-light;
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
 in
 {
