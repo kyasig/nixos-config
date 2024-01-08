@@ -21,13 +21,13 @@ import qualified XMonad.Layout.Renamed as RENAMED
 import XMonad.Layout.BoringWindows
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
-import XMonad.Layout.Spiral
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.SimpleDecoration
 import XMonad.Layout.Simplest
 import XMonad.Layout.Tabbed
+import XMonad.Layout.Dwindle
 import XMonad.ManageHook
 import XMonad.Util.ClickableWorkspaces
 import XMonad.Util.EZConfig(additionalKeysP)
@@ -86,8 +86,8 @@ myKeys = [ ("M-<Return>"    , spawn myTerminal)
          , ("M-q"           , spawn "xmonad --recompile; xmonad --restart")
          , ("M-s"           ,dwmpromote) 
          , ("M-<Delete>"    , spawn "rofi -show power-menu -modi power-menu:rofi-power-menu")
-         , ("<F2>"          , spawn "brillo -q -U 10 ")
-         , ("<F3>"          , spawn "brillo -q -A 10 ")
+         , ("<F2>"          , spawn "brillo -q -U 5 ")
+         , ("<F3>"          , spawn "brillo -q -A 5 ")
          , ("M-<L>"         , sendMessage $ pullGroup L)
          , ("M-<R>"         , sendMessage $ pullGroup R)
          , ("M-<U>"         , sendMessage $ pullGroup U)
@@ -98,8 +98,15 @@ myKeys = [ ("M-<Return>"    , spawn myTerminal)
          ]
 ------------------------------------------------------------------------
 -- Layouts:
-myLayout = avoidStruts (tiled ||| wide) ||| Full
+myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
   where
+   dwindle = RENAMED.renamed [RENAMED.Replace "Dwindle"]
+             $ windowNavigation
+             $ addTabs shrinkText myTabTheme
+             $ subLayout [] Simplest
+             $ boringWindows
+             $ mySpacing 6
+             $ Dwindle R CW 1.1 1.1 
    wide = RENAMED.renamed [RENAMED.Replace "Wide"] $ Mirror tiled
    tiled = RENAMED.renamed [RENAMED.Replace "Tall"] 
            $ windowNavigation 
@@ -110,8 +117,8 @@ myLayout = avoidStruts (tiled ||| wide) ||| Full
            $ fullscreenFull 
            $ mySpacing 6
            $ ResizableTall 1 (3/100) (1/2) []
-   myTabTheme = def { --fontName            = "mononoki"
-                      activeColor         = "#f5c2e7"
+          -- $ mouseRe6sizableTile 1 (1/2) (1/2) (3/100) False (BordersDragger)
+   myTabTheme = def { activeColor         = "#f5c2e7"
                     , inactiveColor       = "#1e1e2e"
                     , activeBorderColor   = "#f5c2e7"
                     , inactiveBorderColor = "#1e1e2e"

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs,  ... }:
 
 {
   home.username = "ky";
@@ -11,9 +11,7 @@
     };
   };
   imports = [
-    # chose a wm
     ./wms/xmonad/xmonad.nix
-    #./wms/qtile/qtile.nix
     ./shell/sh.nix
     ./programs/firefox.nix
   ];

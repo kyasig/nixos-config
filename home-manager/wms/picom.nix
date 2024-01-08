@@ -31,8 +31,9 @@ in{
     backend = "glx";
     settings =  {
       blur ={
-        method = "dual_kawase"; # ALSO DOESNT WORK GRR
-        size = 10;
+        method = "dual_kawase"; 
+        size = 3.0;
+        strength = 6;
         deviation = 5.0;
       };
     };

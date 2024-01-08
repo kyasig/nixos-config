@@ -45,6 +45,7 @@ in
     cowsay
     bottom
     btop
+    htop
     ranger 
     lf
     ripgrep
@@ -54,6 +55,8 @@ in
     eza
     pfetch-rs #nah i'd fetch
     neofetch
+    cmatrix
+    asciiquarium 
   ];
 }
 
