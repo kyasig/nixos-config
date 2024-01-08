@@ -49,10 +49,9 @@ myBorderWidth = 4
 myModMask = mod4Mask
 
 myWorkspaces =  show <$> [1..9] 
---myWorkspaces =  take 9 $ repeat "●"
 
 myNormalBorderColor = "#1e1e2e"
-myFocusedBorderColor = "#f5c2e7"
+myFocusedBorderColor = "#cba6f7"
 
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 -----------------------------------------------------------------------------------------------------
@@ -118,9 +117,9 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
            $ mySpacing 6
            $ ResizableTall 1 (3/100) (1/2) []
           -- $ mouseRe6sizableTile 1 (1/2) (1/2) (3/100) False (BordersDragger)
-   myTabTheme = def { activeColor         = "#f5c2e7"
+   myTabTheme = def { activeColor         = "#cba6f7"
                     , inactiveColor       = "#1e1e2e"
-                    , activeBorderColor   = "#f5c2e7"
+                    , activeBorderColor   = "#cba6f7"
                     , inactiveBorderColor = "#1e1e2e"
                     , activeTextColor     = "#1e1e2e"
                     , inactiveTextColor   = "#cdd6f4"
@@ -177,7 +176,7 @@ mySB = statusBarProp "xmobar ~/.config/xmobar/.xmobarrc" $ clickablePP myXmobarP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
     { ppHiddenNoWindows = catforeground 
-    , ppCurrent = catpink . wrap ("<box type=Bottom width=2 mb=2 color=f5c2e7>") "</box>" 
+    , ppCurrent = catpink . wrap ("<box type=Bottom width=2 mb=2 color=cba6f7>") "</box>" 
     , ppHidden = catpink  
     , ppTitle = catforeground . shorten 30 
     , ppSep = "<fc=#7f849c>  <fn=1>|</fn> </fc>"
@@ -186,10 +185,8 @@ myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def
     , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
     }
   where
-    purple = xmobarColor "#b16286" ""
-    yellow = xmobarColor "#d79921" ""
     catforeground = xmobarColor "#cdd6f4" ""
-    catpink = xmobarColor "#f5c2e7" ""
+    catpink = xmobarColor "#cba6f7" ""
 --------------------------- -----------------------------------------------------------------------------
 main = xmonad 
 	   $ withSB mySB 

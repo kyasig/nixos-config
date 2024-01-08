@@ -7,7 +7,7 @@ let
       background-color = mkLiteral "#${colorScheme.colors.base00}";
       foreground-color = mkLiteral "#${colorScheme.colors.base05}";
       text-color = mkLiteral "#${colorScheme.colors.base05}";
-      border-color = mkLiteral "#${colorScheme.colors.base06}";
+      border-color = mkLiteral "#${colorScheme.colors.base0E}";
 
       border = 0;
       margin = 0;
@@ -18,7 +18,7 @@ let
       width = mkLiteral "30%";
       background-color = mkLiteral "#${colorScheme.colors.base00}";
       border = 4;
-      border-color = mkLiteral "#${colorScheme.colors.base06}";
+      border-color = mkLiteral "#${colorScheme.colors.base0E}";
     };
     "#element" = {
       padding = mkLiteral "8 12";
