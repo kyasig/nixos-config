@@ -116,6 +116,7 @@
         enable = true;
         enableContribAndExtras = true;
   };
+  services.xbanish.enable = true;
 
   services.xserver.displayManager.sessionCommands = ''
     xset -dpms  # Disable Energy Star, as we are going to suspend anyway and it may hide "success" on that
