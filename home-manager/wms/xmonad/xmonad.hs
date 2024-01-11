@@ -38,6 +38,7 @@ import XMonad.Util.Loggers
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
+import Colors.CatppuccinMocha
 -----------------------------------------------------------------------
 myTerminal = "alacritty"
 myEmail = "thunderbird"
@@ -50,8 +51,8 @@ myModMask = mod4Mask
 
 myWorkspaces =  show <$> [1..9] 
 
-myNormalBorderColor = "#1e1e2e"
-myFocusedBorderColor = "#cba6f7"
+myNormalBorderColor = color00 
+myFocusedBorderColor = color0E 
 
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 -----------------------------------------------------------------------------------------------------
@@ -116,26 +117,17 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
            $ fullscreenFull 
            $ mySpacing 6
            $ ResizableTall 1 (3/100) (1/2) []
-          -- $ mouseRe6sizableTile 1 (1/2) (1/2) (3/100) False (BordersDragger)
-   myTabTheme = def { activeColor         = "#cba6f7"
-                    , inactiveColor       = "#1e1e2e"
-                    , activeBorderColor   = "#cba6f7"
-                    , inactiveBorderColor = "#1e1e2e"
-                    , activeTextColor     = "#1e1e2e"
-                    , inactiveTextColor   = "#cdd6f4"
+   myTabTheme = def { activeColor         = colors0E
+                    , inactiveColor       = colors00
+                    , activeBorderColor   = colors0E
+                    , inactiveBorderColor = colors00
+                    , activeTextColor     = colors00
+                    , inactiveTextColor   = colors05
                     }
    mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
 ------------------------------------------------------------------------
--- Window rules:
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---myManageHook = fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 myManageHook = composeAll  
-               [ className =? "pcmanfm" --> doFloat
---               , className =? "Gimp" --> doFloat
---               , resource =? "desktop_window" --> doIgnore
---               , resource =? "kdesktop" --> doIgnore
+               [ title =? "pcmanfm" --> doFloat
                ] <+> fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 ------------------------------------------------------------------------
 -- Scratchpads
@@ -167,7 +159,6 @@ myLogHook = return ()
 --
 myStartupHook = do
   spawnOnce "nitrogen --restore &"
-  --spawnOnce "picom --anim ations --animation-window-mass 1 --animation-for-open-window zoom --animation-stiffness 200 --experimental-backends &&"
   setWMName "LG3D"
 
 --------------------------- ---------------------------------------------
@@ -175,18 +166,15 @@ myStartupHook = do
 mySB = statusBarProp "xmobar ~/.config/xmobar/.xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
-    { ppHiddenNoWindows = catforeground 
-    , ppCurrent = catpink . wrap ("<box type=Bottom width=2 mb=2 color=cba6f7>") "</box>" 
-    , ppHidden = catpink  
-    , ppTitle = catforeground . shorten 30 
-    , ppSep = "<fc=#7f849c>  <fn=1>|</fn> </fc>"
-    , ppLayout = catpink
+    { ppHiddenNoWindows = xmobarColor colors0E "" 
+    , ppCurrent = . wrap ("<box type=Bottom width=2 mb=2 color=" ++ colors0E ++ ">") "</box>" 
+    , ppHidden = xmobarColor colors0E ""  
+    , ppTitle = xmobarColor colors05 "" . shorten 30 
+    , ppSep = "<fc=" ++ xmobarColor colors05 "" ++ ">  <fn=1>|</fn> </fc>"
+    , ppLayout = xmobarColor colors0E ""
     , ppExtras = [windowCount]
     , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
     }
-  where
-    catforeground = xmobarColor "#cdd6f4" ""
-    catpink = xmobarColor "#cba6f7" ""
 --------------------------- -----------------------------------------------------------------------------
 main = xmonad 
 	   $ withSB mySB 

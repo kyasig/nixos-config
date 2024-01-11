@@ -16,6 +16,7 @@
     xdotool
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
+  home.file.".config/xmonad/lib/Colors/CatppuccinMocha.hs".source = ./lib/Colors/CatppuccinMocha.hs;
 
   programs.xmobar.enable = true;
 }
