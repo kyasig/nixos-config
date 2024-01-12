@@ -12,7 +12,7 @@ in
           x = 10;
           y = 15;
         };
-        opacity = lib.mkForce 0.7;
+        opacity = lib.mkForce 0.77;
       };
 #      font = {
 #        normal.family = "mononoki";

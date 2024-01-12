@@ -2,10 +2,11 @@
     {
       font = "Mononoki 12"
     , additionalFonts = ["xft:Inconsolata", "xft:FontAwesome"]
-    , position = Static {xpos = 0, ypos = 0, width = 1920, height = 27}
+    --, position = TopSize L 100 27
+    , position = TopHM 27 4 6 6 0 
     , bgColor = "#{{base00-hex}}"
-    , fgColor = "#{{base05-hex}}" 
-    , allDesktops = True
+    , fgColor = "#{{base06-hex}}" 
+
     , persistent = True
     , commands = [
           Run Cpu ["-t", " <total>%"] 10
@@ -18,5 +19,5 @@
       ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = "  %UnsafeXMonadLog% }{ <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}>%memory%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %cpu%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %uptime%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %disku%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %battery%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %date%</fc></box> "
+    , template = "  %UnsafeXMonadLog% }{ <box type=Bottom width=2 mb=2 color=#{{base0B-hex}}><fc=#{{base0B-hex}}>%memory%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0D-hex}}><fc=#{{base0D-hex}}> %cpu%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base08-hex}}><fc=#{{base08-hex}}> %uptime%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0C-hex}}><fc=#{{base0C-hex}}> %disku%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0A-hex}}><fc=#{{base0A-hex}}> %battery%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0E-hex}}><fc=#{{base0E-hex}}> %date%</fc></box> "
     }

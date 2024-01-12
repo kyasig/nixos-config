@@ -52,8 +52,8 @@ myModMask = mod4Mask
 
 myWorkspaces =  show <$> [1..9] 
 
-myNormalBorderColor = colorBg; 
-myFocusedBorderColor = color06; 
+myNormalBorderColor = color00; 
+myFocusedBorderColor = color0E; 
 
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 -----------------------------------------------------------------------------------------------------
@@ -118,12 +118,12 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
            $ fullscreenFull 
            $ mySpacing 6
            $ ResizableTall 1 (3/100) (1/2) []
-   myTabTheme = def { activeColor         = colorFg 
-                    , inactiveColor       = colorBg 
-                    , activeBorderColor   = color06 
-                    , inactiveBorderColor = colorBg 
-                    , activeTextColor     = colorBg 
-                    , inactiveTextColor   = colorFg
+   myTabTheme = def { activeColor         = color05 
+                    , inactiveColor       = color00 
+                    , activeBorderColor   = color05 
+                    , inactiveBorderColor = color00 
+                    , activeTextColor     = color00 
+                    , inactiveTextColor   = color05
                     }
    mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
 ------------------------------------------------------------------------
@@ -167,7 +167,7 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 myStartupHook = do
-  --spawnOnce "nitrogen --restore &"
+  spawnOnce "nitrogen --restore &"
   setWMName "LG3D"
 
 --------------------------- ---------------------------------------------
@@ -175,12 +175,12 @@ myStartupHook = do
 mySB = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
-    { ppHiddenNoWindows = xmobarColor colorFg ""
-    , ppCurrent = xmobarColor color06 "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>" 
-    , ppHidden = xmobarColor color06  ""
-    , ppTitle = xmobarColor color06 "" . shorten 30 
-    , ppSep = "<fc=" ++ color06 ++ ">  <fn=1>|</fn> </fc>"
-    , ppLayout = xmobarColor color06 ""
+    { ppHiddenNoWindows = xmobarColor color05 ""
+    , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
+    , ppHidden = xmobarColor color0E  ""
+    , ppTitle = xmobarColor color0E "" . shorten 30 
+    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>|</fn> </fc>"
+    , ppLayout = xmobarColor color0E ""
     , ppExtras = [windowCount]
     , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
     }

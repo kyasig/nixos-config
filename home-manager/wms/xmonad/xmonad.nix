@@ -3,7 +3,7 @@
   imports = [
     ../picom.nix
     ./xmobar.nix
-#    ../../programs/rofi.nix
+    ../../programs/rofi.nix
     ../../programs/alacritty.nix
   ];
   home.packages = with pkgs;[
