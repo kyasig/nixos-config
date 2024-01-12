@@ -14,6 +14,7 @@
     ./wms/xmonad/xmonad.nix
     ./shell/sh.nix
     ./programs/firefox.nix
+    ./programs/stylix.nix
   ];
   home.stateVersion = "23.11"; # dont change lol
 

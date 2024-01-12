@@ -38,7 +38,8 @@ import XMonad.Util.Loggers
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
-import Colors.CatppuccinMocha
+import Colors.Stylix
+
 -----------------------------------------------------------------------
 myTerminal = "alacritty"
 myEmail = "thunderbird"
@@ -51,8 +52,8 @@ myModMask = mod4Mask
 
 myWorkspaces =  show <$> [1..9] 
 
-myNormalBorderColor = color00 
-myFocusedBorderColor = color0E 
+myNormalBorderColor = colorBg; 
+myFocusedBorderColor = color06; 
 
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 -----------------------------------------------------------------------------------------------------
@@ -117,17 +118,25 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
            $ fullscreenFull 
            $ mySpacing 6
            $ ResizableTall 1 (3/100) (1/2) []
-   myTabTheme = def { activeColor         = colors0E
-                    , inactiveColor       = colors00
-                    , activeBorderColor   = colors0E
-                    , inactiveBorderColor = colors00
-                    , activeTextColor     = colors00
-                    , inactiveTextColor   = colors05
+   myTabTheme = def { activeColor         = colorFg 
+                    , inactiveColor       = colorBg 
+                    , activeBorderColor   = color06 
+                    , inactiveBorderColor = colorBg 
+                    , activeTextColor     = colorBg 
+                    , inactiveTextColor   = colorFg
                     }
    mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
 ------------------------------------------------------------------------
+-- Window rules:
+-- To find the property name associated with a program, use
+-- > xprop | grep WM_CLASS
+-- and click on the client you're interested in.
+--myManageHook = fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 myManageHook = composeAll  
-               [ title =? "pcmanfm" --> doFloat
+               [ className =? "pcmanfm" --> doFloat
+--               , className =? "Gimp" --> doFloat
+--               , resource =? "desktop_window" --> doIgnore
+--               , resource =? "kdesktop" --> doIgnore
                ] <+> fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 ------------------------------------------------------------------------
 -- Scratchpads
@@ -158,20 +167,20 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 myStartupHook = do
-  spawnOnce "nitrogen --restore &"
+  --spawnOnce "nitrogen --restore &"
   setWMName "LG3D"
 
 --------------------------- ---------------------------------------------
 -- Satus bar stuff
-mySB = statusBarProp "xmobar ~/.config/xmobar/.xmobarrc" $ clickablePP myXmobarPP
+mySB = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
-    { ppHiddenNoWindows = xmobarColor colors0E "" 
-    , ppCurrent = . wrap ("<box type=Bottom width=2 mb=2 color=" ++ colors0E ++ ">") "</box>" 
-    , ppHidden = xmobarColor colors0E ""  
-    , ppTitle = xmobarColor colors05 "" . shorten 30 
-    , ppSep = "<fc=" ++ xmobarColor colors05 "" ++ ">  <fn=1>|</fn> </fc>"
-    , ppLayout = xmobarColor colors0E ""
+    { ppHiddenNoWindows = xmobarColor colorFg ""
+    , ppCurrent = xmobarColor color06 "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color06 ++ ">") "</box>" 
+    , ppHidden = xmobarColor color06  ""
+    , ppTitle = xmobarColor color06 "" . shorten 30 
+    , ppSep = "<fc=" ++ color06 ++ ">  <fn=1>|</fn> </fc>"
+    , ppLayout = xmobarColor color06 ""
     , ppExtras = [windowCount]
     , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
     }
@@ -183,8 +192,6 @@ main = xmonad
 	   $ docks
        def
         { terminal            = myTerminal
-        , focusFollowsMouse   = myFocusFollowsMouse
-        , clickJustFocuses    = myClickJustFocuses
         , borderWidth         = myBorderWidth
         , modMask             = myModMask
         , workspaces          = myWorkspaces

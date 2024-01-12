@@ -16,11 +16,13 @@
     nix-colors = {
       url = "github:misterio77/nix-colors";
     };
+    stylix.url = "github:danth/stylix";
   };
 
 	outputs = {
     self,
     nixpkgs,
+    stylix,
     home-manager, 
     ...
   }@inputs:
@@ -28,6 +30,8 @@
       lib = nixpkgs.lib;
 			system = "x86_64-linux";
 			pkgs = nixpkgs.legacyPackages.${system};
+      font = "mononoki";
+      fontpkg = pkgs.mononoki;
   	in
 		{
      nixosConfigurations = {
@@ -39,8 +43,15 @@
      homeConfigurations = {
 	   	 ky = home-manager.lib.homeManagerConfiguration{
        	 inherit pkgs;
-		     modules = [./home-manager/home.nix];
-         extraSpecialArgs = {inherit inputs;};
+		     modules = [
+          stylix.homeManagerModules.stylix
+          ./home-manager/home.nix
+         ];
+         extraSpecialArgs = {
+           inherit inputs;
+           inherit font;
+           inherit fontpkg;
+         };
        };
 		 };
 	  };

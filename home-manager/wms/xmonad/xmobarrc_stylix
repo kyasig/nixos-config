@@ -1,0 +1,22 @@
+    Config
+    {
+      font = "Mononoki 12"
+    , additionalFonts = ["xft:Inconsolata", "xft:FontAwesome"]
+    , position = Static {xpos = 0, ypos = 0, width = 1920, height = 27}
+    , bgColor = "#{{base00-hex}}"
+    , fgColor = "#{{base05-hex}}" 
+    , allDesktops = True
+    , persistent = True
+    , commands = [
+          Run Cpu ["-t", " <total>%"] 10
+        , Run Memory ["-t"," <used>m used"] 10
+        , Run Date " %a %b %d [%r]" "date" 10
+        , Run BatteryP ["ACAD", "BAT0", "hidpp_battery_0"] ["-t", " <left>%"] 3
+        , Run Uptime ["-t"," <hours>h <minutes>m"] 10
+        , Run DiskU [("/"," <free> free")] [] 3000
+        , Run UnsafeXMonadLog
+      ]
+    , sepChar = "%"
+    , alignSep = "}{"
+    , template = "  %UnsafeXMonadLog% }{ <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}>%memory%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %cpu%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %uptime%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %disku%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %battery%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base07-hex}}><fc=#{{base07-hex}}> %date%</fc></box> "
+    }
