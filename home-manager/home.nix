@@ -31,6 +31,7 @@
     vscodium
     ghc
     nuclear
+    qbittorrent
   ];
   home.sessionVariables = {
      EDITOR = "nvim";

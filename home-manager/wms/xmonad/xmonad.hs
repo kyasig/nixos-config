@@ -41,17 +41,16 @@ import qualified XMonad.StackSet as W
 import Colors.Stylix
 
 -----------------------------------------------------------------------
+myModMask = mod4Mask
+
 myTerminal = "alacritty"
 myEmail = "thunderbird"
 myBrowser = "firefox"
 
-myFocusFollowsMouse = True
-myClickJustFocuses = False
-myBorderWidth = 4
-myModMask = mod4Mask
 
 myWorkspaces =  show <$> [1..9] 
 
+myBorderWidth = 3
 myNormalBorderColor = color00; 
 myFocusedBorderColor = color0E; 
 
@@ -118,12 +117,12 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
            $ fullscreenFull 
            $ mySpacing 6
            $ ResizableTall 1 (3/100) (1/2) []
-   myTabTheme = def { activeColor         = color05 
+   myTabTheme = def { activeColor         = color0E 
                     , inactiveColor       = color00 
-                    , activeBorderColor   = color05 
+                    , activeBorderColor   = color0E 
                     , inactiveBorderColor = color00 
                     , activeTextColor     = color00 
-                    , inactiveTextColor   = color05
+                    , inactiveTextColor   = color0E
                     }
    mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True 
 ------------------------------------------------------------------------
@@ -133,8 +132,7 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
 -- and click on the client you're interested in.
 --myManageHook = fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 myManageHook = composeAll  
-               [ className =? "pcmanfm" --> doFloat
---               , className =? "Gimp" --> doFloat
+               [ title =? "pcmanfm" --> doFloat
 --               , resource =? "desktop_window" --> doIgnore
 --               , resource =? "kdesktop" --> doIgnore
                ] <+> fullscreenManageHook <+> namedScratchpadManageHook scratchpads
@@ -176,13 +174,13 @@ mySB = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
     { ppHiddenNoWindows = xmobarColor color05 ""
-    , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
+    , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Top width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
     , ppHidden = xmobarColor color0E  ""
     , ppTitle = xmobarColor color0E "" . shorten 30 
-    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>|</fn> </fc>"
+    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>:</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
     , ppExtras = [windowCount]
-    , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
+    , ppOrder = \(ws:l:t:ex)  -> [l,ws] ++ ex ++ [t]
     }
 --------------------------- -----------------------------------------------------------------------------
 main = xmonad 
