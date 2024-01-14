@@ -146,7 +146,7 @@ scratchpads = [
     NS "email" myEmail (className =? myEmail) customFloat,
     NS "volume" (myTerminal ++ " -T volume -e pulsemixer") (title =? "volume") customFloat,
     NS "top" (myTerminal ++ " -T top -e btop") (title =? "top") customFloat,
-    NS "file" (myTerminal ++ " -T file -e ranger") (title =? "file") customFloat
+    NS "file" (myTerminal ++ " -T file -e yazi") (title =? "file") customFloat
   ] 
 ------------------------------------------------------------------------
 -- Event handling

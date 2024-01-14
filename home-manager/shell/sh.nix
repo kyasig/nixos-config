@@ -46,8 +46,6 @@ in
     bottom
     btop
     htop
-    ranger 
-    lf
     ripgrep
     killall
     tldr
