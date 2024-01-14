@@ -43,7 +43,7 @@ import Colors.Stylix
 -----------------------------------------------------------------------
 myModMask = mod4Mask
 
-myTerminal = "alacritty"
+myTerminal = "kitty"
 myEmail = "thunderbird"
 myBrowser = "firefox"
 
@@ -152,7 +152,7 @@ scratchpads = [
 -- Event handling
 
 -- * EwmhDesktops users should change this to ewmhDesktopsEventHook
-myEventHook = swallowEventHook (className =? "Alacritty") (return True) <+> fullscreenEventHook
+myEventHook = swallowEventHook (className =? myTerminal) (return True) <+> fullscreenEventHook
 ------------------------------------------------------------------------
 -- Status bars and logging
 -- Perform an arbitrary action on each internal state change or X event.

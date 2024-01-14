@@ -57,6 +57,7 @@ in
     neofetch
     cmatrix
     asciiquarium 
+    yazi
   ];
 }
 

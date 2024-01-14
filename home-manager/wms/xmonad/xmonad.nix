@@ -4,7 +4,8 @@
     ../picom.nix
     ./xmobar.nix
     ../../programs/rofi.nix
-    ../../programs/alacritty.nix
+  #  ../../programs/alacritty.nix
+    ../../programs/kitty.nix
   ];
   home.packages = with pkgs;[
     brillo

@@ -32,6 +32,7 @@
     ghc
     nuclear
     qbittorrent
+    kitty
   ];
   home.sessionVariables = {
      EDITOR = "nvim";

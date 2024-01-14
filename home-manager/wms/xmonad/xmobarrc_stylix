@@ -2,8 +2,8 @@
     {
       font = "Mononoki 12"
     , additionalFonts = ["xft:Inconsolata", "xft:FontAwesome"]
-    --, position = TopSize L 100 27
-    , position = TopHM 27 4 6 6 0 
+    , position = TopSize L 100 27
+    -- , position = TopHM 27 4 6 6 0 
     , bgColor = "#{{base00-hex}}"
     , fgColor = "#{{base06-hex}}" 
 
