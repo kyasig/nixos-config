@@ -1,5 +1,5 @@
 -- __  ____  __  ___  _   _    _    ____
--- \ \/ /  \/  |/ _ \| \ | |  / \  |  _ \
+- \ \/ /  \/  |/ _ \| \ | |  / \  |  _ \
 --  \  /| |\/| | | | |  \| | / _ \ | | | |
 --  /  \| |  | | |_| | |\  |/ ___ \| |_| |
 -- /_/\_\_|  |_|\___/|_| \_/_/   \_\____/
@@ -49,6 +49,7 @@ myBrowser = "firefox"
 
 
 myWorkspaces =  show <$> [1..9] 
+--myWorkspaces = ["一", "二", "三", "四","五", "六", "七", "八", "九"]
 
 myBorderWidth = 3
 myNormalBorderColor = color00; 
@@ -174,9 +175,10 @@ mySB = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
     { ppHiddenNoWindows = xmobarColor color05 ""
-    , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Top width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
+    --, ppCurrent = xmobarColor color0E "" . wrap ("<box type=Top width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
+    , ppCurrent = xmobarColor color0D "" 
     , ppHidden = xmobarColor color0E  ""
-    , ppTitle = xmobarColor color0E "" . shorten 30 
+    , ppTitle = xmobarColor color0A "" . shorten 30 
     , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>:</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
     , ppExtras = [windowCount]

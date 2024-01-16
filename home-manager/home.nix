@@ -12,7 +12,7 @@
   };
   imports = [
     ./wms/xmonad/xmonad.nix
-    ./shell/sh.nix
+    ./shell/zsh.nix
     ./programs/firefox.nix
     ./programs/stylix.nix
   ];

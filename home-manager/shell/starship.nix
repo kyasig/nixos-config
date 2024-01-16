@@ -1,20 +1,5 @@
 { config, lib,  pkgs, ...}:
 let
-  myAliases = {
-    "c" = "clear";
-    "listgens" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
-    "deletegens" = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations";
-    "vim" = "nvim";
-    "ls" = "eza --icons -l -T -L=1";
-    "cat" = "bat --style=plain";
-    "grep" = "rg";
-    "rm" = "rm -v";
-    "mv" = "mv -iv";
-    "cp" = "cp -riv";
-    "mkdir" = "mkdir -vp";
-    "homeswitch" = "home-manager switch --flake .";
-    "n" = "nvim";
-  };
   myStarshipSettings = { #I LOVE RICING RAAAHHHHH
     username = {
       style_user = "green bold";

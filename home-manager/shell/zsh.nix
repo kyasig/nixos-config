@@ -15,6 +15,10 @@ let
       "mkdir" = "mkdir -vp";
       "homeswitch" = "home-manager switch --flake .";
       "n" = "nvim";
+      "y" = "yazi";
+      "nf" = "nvim $(fzf)";
+      "f" = "fzf";
+      "pks" = "firefox https://search.nixos.org/packages";
   };
 in 
 {
@@ -33,7 +37,7 @@ in
     '';
   };
  programs.bash = {
-    enable = true;
+    enable = false;
     enableCompletion = true;
     shellAliases = myAliases;
     bashrcExtra = ''
@@ -56,6 +60,8 @@ in
     cmatrix
     asciiquarium 
     yazi
+    cbonsai
+    fzf
   ];
 }
 
