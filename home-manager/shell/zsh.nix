@@ -13,11 +13,9 @@ let
       "mv" = "mv -iv";
       "cp" = "cp -riv";
       "mkdir" = "mkdir -vp";
-      "homeswitch" = "home-manager switch --flake .";
       "n" = "nvim";
       "y" = "yazi";
       "nf" = "nvim $(fzf)";
-      "f" = "fzf";
       "pks" = "firefox https://search.nixos.org/packages";
   };
 in 
@@ -46,6 +44,7 @@ in
     '';
   };
   home.packages = with pkgs;[
+    atool
     cowsay
     bottom
     btop
