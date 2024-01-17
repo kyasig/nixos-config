@@ -15,7 +15,8 @@ let
       "mkdir" = "mkdir -vp";
       "n" = "nvim";
       "y" = "yazi";
-      "nf" = "nvim $(fzf)";
+      "nf" = "nvim $(fzf --border=rounded)";
+      "cf" = "cd $(fd -H -t d | fzf --border=rounded)";
       "pks" = "firefox https://search.nixos.org/packages";
   };
 in 
@@ -61,6 +62,7 @@ in
     yazi
     cbonsai
     fzf
+    fd
   ];
 }
 

@@ -32,6 +32,8 @@
 			pkgs = nixpkgs.legacyPackages.${system};
       font = "mononoki";
       fontpkg = pkgs.mononoki;
+      nvidia = true;
+      wm = "qtile";
   	in
 		{
      nixosConfigurations = {
