@@ -1,11 +1,15 @@
 { config, libs, pkgs, ...}:
 {
-  services.xserver.enable = true;
-  services.xserver.windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
+  services.xserver = {
+    enable = true;
+    windowManager = {
+      xmonad = {
+       enable = true;
+       enableContribAndExtras = true;
+      };
+      qtile.enable = false;  
+    };
   };
-#  services.xserver.windowManager.qtile.enable = true;
   services.xbanish.enable = true;
 
   services.xserver.displayManager.sessionCommands = ''
@@ -14,7 +18,6 @@
     xset s 300 # seconds
     ${pkgs.lightlocker}/bin/light-locker --idle-hint &
   '';
-
   systemd.targets.hybrid-sleep.enable = true;
   services.logind.extraConfig = ''
     IdleAction=hybrid-sleep
