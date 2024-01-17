@@ -47,11 +47,11 @@
     };
     systemPackages = with pkgs; [
       dmenu
-		  git
-		  neovim
-		  unzip
-		  vim
-		  wget	
+      git
+      neovim
+      unzip
+      vim
+      wget
       killall
       ripgrep
     ];
