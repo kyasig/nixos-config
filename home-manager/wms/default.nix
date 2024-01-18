@@ -1,7 +1,7 @@
 {config, pkgs, ...}:
 {
   imports = [
-    ./xmonad/default.nix
+    ./xmonad
     ./picom.nix
   ];
 }

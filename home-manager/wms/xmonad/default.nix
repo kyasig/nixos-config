@@ -11,7 +11,6 @@
     xdotool
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
-  #home.file.".config/xmonad/lib/Colors/stylix.hs".source =./lib/Colors/stylix.hs;
 
   home.file.".config/xmonad/lib/Colors/Stylix.hs".source = config.lib.stylix.colors {
     template = builtins.readFile ./lib/Colors/Stylix.hs;
