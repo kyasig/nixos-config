@@ -33,13 +33,13 @@
       font = "mononoki";
       fontpkg = pkgs.mononoki;
       nvidia = true;
-      wm = "qtile";
+      user = "ky";
   	in
 		{
      nixosConfigurations = {
 		   sig = lib.nixosSystem{
          inherit system;
-		     modules = [./nixos/configuration.nix];
+		     modules = [./nixos/default.nix];
        };
 		 };
      homeConfigurations = {
@@ -47,7 +47,7 @@
        	 inherit pkgs;
 		     modules = [
           stylix.homeManagerModules.stylix
-          ./home-manager/home.nix
+          ./home-manager/default.nix
          ];
          extraSpecialArgs = {
            inherit inputs;

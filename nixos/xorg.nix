@@ -9,6 +9,12 @@
       };
       qtile.enable = false;  
     };
+    resolutions = [
+      { 
+        x = 1920; # for vms lol
+        y = 1080;
+      }
+    ];
   };
   services.xbanish.enable = true;
 

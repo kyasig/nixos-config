@@ -1,16 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ 
-		./hardware-configuration.nix
-    ./audio.nix
-    ./auth.nix
-    ./fonts.nix
-    ./nix.nix
-    ./nvidia.nix
-    ./virtualization.nix
-    ./xorg.nix
-  ]; 
-  
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -37,31 +26,11 @@
       extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"]; 
     };
   };
-  programs.zsh.enable = true;
-
-  environment = {
-    shells = [pkgs.zsh];
-    variables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-    systemPackages = with pkgs; [
-      dmenu
-      git
-      neovim
-      unzip
-      vim
-      wget
-      killall
-      ripgrep
-    ];
-  };
 
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
    };
-  programs.nano.enable = false;
   
   services.openssh.enable = true;
 

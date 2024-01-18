@@ -5,18 +5,20 @@
     , position = TopSize L 100 27
     -- , position = TopHM 27 4 6 6 0 
     , bgColor = "#{{base00-hex}}"
-    , fgColor = "#{{base05-hex}}" 
+    , fgColor = "#{{base06-hex}}" 
+
     , persistent = True
     , commands = [
-          Run Cpu ["-t", " <total>%"] 10
-        , Run Memory ["-t","<used>m used"] 10
-        , Run Date "%a %b %d [%r]" "date" 10
-        , Run BatteryP ["ACAD", "BAT0", "hidpp_battery_0"] ["-t", "<left>%"] 3
-        , Run Uptime ["-t","<hours>h <minutes>m"] 10
-        , Run DiskU [("/","<free> free")] [] 3000
+          Run Cpu ["-t", "  <total>%"] 10
+        , Run Memory ["-t","  <used>m used"] 10
+        , Run Date " %a %b %d [%r]" "date" 10
+        , Run BatteryP ["ACAD", "BAT0", "hidpp_battery_0"] ["-t", "  <left>%"] 3
+        , Run Uptime ["-t"," <hours>h <minutes>m"] 10
+        , Run DiskU [("/"," <free> free")] [] 3000
         , Run UnsafeXMonadLog
       ]
     , sepChar = "%"
     , alignSep = "}{"
-     , template = "  %UnsafeXMonadLog% }{ <fc=#{{base0B-hex}}></fc> %memory% <fc=#{{base0D-hex}}> </fc> %cpu% <fc=#{{base08-hex}}> </fc> %uptime% <fc=#{{base0C-hex}}> </fc> %disku% <fc=#{{base0A-hex}}> </fc>  %battery% <fc=#{{base0E-hex}}> </fc> %date% "
+     --, template = "  %UnsafeXMonadLog% }{ <box type=Bottom width=2 mb=2 color=#{{base0B-hex}}><fc=#{{base0B-hex}}>%memory%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0D-hex}}><fc=#{{base0D-hex}}> %cpu%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base08-hex}}><fc=#{{base08-hex}}> %uptime%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0C-hex}}><fc=#{{base0C-hex}}> %disku%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0A-hex}}><fc=#{{base0A-hex}}> %battery%</fc></box> <box type=Bottom width=2 mb=2 color=#{{base0E-hex}}><fc=#{{base0E-hex}}> %date%</fc></box> "
+     , template = "  %UnsafeXMonadLog% }{ <fc=#{{base0B-hex}}>%memory%</fc> <fc=#{{base0D-hex}}> %cpu%</fc> <fc=#{{base08-hex}}> %uptime%</fc> <fc=#{{base0C-hex}}> %disku%</fc><fc=#{{base0A-hex}}> %battery%</fc><fc=#{{base0E-hex}}> %date%</fc> "
     }

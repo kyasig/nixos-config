@@ -1,13 +1,8 @@
 { config, lib, pkgs, ...}:
 {
-  imports = [
-    ../picom.nix
-    ../../programs/rofi.nix
-  #  ../../programs/alacritty.nix
-    ../../programs/kitty.nix
-  ];
   home.packages = with pkgs;[
     brillo
+    light
     feh # using this as an image viewer xd 
     flameshot
     nitrogen

@@ -1,5 +1,4 @@
 { config, pkgs,  ... }:
-
 {
   home.username = "ky";
   home.homeDirectory = "/home/ky";
@@ -11,10 +10,9 @@
     };
   };
   imports = [
-    ./wms/xmonad/xmonad.nix
-    ./shell/zsh.nix
-    ./programs/firefox.nix
-    ./programs/stylix.nix
+    ./wms
+    ./shell
+    ./programs
   ];
   home.stateVersion = "23.11"; # dont change lol
 

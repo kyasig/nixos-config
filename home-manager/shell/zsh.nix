@@ -15,9 +15,10 @@ let
       "mkdir" = "mkdir -vp";
       "n" = "nvim";
       "y" = "yazi";
-      "nf" = "nvim $(fzf --border=rounded)";
+      "nf" = "fd -H | fzf --border=rounded | xargs $EDITOR";
       "cf" = "cd $(fd -H -t d | fzf --border=rounded)";
       "pks" = "firefox https://search.nixos.org/packages";
+      "ac" = "ani-cli";
   };
 in 
 {
@@ -44,25 +45,5 @@ in
       PS1='[\u@\h:\w]\n⤷ '
     '';
   };
-  home.packages = with pkgs;[
-    atool
-    cowsay
-    bottom
-    btop
-    htop
-    ripgrep
-    killall
-    tldr
-    bat 
-    eza
-    pfetch-rs #nah i'd fetch
-    neofetch
-    cmatrix
-    asciiquarium 
-    yazi
-    cbonsai
-    fzf
-    fd
-  ];
 }
 
