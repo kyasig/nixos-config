@@ -27,3 +27,7 @@ There's this annoying bug where you have to reboot before running this
 ```
 nix-shell '<home-manager>' -A install
 ```
+Switch home-manager generations 
+```
+home-manager switch --flake .#ky
+```
