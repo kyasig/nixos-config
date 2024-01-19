@@ -20,13 +20,10 @@ sudo nixos-rebuild switch --flake .#sig
 Install Home Manager
 ```
 nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager
-nix-channel --update```
+nix-channel --update
+```
 
-There's this annoying bug where you have to reboot before running
+There's this annoying bug where you have to reboot before running this
 ```
 nix-shell '<home-manager>' -A install
-```
-
-Switch home-manager generations 
-```home-manager switch --flake .#ky
 ```
