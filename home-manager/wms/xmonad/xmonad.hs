@@ -134,8 +134,12 @@ myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
 --myManageHook = fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 myManageHook = composeAll  
                [ title =? "pcmanfm" --> doFloat
---               , resource =? "desktop_window" --> doIgnore
---               , resource =? "kdesktop" --> doIgnore
+               , className =? "confirm" --> doFloat
+               , className =? "file_progress" --> doFloat
+               , className =? "dialog" --> doFloat
+               , className =? "download" --> doFloat
+               , className =? "error" --> doFloat
+               , title =? "vencorddesktop" --> doShift (myWorkspaces !! 1)
                ] <+> fullscreenManageHook <+> namedScratchpadManageHook scratchpads
 ------------------------------------------------------------------------
 -- Scratchpads

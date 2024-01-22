@@ -23,6 +23,8 @@
       nuclear
       qbittorrent
       kitty
+      okular
+      pinta #nah i'd paint
     ];
     sessionVariables = {
       EDITOR = "nvim";
