@@ -38,6 +38,8 @@ import XMonad.Util.Loggers
 import qualified Data.Map as M
 import qualified XMonad.StackSet as W
 
+-- import System.Taffybar.Support.PagerHints (pagerHints)
+
 import Colors.Stylix
 
 -----------------------------------------------------------------------
@@ -170,6 +172,7 @@ myLogHook = return ()
 -- per-workspace layout choices.
 --
 myStartupHook = do
+  spawnOnce "taffybar &"
   spawnOnce "nitrogen --restore &"
   setWMName "LG3D"
 
@@ -182,17 +185,18 @@ myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def
     , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
     , ppHidden = xmobarColor color0E  ""
     , ppTitle = xmobarColor color0A "" . shorten 30 
-    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>:</fn> </fc>"
+    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>|</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
     , ppExtras = [windowCount]
-    , ppOrder = \(ws:l:t:ex)  -> [l,ws] ++ ex ++ [t]
+    , ppOrder = \(ws:_:t:ex)  -> [ws] ++ ex ++ [t]
     }
 --------------------------- -----------------------------------------------------------------------------
 main = xmonad 
-	   $ withSB mySB 
+ 	   $ withSB mySB 
      $ EWMHD.ewmh
      $ fullscreenSupportBorder
 	   $ docks
+--     $ pagerHints
        def
         { terminal            = myTerminal
         , borderWidth         = myBorderWidth

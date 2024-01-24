@@ -15,6 +15,8 @@
       mpv
       obs-studio
       pulsemixer
+      protonmail-bridge
+      pass
       thunderbird
       vesktop
       vlc
@@ -25,6 +27,7 @@
       kitty
       okular
       pinta #nah i'd paint
+      xclip
     ];
     sessionVariables = {
       EDITOR = "nvim";

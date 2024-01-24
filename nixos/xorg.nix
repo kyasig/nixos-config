@@ -31,4 +31,8 @@
   '';
   services.xserver.libinput.enable = true; #trackpad support
   services.xserver.xkb.layout = "us";
+
+  #for taffybar
+  services.upower.enable = true;
+  systemd.services.upower.enable = true;
 }

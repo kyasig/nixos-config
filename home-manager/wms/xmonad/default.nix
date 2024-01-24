@@ -9,6 +9,7 @@
     pcmanfm
     trayer
     xdotool
+    cabal-install
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
 
@@ -24,5 +25,7 @@
 
   programs.xmobar.enable = true;
   programs.rofi.enable = true;
-  programs.alacritty.enable = true;
+
+  services.taffybar.enable = true;
+  
 }
