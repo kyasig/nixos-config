@@ -24,6 +24,7 @@
       dmenu
       git
       neovim
+      wget
       unzip
       vim
       killall
