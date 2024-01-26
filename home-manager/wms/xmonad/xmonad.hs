@@ -89,8 +89,6 @@ myKeys = [ ("M-<Return>"    , spawn myTerminal)
          , ("M-q"           , spawn "xmonad --recompile; xmonad --restart")
          , ("M-s"           ,dwmpromote) 
          , ("M-<Delete>"    , spawn "rofi -show power-menu -modi power-menu:rofi-power-menu")
-         , ("<F2>"          , spawn "brillo -q -U 5 ")
-         , ("<F3>"          , spawn "brillo -q -A 5 ")
          , ("M-<L>"         , sendMessage $ pullGroup L)
          , ("M-<R>"         , sendMessage $ pullGroup R)
          , ("M-<U>"         , sendMessage $ pullGroup U)
@@ -101,15 +99,8 @@ myKeys = [ ("M-<Return>"    , spawn myTerminal)
          ]
 ------------------------------------------------------------------------
 -- Layouts:
-myLayout = avoidStruts (tiled ||| wide ||| dwindle) ||| Full
+myLayout = avoidStruts (tiled ||| wide) ||| Full
   where
-   dwindle = RENAMED.renamed [RENAMED.Replace "Dwindle"]
-             $ windowNavigation
-             $ addTabs shrinkText myTabTheme
-             $ subLayout [] Simplest
-             $ boringWindows
-             $ mySpacing 6
-             $ Dwindle R CW 1.1 1.1 
    wide = RENAMED.renamed [RENAMED.Replace "Wide"] $ Mirror tiled
    tiled = RENAMED.renamed [RENAMED.Replace "Tall"] 
            $ windowNavigation 
