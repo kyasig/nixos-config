@@ -27,7 +27,7 @@
     ...
   }: let
     system = "x86_64-linux";
-    inherit (nixkpkgs) lib
+    inherit (nixpkgs) lib;
     pkgs = nixpkgs.legacyPackages.${system};
     font = "mononoki";
     fontpkg = pkgs.mononoki;
