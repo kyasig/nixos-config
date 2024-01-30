@@ -4,6 +4,6 @@
     ./kitty.nix
     ./firefox.nix
     ./rofi.nix
-    ./stylix.nix
+#    ./stylix.nix
   ];
 }

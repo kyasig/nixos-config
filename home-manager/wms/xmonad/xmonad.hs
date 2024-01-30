@@ -169,14 +169,14 @@ myStartupHook = do
 
 --------------------------- ---------------------------------------------
 -- Satus bar stuff
-mySB = statusBarProp "xmobar ~/.config/xmobar/xmobarrc" $ clickablePP myXmobarPP
+mySB = statusBarProp "xmobar ~/.config/xmobar/.xmobarrc" $ clickablePP myXmobarPP
 
 myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def 
     { ppHiddenNoWindows = xmobarColor color05 ""
     , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
     , ppHidden = xmobarColor color0E  ""
     , ppTitle = xmobarColor color0A "" . shorten 30 
-    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>|</fn> </fc>"
+    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>|</fn> | </fc>"
     , ppLayout = xmobarColor color0E ""
     , ppExtras = [windowCount]
     , ppOrder = \(ws:_:t:ex)  -> [ws] ++ ex ++ [t]
