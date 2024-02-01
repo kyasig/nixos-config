@@ -25,7 +25,7 @@ in{
     };
     extraConfig = ''
       window_padding_width 10
-      background_opacity 0.77
+      background_opacity 0.85
       confirm_os_window_close 0
       enable_audio_bell no
     '';

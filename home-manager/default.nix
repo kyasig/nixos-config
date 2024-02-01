@@ -20,7 +20,7 @@
       thunderbird
       vesktop
       vlc
-      vscodium
+      vscodium-fhs
       ghc
       nuclear
       qbittorrent
@@ -28,6 +28,10 @@
       okular
       pinta #nah i'd paint
       xclip
+#      yazi
+      ranger
+      platformio
+      lxappearance
     ];
     sessionVariables = {
       EDITOR = "nvim";

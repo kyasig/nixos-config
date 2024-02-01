@@ -48,6 +48,7 @@ myModMask = mod4Mask
 myTerminal = "kitty"
 myEmail = "thunderbird"
 myBrowser = "firefox"
+myFileMan = "ranger" 
 
 
 myWorkspaces =  show <$> [1..9] 
@@ -144,7 +145,7 @@ scratchpads = [
     NS "email" myEmail (className =? myEmail) customFloat,
     NS "volume" (myTerminal ++ " -T volume -e pulsemixer") (title =? "volume") customFloat,
     NS "top" (myTerminal ++ " -T top -e btop") (title =? "top") customFloat,
-    NS "file" (myTerminal ++ " -T file -e yazi") (title =? "file") customFloat
+    NS "file" (myTerminal ++ " -T file -e " ++ myFileMan) (title =? "file") customFloat
   ] 
 ------------------------------------------------------------------------
 -- Event handling
@@ -176,10 +177,10 @@ myXmobarPP = filterOutWsPP[scratchpadWorkspaceTag] $ def
     , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>" 
     , ppHidden = xmobarColor color0E  ""
     , ppTitle = xmobarColor color0A "" . shorten 30 
-    , ppSep = "<fc=" ++ color0E ++ ">  <fn=1>|</fn> | </fc>"
+    , ppSep =  "<fc=" ++ color0E ++ "> <fn=1>|</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
     , ppExtras = [windowCount]
-    , ppOrder = \(ws:_:t:ex)  -> [ws] ++ ex ++ [t]
+    , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
     }
 --------------------------- -----------------------------------------------------------------------------
 main = xmonad 
