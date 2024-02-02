@@ -18,8 +18,8 @@ in{
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
 
-  home.file.".config/xmonad/lib/Colors/Stylix.hs".text = ''
-    module Colors.Stylix where
+  home.file.".config/xmonad/lib/Colors/Colors.hs".text = ''
+    module Colors.Colors where
 
     import XMonad
     

@@ -32,6 +32,7 @@ in
     syntaxHighlighting.enable= true;
     shellAliases = myAliases;
     initExtra = ''
+    pfetch
     set -o vi
     zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     '';

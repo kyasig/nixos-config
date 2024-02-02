@@ -28,7 +28,7 @@
       okular
       pinta #nah i'd paint
       xclip
-#      yazi
+      #yazi
       ranger
       platformio
       lxappearance
