@@ -4,10 +4,10 @@ let
   colorScheme = inputs.nix-colors.colorSchemes.${scheme}; 
   myRofiTheme = lib.mkForce {
     "*" =  {
-      background-color = mkLiteral "#${colorScheme.colors.base00}";
-      foreground-color = mkLiteral "#${colorScheme.colors.base05}";
-      text-color = mkLiteral "#${colorScheme.colors.base05}";
-      border-color = mkLiteral "#${colorScheme.colors.base0E}";
+      background-color = mkLiteral "#${colorScheme.palette.base00}";
+      foreground-color = mkLiteral "#${colorScheme.palette.base05}";
+      text-color = mkLiteral "#${colorScheme.palette.base05}";
+      border-color = mkLiteral "#${colorScheme.palette.base0E}";
       border =  0;
       margin =  0;
       padding = 0;
@@ -15,18 +15,18 @@ let
     };
     "#window" = {
       width = mkLiteral "30%";
-      background-color = mkLiteral "#${colorScheme.colors.base00}";
+      background-color = mkLiteral "#${colorScheme.palette.base00}";
       #border = 4;
       #border-color = mkLiteral "#${colorScheme.colors.base0E}";
     };
     "#element" = {
       padding = mkLiteral "8 12";
       background-color = mkLiteral "transparent";
-      text-color = "#${colorScheme.colors.base04}";
+      text-color = "#${colorScheme.palette.base04}";
     };
     "#element.selected" = {
-      text-color = mkLiteral "#${colorScheme.colors.base05}";
-      background-color = mkLiteral "#${colorScheme.colors.base02}";
+      text-color = mkLiteral "#${colorScheme.palette.base05}";
+      background-color = mkLiteral "#${colorScheme.palette.base02}";
     };
     "#element-text" = {
       background-color = mkLiteral "transparent";
@@ -40,27 +40,27 @@ let
     };
     "#entry" = {
       padding = 12;
-      background-color = mkLiteral "#${colorScheme.colors.base04}";
-      text-color = mkLiteral "#${colorScheme.colors.base00}";
+      background-color = mkLiteral "#${colorScheme.palette.base04}";
+      text-color = mkLiteral "#${colorScheme.palette.base00}";
     };
     "#inputbar" = {
       children = map mkLiteral [ "prompt" "entry" ];
-      background-color = mkLiteral "#${colorScheme.colors.base00}";
+      background-color = mkLiteral "#${colorScheme.palette.base00}";
     };
     "#listview" = {
-      background-color = mkLiteral "#${colorScheme.colors.base00}";
+      background-color = mkLiteral "#${colorScheme.palette.base00}";
       columns = 1;
       lines = 10;
     };
     "#mainbox" = {
       children = map mkLiteral ["inputbar" "listview"];
-      background-color = mkLiteral"#${colorScheme.colors.base00}";
+      background-color = mkLiteral"#${colorScheme.palette.base00}";
     };
     "#prompt" = {
       enabled = true;
       padding = mkLiteral "12 0 0 12";
-      background-color = mkLiteral "#${colorScheme.colors.base04}";
-      text-color = mkLiteral "#${colorScheme.colors.base00}";
+      background-color = mkLiteral "#${colorScheme.palette.base04}";
+      text-color = mkLiteral "#${colorScheme.palette.base00}";
     };
   };
   inherit(config.lib.formats.rasi) mkLiteral;

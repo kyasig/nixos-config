@@ -5,16 +5,16 @@ in{
   programs.kitty = {
     enable = true;
     settings = {
-      foreground = "#${colorScheme.colors.base05}";
-      background = "#${colorScheme.colors.base00}";
-      color0 = "#${colorScheme.colors.base00}";
-      color1 = "#${colorScheme.colors.base08}";
-      color2 = "#${colorScheme.colors.base0B}";
-      color3 = "#${colorScheme.colors.base0A}";
-      color4 = "#${colorScheme.colors.base0D}";
-      color5 = "#${colorScheme.colors.base0E}";
-      color6 = "#${colorScheme.colors.base0C}";
-      color7 = "#${colorScheme.colors.base05}";
+      foreground = "#${colorScheme.palette.base05}";
+      background = "#${colorScheme.palette.base00}";
+      color0 = "#${colorScheme.palette.base00}";
+      color1 = "#${colorScheme.palette.base08}";
+      color2 = "#${colorScheme.palette.base0B}";
+      color3 = "#${colorScheme.palette.base0A}";
+      color4 = "#${colorScheme.palette.base0D}";
+      color5 = "#${colorScheme.palette.base0E}";
+      color6 = "#${colorScheme.palette.base0C}";
+      color7 = "#${colorScheme.palette.base05}";
     };
     font = {
       name = lib.mkForce "mononoki";

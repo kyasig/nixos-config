@@ -19,6 +19,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.NoBorders
 import XMonad.Layout.LayoutCombinators(JumpToLayout)
 import qualified XMonad.Layout.Renamed as R
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.WindowSwallowing
 import XMonad.Hooks.ManageDocks
@@ -101,8 +102,8 @@ myLayout = smartBorders
          $ ResizableTall 1 (3/100) (1/2) []
 
     tabs = addTabs shrinkText myTabTheme
-         -- . subLayout [] Simplest 
-          . subLayout [] Accordion 
+          . subLayout [] Simplest 
+         -- . subLayout [] Accordion 
          -- . subLayout [] (Simplest ||| Accordion)
 
     myTabTheme = def { activeColor         = color0E
@@ -144,9 +145,10 @@ myStartupHook = do
   setWMName "LG3D"
 
 --statusbar
-mySB = statusBarProp "xmobar ~/.config/xmobar/.xmobarrc" $ clickablePP myPP
-myPP = filterOutWsPP[scratchpadWorkspaceTag] $  def
-    { ppHiddenNoWindows = xmobarColor color05 ""
+mySB = statusBarProp "xmobar" $ clickablePP myPP
+
+myPP = filterOutWsPP[scratchpadWorkspaceTag] $ def{
+      ppHiddenNoWindows = xmobarColor color05 ""
     , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>"
     , ppHidden = xmobarColor color0E  ""
     , ppTitle = xmobarColor color0A "" . shorten 30
@@ -157,9 +159,9 @@ myPP = filterOutWsPP[scratchpadWorkspaceTag] $  def
     }
 
 main = xmonad
-     $ withSB mySB
      $ ewmhFullscreen
      $ ewmh
+     $ withSB mySB
      $ docks
      $ def
        { terminal = "kitty"
@@ -175,4 +177,3 @@ main = xmonad
        }
        `additionalKeysP`
        myKeys
-

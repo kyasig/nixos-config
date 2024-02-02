@@ -11,8 +11,8 @@ in{
     , additionalFonts = ["xft:Inconsolata", "xft:FontAwesome"]
     , position = TopSize L 100 27
     -- , position = TopHM 27 4 6 6 0 
-    , bgColor = "#${colorScheme.colors.base00}"
-    , fgColor = "#${colorScheme.colors.base05}" 
+    , bgColor = "#${colorScheme.palette.base00}"
+    , fgColor = "#${colorScheme.palette.base05}" 
     , persistent = True
     , commands = [
           Run Cpu ["-t", " <total>%"] 10
@@ -25,7 +25,7 @@ in{
       ]
     , sepChar = "%"
     , alignSep = "}{"
-     , template = "  %UnsafeXMonadLog% }{ <fc=#${colorScheme.colors.base0B}></fc> %memory% <fc=#${colorScheme.colors.base0D}> </fc> %cpu% <fc=#${colorScheme.colors.base08}> </fc> %uptime% <fc=#${colorScheme.colors.base0C}> </fc> %disku% <fc=#${colorScheme.colors.base0A}> </fc>  %battery% <fc=#${colorScheme.colors.base0E}> </fc> %date% "
+    , template = "  %UnsafeXMonadLog% }{ <fc=#${colorScheme.palette.base0B}></fc> %memory% <fc=#${colorScheme.palette.base0D}> </fc> %cpu% <fc=#${colorScheme.palette.base08}> </fc> %uptime% <fc=#${colorScheme.palette.base0C}> </fc> %disku% <fc=#${colorScheme.palette.base0A}> </fc>  %battery% <fc=#${colorScheme.palette.base0E}> </fc> %date% "
     }
     '';
   };

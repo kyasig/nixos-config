@@ -15,7 +15,7 @@ let
       "mkdir" = "mkdir -vp";
       "n" = "nvim";
       "y" = "yazi";
-      "nf" = "fd -H | fzf --border=rounded | xargs $EDITOR";
+      "nf" = "fd -H -t f | fzf --border=rounded | xargs $EDITOR";
       "cf" = "cd $(fd -H -t d | fzf --border=rounded)";
       "pks" = "firefox https://search.nixos.org/packages";
       "ac" = "ani-cli";

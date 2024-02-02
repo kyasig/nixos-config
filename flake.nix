@@ -10,7 +10,6 @@
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-      inputs.nixkpgs.follows = "nixpkgs";
     };
 
     nix-colors = {
