@@ -19,6 +19,7 @@ let
       "cf" = "cd $(fd -H -t d | fzf --border=rounded)";
       "pks" = "firefox https://search.nixos.org/packages";
       "ac" = "ani-cli";
+      "z" = "zathura";
   };
 in 
 {

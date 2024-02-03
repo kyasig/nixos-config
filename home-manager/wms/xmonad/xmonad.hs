@@ -86,8 +86,7 @@ myLayout = smartBorders
          $ (R.renamed [R.CutWordsLeft 2 ] 
          $ mySpacing 6 
          $ tabs 
-         $ windowNavigation 
-         $ boringWindows 
+         $ nav 
          $ avoidStruts (tall ||| dwind ||| wide)) ||| full 
   where
     full = R.renamed [R.Replace "Full"] Full --for jumpToLayout 
@@ -101,10 +100,8 @@ myLayout = smartBorders
     tall = R.renamed [R.Replace "Tall"]
          $ ResizableTall 1 (3/100) (1/2) []
 
-    tabs = addTabs shrinkText myTabTheme
-          . subLayout [] Simplest 
-         -- . subLayout [] Accordion 
-         -- . subLayout [] (Simplest ||| Accordion)
+    tabs = addTabs shrinkText myTabTheme . subLayout [] Simplest 
+    nav = windowNavigation . boringWindows
 
     myTabTheme = def { activeColor         = color0E
                      , inactiveColor       = color00

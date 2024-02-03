@@ -25,13 +25,13 @@
       nuclear
       qbittorrent
       kitty
-      okular
       pinta #nah i'd paint
       xclip
       #yazi
       ranger
       platformio
       lxappearance
+      zathura
     ];
     sessionVariables = {
       EDITOR = "nvim";
