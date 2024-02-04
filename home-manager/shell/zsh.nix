@@ -16,7 +16,7 @@ let
       "n" = "nvim";
       "y" = "yazi";
       "nf" = "fd -H -t f | fzf --border=rounded | xargs $EDITOR";
-      "cf" = "cd $(fd -H -t d | fzf --border=rounded)";
+      "cf" = "cd $(fd -td | fzf --border=rounded)";
       "pks" = "firefox https://search.nixos.org/packages";
       "ac" = "ani-cli";
       "z" = "zathura";

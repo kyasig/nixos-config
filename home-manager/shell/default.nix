@@ -20,7 +20,7 @@
     neofetch
     cmatrix
     asciiquarium 
-#    yazi
+    yazi
     cbonsai
     fzf
     fd

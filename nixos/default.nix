@@ -30,6 +30,7 @@
       killall
       ripgrep
       usbutils
+      ntfs3g
     ];
   };
   programs.nano.enable = false;

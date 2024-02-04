@@ -33,7 +33,7 @@ import Colors.Colors
 myMod = mod4Mask
 myTerminal = "kitty"
 myBrowser = "firefox"
-myFileMan = "ranger"
+myFileMan = "yazi"
 myEmail = "thunderbird"
 
 myWorkspaces = show <$> [1..9]

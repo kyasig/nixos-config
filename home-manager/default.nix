@@ -25,9 +25,10 @@
       nuclear
       qbittorrent
       kitty
-      pinta #nah i'd paint
+      inkscape
       xclip
       #yazi
+      ytfzf
       ranger
       platformio
       lxappearance
