@@ -27,12 +27,13 @@
       kitty
       inkscape
       xclip
-      #yazi
       ytfzf
       ranger
       platformio
       lxappearance
       zathura
+      exif
+      exiftool
     ];
     sessionVariables = {
       EDITOR = "nvim";

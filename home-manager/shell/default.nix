@@ -3,6 +3,7 @@
   imports = [
     ./zsh.nix
     ./starship.nix
+    ./yazi.nix
   ];
   home.packages = with pkgs;[
     ani-cli

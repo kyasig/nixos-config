@@ -5,6 +5,5 @@
     ./firefox.nix
     ./rofi.nix
     ./zathura.nix
-#    ./stylix.nix
   ];
 }
