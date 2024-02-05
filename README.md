@@ -1,5 +1,9 @@
 **INSTALLATION**
+
+dont try this lol i havent tested it (laughs out loud)
+
 Just for me in case I need to reinstall.
+
 
 Make sure flakes is enabled. 
 in ``configuration.nix``
