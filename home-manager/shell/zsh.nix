@@ -15,8 +15,9 @@ let
       "mkdir" = "mkdir -vp";
       "n" = "nvim";
       "y" = "yazi";
-      "nf" = "fd -H -t f | fzf --border=rounded | xargs $EDITOR";
-      "cf" = "cd $(fd -td | fzf --border=rounded)";
+      "nf" = "fd -H -tf | fzf --border=rounded --preview 'bat --style=numbers --color=always {}' | xargs $EDITOR";
+      "cf" = "cd $(fzf --border=rounded --preview 'bat --style=numbers --color=always {}')";
+      "vcf" = "codium $(fd -td | fzf --border=rounded)";
       "pks" = "firefox https://search.nixos.org/packages";
       "ac" = "ani-cli";
       "z" = "zathura";

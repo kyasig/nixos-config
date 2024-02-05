@@ -83,8 +83,7 @@ myKeys =
 
 --layouts
 myLayout = smartBorders 
-         $ (R.renamed [R.CutWordsLeft 2 ] 
-         $ mySpacing 6 
+         $ (R.renamed [R.CutWordsLeft 1 ] 
          $ tabs 
          $ nav 
          $ avoidStruts (tall ||| dwind ||| wide)) ||| full 
@@ -92,12 +91,14 @@ myLayout = smartBorders
     full = R.renamed [R.Replace "Full"] Full --for jumpToLayout 
 
     dwind = R.renamed [R.Replace "Dwindle"] 
+         $ mySpacing 6 
           $ Dwindle R CW 1.1 1.1
 
     wide = R.renamed [R.Replace "Wide"]
          $ Mirror tall
 
     tall = R.renamed [R.Replace "Tall"]
+         $ mySpacing 6 
          $ ResizableTall 1 (3/100) (1/2) []
 
     tabs = addTabs shrinkText myTabTheme . subLayout [] Simplest 
@@ -110,7 +111,7 @@ myLayout = smartBorders
                      , activeTextColor     = color00
                      , inactiveTextColor   = color0E
                      }
-    mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+    mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
 --scratchpads
 customFloat = customFloating $ W.RationalRect (1/12) (1/10) (5/6) (5/6)

@@ -4,6 +4,7 @@
     ./zsh.nix
     ./starship.nix
     ./yazi.nix
+#    ./scripts
   ];
   home.packages = with pkgs;[
     ani-cli

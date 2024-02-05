@@ -29,7 +29,7 @@ edit = [
 	{ exec = 'code "%*"',    orphan = true, for = "windows" },
 ]
 doc = [
-  {exec = 'zathura "$@"', block = true}
+  {exec = 'zathura "$@"'}
 ]
 open = [
 	{ exec = 'xdg-open "$@"',                desc = "Open", for = "linux" },

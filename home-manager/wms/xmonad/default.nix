@@ -14,6 +14,7 @@ in{
     pcmanfm
     trayer
     xdotool
+    xorg.xbacklight
     cabal-install
   ];
   home.file.".config/xmonad/xmonad.hs".source = ./xmonad.hs;
