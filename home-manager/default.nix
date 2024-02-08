@@ -11,6 +11,7 @@
     stateVersion = "23.11"; #dont change xd
     packages = with pkgs; [
       bitwarden
+      clang
       dmenu
       mpv
       obs-studio

@@ -111,7 +111,7 @@ myLayout = smartBorders
                      , activeTextColor     = color00
                      , inactiveTextColor   = color0E
                      }
-    mySpacing i = spacingRaw True (Border i i i i) True (Border i i i i) True
+    mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 --scratchpads
 customFloat = customFloating $ W.RationalRect (1/12) (1/10) (5/6) (5/6)

@@ -17,7 +17,7 @@ let
       "y" = "yazi";
       "nf" = "fd -H -tf | fzf --border=rounded --preview 'bat --style=numbers --color=always {}' | xargs $EDITOR";
       "cf" = "cd $(fzf --border=rounded --preview 'bat --style=numbers --color=always {}')";
-      "vcf" = "codium $(fd -td | fzf --border=rounded)";
+      "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=rounded | xargs zathura";
       "pks" = "firefox https://search.nixos.org/packages";
       "ac" = "ani-cli";
       "z" = "zathura";

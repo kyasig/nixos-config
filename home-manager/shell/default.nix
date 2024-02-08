@@ -26,5 +26,6 @@
     cbonsai
     fzf
     fd
+    platformio
   ];
 }
