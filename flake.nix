@@ -29,7 +29,9 @@
     fontpkg = pkgs.mononoki;
     nvidia = true;
     user = "ky";
-    scheme = "catppuccin-mocha";
+    #scheme = "catppuccin-mocha";
+    scheme = "gruvbox-dark-medium";
+
   in{
     devShells.${system}.default = pkgs.mkShell {};
     nixosConfigurations = {

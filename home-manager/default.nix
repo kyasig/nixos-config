@@ -11,6 +11,7 @@
     stateVersion = "23.11"; #dont change xd
     packages = with pkgs; [
       bitwarden
+      qtspim
       clang
       dmenu
       mpv
@@ -35,6 +36,7 @@
       zathura
       exif
       exiftool
+      cmake
     ];
     sessionVariables = {
       EDITOR = "nvim";
