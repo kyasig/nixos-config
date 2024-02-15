@@ -20,6 +20,7 @@ let
       "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=rounded | xargs zathura";
       "pks" = "firefox https://search.nixos.org/packages";
       "ac" = "ani-cli";
+      "setwal" = "feh --bg-fil";
       "z" = "zathura";
   };
 in 

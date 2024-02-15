@@ -139,7 +139,7 @@ myHandleEventHook = swallowEventHook (className =? myTerminal <||> className =? 
 
 --startuphook
 myStartupHook = do
-  spawnOnce "nitrogen --restore &"
+  spawnOnce "~/.fehbg &"
   setWMName "LG3D"
 
 --statusbar

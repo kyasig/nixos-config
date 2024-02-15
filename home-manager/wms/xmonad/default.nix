@@ -10,7 +10,6 @@ in{
     light
     feh # using this as an image viewer xd 
     flameshot
-    nitrogen
     pcmanfm
     trayer
     xdotool
