@@ -29,24 +29,30 @@
     fontpkg = pkgs.mononoki;
     nvidia = true;
     user = "ky";
+    host = "sig";
     #scheme = "catppuccin-mocha";
     scheme = "gruvbox-dark-medium";
 
   in{
-    devShells.${system}.default = pkgs.mkShell {};
     nixosConfigurations = {
-      sig = lib.nixosSystem{
+      ${host} = lib.nixosSystem{
         inherit system;
         modules = [./nixos/default.nix];
+        specialArgs = {
+          inherit host;
+          inherit user;
+        };
       };
     };
     homeConfigurations = {
-      ky = home-manager.lib.homeManagerConfiguration{
+      ${user} = home-manager.lib.homeManagerConfiguration{
         inherit pkgs;
         modules = [
         ./home-manager/default.nix
         ];
       extraSpecialArgs = {
+        inherit user;
+        inherit host;
         inherit inputs;
         inherit font;
         inherit fontpkg;

@@ -1,4 +1,4 @@
-{ config, lib, inputs, pkgs, nix-colors,scheme, ...}:
+{ config, lib, inputs, font, pkgs, nix-colors,scheme, ...}:
 let 
   # shamelessly totally stolen from eric murphey xd
   colorScheme = inputs.nix-colors.colorSchemes.${scheme}; 
@@ -67,7 +67,7 @@ let
 in{
    programs.rofi = {
      enable = true;
-     font = lib.mkDefault "Mononoki";
+     font = lib.mkDefault  "${font}";
      extraConfig = {
        display-drun = "Spawn:";
        display-window = "Windows:";

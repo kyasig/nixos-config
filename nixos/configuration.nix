@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, user, host,... }:
 {
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.systemd-boot.enable = true;
@@ -7,7 +7,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "sig"; 
+  networking.hostName = "${host}"; 
   networking.networkmanager.enable = true;  
 
   time.timeZone = "America/Los_Angeles";
@@ -20,7 +20,7 @@
 
   users ={
     defaultUserShell = pkgs.zsh;
-    users.ky = {
+    users.${user} = {
       isNormalUser = true;
       initialPassword = "xd";
       extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"]; 
