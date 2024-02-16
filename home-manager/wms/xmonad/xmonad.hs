@@ -36,13 +36,13 @@ myBrowser = "firefox"
 myFileMan = "yazi"
 myEmail = "thunderbird"
 
-myWorkspaces = show <$> [1..9]
+--myWorkspaces = show <$> [1..9]
+myWorkspaces = ["壹","貳","叄","肆","伍","陸","柒","捌","玖"]
 
 myBorderWidth = 3
 myNormalBorderColor = color00
 myFocusedBorderColor = color0E
 
-windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 --keybindings
 myKeys =
@@ -152,8 +152,9 @@ myPP = filterOutWsPP[scratchpadWorkspaceTag] $ def{
     , ppTitle = xmobarColor color0A "" . shorten 30
     , ppSep =  "<fc=" ++ color0E ++ "> <fn=1>|</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
-    , ppExtras = [windowCount]
-    , ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
+    --, ppExtras = [windowCount]
+    --, ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
+    , ppOrder = \(ws:_:t)  -> [ws] ++ t
     }
 
 main = xmonad
