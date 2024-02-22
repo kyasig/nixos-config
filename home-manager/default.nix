@@ -22,7 +22,6 @@
       thunderbird
       vesktop
       vlc
-      vscodium-fhs
       ghc
       nuclear
       qbittorrent

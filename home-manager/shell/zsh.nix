@@ -15,10 +15,10 @@ let
       "mkdir" = "mkdir -vp";
       "n" = "nvim";
       "y" = "yazi";
-      "nf" = "fd -H -tf | fzf --border=rounded --preview 'bat --style=numbers --color=always {}' | xargs $EDITOR";
-      "cf" = "cd $(fzf --border=rounded --preview 'bat --style=numbers --color=always {}')";
-      "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=rounded | xargs zathura";
-      "pks" = "firefox https://search.nixos.org/packages";
+      "nf" = "fd -H -tf | fzf --border=rounded --preview 'bat --style=numbers --color=always {}' | xargs -r $EDITOR";
+      "cf" = "cd $(fd -t d | fzf --border=rounded --preview 'bat --style=numbers --color=always {}')";
+      "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=rounded | xargs  -r zathura";
+      "fy" = "yazi $(fd -t d | fzf)";
       "ac" = "ani-cli";
       "setwal" = "feh --bg-fil";
       "z" = "zathura";
@@ -35,7 +35,6 @@ in
     syntaxHighlighting.enable= true;
     shellAliases = myAliases;
     initExtra = ''
-    pfetch
     set -o vi
     zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     '';

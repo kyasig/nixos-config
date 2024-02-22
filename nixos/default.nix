@@ -22,6 +22,8 @@
     };
     systemPackages = with pkgs;[
       dmenu
+      cups-toshiba-estudio
+      cups-filters
       git
       neovim
       wget
