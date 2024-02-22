@@ -35,6 +35,10 @@ myTerminal = "kitty"
 myBrowser = "firefox"
 myFileMan = "yazi"
 myEmail = "thunderbird"
+myPassMan = "bitwarden"
+
+myRunCmd :: String
+myRunCmd = "dmenu_run -i -l 7 -p 'spawn: ' -nb '" ++ color00  ++ "' -nf '" ++ color05 ++ "' -sb '" ++ color0E ++ "' -sf '" ++ color00 ++ "'"
 
 --myWorkspaces = show <$> [1..9]
 myWorkspaces = ["壹","貳","叄","肆","伍","陸","柒","捌","玖"]
@@ -48,9 +52,10 @@ myFocusedBorderColor = color0E
 myKeys =
   [ ("M-<Return>"    , spawn myTerminal)
   , ("M-b"           , spawn myBrowser)
-  , ("M-r"           , spawn "rofi -show drun")
+  , ("M-r"           , spawn myRunCmd)
   , ("M-C-s"         , spawn "flameshot gui")
   , ("M-<Delete>"    , spawn "rofi -show power-menu -modi power-menu:rofi-power-menu")
+  , ("M-C-b"         , spawn "bm")
   , ("<F3>"          , spawn "brillo -q -A 10")
   , ("<F3>"          , spawn "brillo -q -U 10")
   , ("M-0"           , namedScratchpadAction scratchpads "term")
@@ -126,6 +131,7 @@ scratchpads = [
 --managehook
 myManageHook = composeAll  
                [ title     =? "pcmanfm" --> doFloat
+               , title     =? "Bitwarden" --> doFloat
                , className =? "confirm" --> doFloat
                , className =? "file_progress" --> doFloat
                , className =? "dialog" --> doFloat
@@ -153,8 +159,8 @@ myPP = filterOutWsPP[scratchpadWorkspaceTag] $ def{
     , ppSep =  "<fc=" ++ color0E ++ "> <fn=1>|</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
     --, ppExtras = [windowCount]
-    --, ppOrder = \(ws:l:t:ex)  -> [ws,l] ++ ex ++ [t]
-    , ppOrder = \(ws:_:t)  -> [ws] ++ t
+    , ppOrder = \(ws:l:t:_)  -> [ws,l] ++ [t]
+    --, ppOrder = \(ws:_:t)  -> [ws] ++ t
     }
 
 main = xmonad
@@ -163,8 +169,8 @@ main = xmonad
      $ withSB mySB
      $ docks
      $ def
-       { terminal = "kitty"
-       , modMask = mod4Mask
+       { terminal           = myTerminal 
+       , modMask            = mod4Mask
        , layoutHook         = myLayout
        , startupHook        = myStartupHook
        , manageHook         = myManageHook

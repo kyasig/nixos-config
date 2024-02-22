@@ -31,7 +31,7 @@
     user = "ky";
     host = "sig";
     #scheme = "catppuccin-mocha";
-    scheme = "gruvbox-dark-medium";
+    scheme = "ayu-dark";
 
   in{
     nixosConfigurations = {
