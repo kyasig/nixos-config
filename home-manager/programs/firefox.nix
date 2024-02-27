@@ -1,5 +1,38 @@
-{ config, pkgs, inputs, ...}:
-{
+{ config, pkgs, inputs, scheme,...}:
+let 
+  colorScheme = inputs.nix-colors.colorSchemes.${scheme};
+  bookmarks = pkgs.writeShellApplication{
+    name = "bm";
+    text = ''
+    browser="firefox"
+    declare -A bookmarks
+    
+    bookmarks["invidious"]="https://inv.n8pjl.ca/feed/subscriptions"
+    bookmarks["canvas"]="https://pacific.instructure.com/"
+    bookmarks["student support center"]="https://pacific.mywconline.com/"
+    bookmarks["degreeworks"]="https://dw-prod.ec.pacific.edu/responsiveDashboard/worksheets/WEB31"
+    bookmarks["handhake"]="https://app.joinhandshake.com/stu"
+    bookmarks["linkedin"]="https://www.linkedin.com/in/kevin-yang-80a50326a/"
+    bookmarks["nvidia-portal"]="https://nvidia.wd5.myworkdayjobs.com/en-US/NVIDIAExternalCareerSite/login?redirect=%2Fen-US%2FNVIDIAExternalCareerSite%2FuserHome"
+    bookmarks["github"]="https://github.com/"
+    bookmarks["github-solarcar"]="https://github.com/UOP-Solarcar"
+    bookmarks["piped"]="https://piped.us.projectsegfau.lt/feed"
+    bookmarks["mangadex"]="https://mangadex.org/"
+    bookmarks["mal"]="https://myanimelist.net/anime/season"
+    bookmarks["anilist"]="https://anilist.co/user/kyasig/"
+    bookmarks["nix packages"]="https://search.nixos.org/packages"
+    bookmarks["overleaf"]="https://www.overleaf.com/project"
+    bookmarks["mynixos"]="https://mynixos.com/"
+    bookmarks["mypacific"]="https://my.pacific.edu/dashboard"
+    bookmarks["matlab online"]="https://matlab.mathworks.com/"
+    
+    site_names=$(for key in "''${!bookmarks[@]}"; do echo "$key"; done)
+    selected="''${bookmarks[$(echo "$site_names" | dmenu -i -l 7 -nb '#${colorScheme.palette.base00}' -nf '#${colorScheme.palette.base05}' -sb '#${colorScheme.palette.base0E}' -sf '#${colorScheme.palette.base00}' -p 'open bookmark: ')]}"
+    $browser "$selected"
+    '';
+  };
+in{
+  home.packages = [bookmarks];
   programs.librewolf.enable = true; #guh
   programs.firefox = {
     enable = true;
@@ -14,152 +47,285 @@
         tabcenter-reborn
       ];
       userChrome = ''
-      /*
-  __  __   _           _                     
- |  \/  | (_)         (_)                    
- | \  / |  _   _ __    _   _ __ ___     __ _ 
- | |\/| | | | | '_ \  | | | '_ ` _ \   / _` |
- | |  | | | | | | | | | | | | | | | | | (_| |
- |_|  |_| |_| |_| |_| |_| |_| |_| |_|  \__,_|
-                                            
+              /* userChrome.css from: https://github.com/Dook97/firefox-qutebrowser-userchrome*/
+          :root {
+            --tab-active-bg-color: #${colorScheme.palette.base02};
+            --tab-inactive-bg-color: #${colorScheme.palette.base00};
+            --tab-active-fg-fallback-color: #${colorScheme.palette.base06};
+            --tab-inactive-fg-fallback-color: #${colorScheme.palette.base04};
+            --urlbar-focused-bg-color: #${colorScheme.palette.base00};
+            --urlbar-not-focused-bg-color: #${colorScheme.palette.base00};
+            --toolbar-bgcolor: #${colorScheme.palette.base00} !important;
+            --tab-font: 'JetbrainsMono Nerd Font';
+            --urlbar-font: 'JetbrainsMono Nerd Font';
 
-*/
+            --urlbar-height-setting: 32px;
+            --tab-min-height: 24px !important;
 
+            /* I don't recommend you touch this unless you know what you're doing */
+            --arrowpanel-menuitem-padding: 2px !important;
+            --arrowpanel-border-radius: 0px !important;
+            --arrowpanel-menuitem-border-radius: 0px !important;
+            --toolbarbutton-border-radius: 0px !important;
+            --toolbarbutton-inner-padding: 0px 2px !important;
+            --toolbar-field-focus-background-color: var(--urlbar-focused-bg-color) !important;
+            --toolbar-field-background-color: var(--urlbar-not-focused-bg-color) !important;
+            --toolbar-field-focus-border-color: transparent !important;
 
-/* User changable variables */
+            --newtab-background-color: #${colorScheme.palette.base00};
+            --newtab-wordmark-color: #${colorScheme.palette.base06};
+          }
 
-:root {
-	--tab-font-size: 0.8em; /* Font size of the tab labels */
-	--tab-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* The font used for the tab labels */
-	--max-tab-width: none; /* The maximum width a tab in the tab bar can use. Set this to none for no limit */
-	--show-titlebar-buttons: none; /* Hide the buttons (close/minimize/maximize) in the title bar. Required on some platforms (e.g macOS) to fully hide the title bar. `none` hides them, `block` shows them */
-	--tab-height: 20px;
-}
+          :root[lwt-newtab-brighttext] {
+                --newtab-background-color-secondary: #${colorScheme.palette.base02};
+          }
 
-/* Minima Source Code. Here be dragons. */
-/* Only change this if you know what you're doing */
+          .search-wrapper .search-handoff-button, .search-wrapper input {
+            background: #${colorScheme.palette.base02} !important;
+          }
 
-.titlebar-buttonbox-container {
-	display: var(--show-titlebar-buttons);
-}
+          /* --- GENERAL DEBLOAT ---------------------------------- */
 
-:root:not([customizing]) #TabsToolbar {
-	margin-left: 1px !important;
-	margin-right: 1px !important;
-	border-radius: 0 !important;
-	padding: 0 !important;
-}
-.tabbrowser-tab * {
-	margin:0 !important;
-	border-radius: 0 !important;
-	font-family: var(--tab-font-family) !important;
-}
-.tabbrowser-tab {
-	height: var(--tab-height);
-	font-size: var(--tab-font-size) !important;
-	min-height: 0 !important;
-	align-items: center !important;
-}
-.tabbrowser-tab[fadein]:not([pinned]) {
-	max-width: var(--max-tab-width) !important;
-}
-.tab-close-button, .new-tab-button, #firefox-view-button, #scrollbutton-up, .tab-secondary-label {
-	display: none !important;
-}
-.tab-icon-image {
-	height: auto !important;
-	width: calc(var(--tab-height) / 1.5) !important;
-	margin-right: 4px !important;
-}
+          /* Bottom left page loading status or url preview */
+          #statuspanel { display: none !important; }
 
-#tabs-newtab-button, #titlebar spacer {
-	display: none !important;
-}
+          /* Hide dropdown that appears when you type in search bar */
+          .autocomplete-history-popup, panel[type=autocomplete-richlistbox], panel[type=autocomplete] {
+            display: none !important;
+          }
 
-:root:not([customizing]) #nav-bar
-{
-	min-height : 2.5em       !important;
-	height     : 2.5em       !important;
-	margin     : 0 0 -2.5em  !important;
-	z-index    : -1000       !important;
-	opacity    : 0           !important;
-}
+          /* remove radius from right-click popup */
+          menupopup, panel { --panel-border-radius: 0px !important; }
+          menu, menuitem, menucaption { border-radius: 0px !important; }
 
-:root:not([customizing]) #nav-bar:focus-within
-{
-	z-index    : 1000        !important;
-	opacity    : 1           !important;
-}
+          /* no stupid large buttons in right-click menu */
+          menupopup > #context-navigation { display: none !important; }
+          menupopup > #context-sep-navigation { display: none !important; }
 
-#nav-bar{
-	border-inline: var(--uc-window-drag-space-width) solid var(--toolbar-bgcolor);
-}
-#new-tab-button, #alltabs-button, #scrollbutton-down, .tab-loading-burst{
-	display: none;
-}
-#titlebar {
-	overflow: none !important;
-}
+          /* --- DEBLOAT NAVBAR ----------------------------------- */
 
-/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/hide_tabs_with_one_tab.css made available under Mozilla Public License v. 2.0
-See the above repository for updates as well as full license text. */
+          #back-button { display: none; }
+          #forward-button { display: none; }
+          #reload-button { display: none; }
+          #stop-button { display: none; }
+          #home-button { display: none; }
+          #library-button { display: none; }
+          #fxa-toolbar-menu-button { display: none; }
+          /* empty space before and after the url bar */
+          #customizableui-special-spring1, #customizableui-special-spring2 { display: none; }
 
-/* Makes tabs toolbar items zero-height initially and sets enlarge them to fill up space equal to tab-min-height set on tabs. Optionally use privatemode_indicator_as_menu_button.css to replace main menu icon with private browsing indicator while tabs are hidden. */
-/* Firefox 65+ only */
+          /* --- STYLE NAVBAR ------------------------------------ */
 
-:root[sizemode="normal"] #nav-bar{ --uc-window-drag-space-width: 20px }
+          /* remove padding between toolbar buttons */
+          toolbar .toolbarbutton-1 { padding: 0 0 !important; }
 
-#titlebar{ -moz-appearance: none !important; }
-#TabsToolbar{ min-height: 0px !important }
+          /* add padding to the right of the last button so that it doesn't touch the edge of the window */
+          #PanelUI-menu-button {
+            padding: 0px 4px 0px 0px !important;
+          }
 
-#tabbrowser-tabs, #tabbrowser-tabs > .tabbrowser-arrowscrollbox, #tabbrowser-arrowscrollbox{ min-height: 0 !important; }
+          #urlbar-container {
+            --urlbar-container-height: var(--urlbar-height-setting) !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            font-family: var(--urlbar-font, 'monospace');
+            font-size: 11px;
+          }
 
-:root:not([customizing]) #tabbrowser-tabs .tabs-newtab-button,
-:root:not([customizing]) #tabs-newtab-button,
-:root:not([customizing]) #TabsToolbar-customization-target > .toolbarbutton-1,
-:root:not([customizing]) #TabsToolbar .titlebar-button{
-	-moz-appearance: none !important;
-	height: 0px;
-	padding-top: 0px !important;
-	padding-bottom: 0px !important;
-	-moz-box-align: stretch;
-	margin: 0 !important;
-}
+          #urlbar {
+            --urlbar-height: var(--urlbar-height-setting) !important;
+            --urlbar-toolbar-height: var(--urlbar-height-setting) !important;
+            min-height: var(--urlbar-height-setting) !important;
+            border-color: var(--lwt-toolbar-field-border-color, hsla(240,5%,5%,.25)) !important;
+          }
 
-.accessibility-indicator,
-.private-browsing-indicator{ 
-	height: unset !important;
-}
-.accessibility-indicator > hbox{ padding-block: 0 !important }
+          #urlbar-input {
+            margin-left: 0.8em !important;
+            margin-right: 0.4em !important;
+          }
 
-#tabbrowser-tabs tab:only-of-type {
-	visibility: collapse !important;
-}
+          #navigator-toolbox {
+            border: none !important;
+          }
 
-/* Button re-styling */
-#tabs-newtab-button:hover,
-#tabbrowser-tabs .tabs-newtab-button:hover{ background-color: var(--toolbarbutton-hover-background) }
+          /* keep pop-up menus from overlapping with navbar */
+          #widget-overflow { margin: 0 !important; }
+          #appMenu-popup { margin: 0 !important; }
+          #customizationui-widget-panel { margin: 0 !important; }
+          #unified-extensions-panel { margin: 0 !important; }
 
-#tabs-newtab-button > .toolbarbutton-icon,
-#tabbrowser-tabs .tabs-newtab-button > .toolbarbutton-icon{
-	padding: 0 !important;
-	transform: scale(0.6);
-	background-color: transparent !important;
-}
-/* Extra top padding  in maximized window */
-@media (-moz-os-version: windows-win10){
-	:root[sizemode="maximized"] #navigator-toolbox{ padding-top:7px !important; }
-}
-/* Fix window controls not being clickable */
-:root[tabsintitlebar] #toolbar-menubar[autohide="true"][inactive]{
-	transition: height 0ms steps(1) 80ms;
-}
-#nav-bar{
-	border-inline: var(--uc-window-drag-space-width) solid var(--toolbar-bgcolor);
-}
-#navigator-toolbox {
-	appearance: toolbar !important; /* Pretty much anything except none */
-}
+          /* --- UNIFIED EXTENSIONS BUTTON ------------------------ */
+
+          /* make extension icons smaller */
+          #unified-extensions-view {
+            --uei-icon-size: 16px;
+          }
+
+          /* hide bloat */
+          .unified-extensions-item-message-deck,
+          #unified-extensions-view > .panel-header,
+          #unified-extensions-view > toolbarseparator,
+          #unified-extensions-manage-extensions {
+            display: none !important;
+          }
+
+          /* add 3px padding on the top and the bottom of the box */
+          .panel-subview-body {
+            padding: 3px 0px !important;
+          }
+
+          #unified-extensions-view .unified-extensions-item-menu-button {
+            margin-inline-end: 0 !important;
+          }
+
+          #unified-extensions-view .toolbarbutton-icon {
+            padding: 0 !important;
+          }
+
+          .unified-extensions-item-contents {
+            line-height: 1 !important;
+            white-space: nowrap !important;
+          }
+
+          /* --- DEBLOAT URLBAR ----------------------------------- */
+
+          #identity-box { display: none; }
+          #pageActionButton { display: none; }
+          #pocket-button { display: none; }
+          #urlbar-zoom-button { display: none; }
+          #tracking-protection-icon-container { display: none !important; }
+          #reader-mode-button{ display: none !important; }
+          #star-button { display: none; }
+          #star-button-box:hover { background: inherit !important; }
+
+          /* Go to arrow button at the end of the urlbar when searching */
+          #urlbar-go-button { display: none; }
+
+          /* remove container indicator from urlbar */
+          #userContext-label, #userContext-indicator { display: none !important;}
+
+          /* --- STYLE TAB TOOLBAR -------------------------------- */
+
+          #titlebar {
+            --proton-tab-block-margin: 0px !important;
+            --tab-block-margin: 0px !important;
+          }
+
+          #TabsToolbar, .tabbrowser-tab {
+            max-height: var(--tab-min-height) !important;
+            font-size: 11px !important;
+          }
+
+          /* Change color of normal tabs */
+          tab:not([selected="true"]) {
+            background-color: var(--tab-inactive-bg-color) !important;
+            color: var(--identity-icon-color, var(--tab-inactive-fg-fallback-color)) !important;
+          }
+
+          tab {
+            font-family: var(--tab-font, monospace);
+            font-weight: bold;
+            border: none !important;
+          }
+
+          /* safari style tab width */
+          .tabbrowser-tab[fadein] {
+            max-width: 100vw !important;
+            border: none
+          }
+
+          /* Hide close button on tabs */
+          #tabbrowser-tabs .tabbrowser-tab .tab-close-button { display: none !important; }
+
+          /* disable favicons in tab */
+          /* .tab-icon-stack:not([pinned]) { display: none !important; } */
+
+          .tabbrowser-tab {
+            /* remove border between tabs */
+            padding-inline: 0px !important;
+            /* reduce fade effect of tab text */
+            --tab-label-mask-size: 1em !important;
+            /* fix pinned tab behaviour on overflow */
+            overflow-clip-margin: 0px !important;
+          }
+
+          /* Tab: selected colors */
+          #tabbrowser-tabs .tabbrowser-tab[selected] .tab-content {
+            background: var(--tab-active-bg-color) !important;
+            color: var(--identity-icon-color, var(--tab-active-fg-fallback-color)) !important;
+          }
+
+          /* Tab: hovered colors */
+          #tabbrowser-tabs .tabbrowser-tab:hover:not([selected]) .tab-content {
+            background: var(--tab-active-bg-color) !important;
+          }
+
+          /* hide window controls */
+          .titlebar-buttonbox-container { display: none; }
+
+          /* remove titlebar spacers */
+          .titlebar-spacer { display: none !important; }
+
+          /* disable tab shadow */
+          #tabbrowser-tabs:not([noshadowfortests]) .tab-background:is([selected], [multiselected]) {
+              box-shadow: none !important;
+          }
+
+          /* remove dark space between pinned tab and first non-pinned tab */
+          #tabbrowser-tabs[haspinnedtabs]:not([positionpinnedtabs]) >
+          #tabbrowser-arrowscrollbox >
+          .tabbrowser-tab:nth-child(1 of :not([pinned], [hidden])) {
+          margin-inline-start: 0px !important;
+          }
+
+          /* remove dropdown menu button which displays all tabs on overflow */
+          #alltabs-button { display: none !important }
+
+          /* fix displaying of pinned tabs on overflow */
+          #tabbrowser-tabs:not([secondarytext-unsupported]) .tab-label-container {
+            height: var(--tab-min-height) !important;
+          }
+
+          /* remove overflow scroll buttons */
+          #scrollbutton-up, #scrollbutton-down { display: none !important; }
+
+          /* remove new tab button */
+          #tabs-newtab-button {
+            display: none !important;
+          }
+
+          /* hide private browsing indicator */
+          #private-browsing-indicator-with-label {
+            display: none;
+          }
+
+          /* --- AUTOHIDE NAVBAR ---------------------------------- */
+
+          /* hide navbar unless focused */
+          #nav-bar {
+            min-height: 0 !important;
+            max-height: 0 !important;
+            height: 0 !important;
+            --moz-transform: scaleY(0) !important;
+            transform: scaleY(0) !important;
+          }
+
+          /* show on focus */
+          #nav-bar:focus-within {
+            --moz-transform: scale(1) !important;
+            transform: scale(1) !important;
+            max-height: var(--urlbar-height-setting) !important;
+            height: var(--urlbar-height-setting) !important;
+            min-height: var(--urlbar-height-setting) !important;
+          }
+
+          #navigator-toolbox:focus-within > .browser-toolbar {
+            transform: translateY(0);
+            opacity: 1;
+          }
+
       '';
       extraConfig = ''
         //
@@ -417,7 +583,6 @@ user_pref("browser.firefox-view.feature-tour", "{\"screen\":\"\",\"complete\":tr
 user_pref("network.trr.mode", 2);
 user_pref("network.trr.max-fails", 5);
 
-user_pref("browser.toolbars.bookmarks.visibility", "always");
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
