@@ -38,7 +38,8 @@ myEmail = "thunderbird"
 myPassMan = "bitwarden"
 
 myRunCmd :: String
-myRunCmd = "dmenu_run -i -l 7 -p 'spawn: ' -nb '" ++ color00  ++ "' -nf '" ++ color05 ++ "' -sb '" ++ color0E ++ "' -sf '" ++ color00 ++ "'"
+--myRunCmd = "dmenu_run -i -l 7 -p 'spawn: ' -nb '" ++ color00  ++ "' -nf '" ++ color05 ++ "' -sb '" ++ color0E ++ "' -sf '" ++ color00 ++ "'"
+myRunCmd = "rofi -show drun"
 
 --myWorkspaces = show <$> [1..9]
 myWorkspaces = ["壹","貳","叄","肆","伍","陸","柒","捌","玖"]
@@ -55,6 +56,7 @@ myKeys =
   , ("M-r"           , spawn myRunCmd)
   , ("M-C-s"         , spawn "flameshot gui")
   , ("M-<Delete>"    , spawn "rofi -show power-menu -modi power-menu:rofi-power-menu")
+  , ("M-w"    , spawn "rofi -show window")
   , ("M-C-b"         , spawn "bm")
   , ("<F3>"          , spawn "brillo -q -A 10")
   , ("<F3>"          , spawn "brillo -q -U 10")
@@ -155,7 +157,8 @@ myPP = filterOutWsPP[scratchpadWorkspaceTag] $ def{
       ppHiddenNoWindows = xmobarColor color05 ""
     , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=2 color=" ++ color0E ++ ">") "</box>"
     , ppHidden = xmobarColor color0E  ""
-    , ppTitle = xmobarColor color0A "" . shorten 30
+    --, ppTitle = xmobarColor color0A "" . shorten 30
+    , ppTitle = xmobarColor color05 "" . shorten 30
     , ppSep =  "<fc=" ++ color0E ++ "> <fn=1>|</fn> </fc>"
     , ppLayout = xmobarColor color0E ""
     --, ppExtras = [windowCount]

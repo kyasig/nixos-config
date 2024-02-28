@@ -15,9 +15,9 @@ let
       "mkdir" = "mkdir -vp";
       "n" = "nvim";
       "y" = "yazi";
-      "nf" = "fd -H -tf | fzf --border=rounded --preview 'bat --style=numbers --color=always {}' | xargs -r $EDITOR";
-      "cf" = "cd $(fd -t d | fzf --border=rounded --preview 'bat --style=numbers --color=always {}')";
-      "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=rounded | xargs  -r zathura";
+      "nf" = "fd -H -tf | fzf --border=double --prompt='edit file: ' --pointer='→'  --header='ESC to quit' --color='dark,fg:magenta' --preview 'bat --style=numbers --color=always {}' | xargs -r $EDITOR";
+      "cf" = "cd $(fd -t d | fzf --border=double --prompt='change directory to: ' --header='  ESC to quit')";
+      "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=double --prompt='Open PDF: ' | xargs  -r zathura";
       "fy" = "yazi $(fd -t d | fzf)";
       "ac" = "ani-cli";
       "setwal" = "feh --bg-fil";

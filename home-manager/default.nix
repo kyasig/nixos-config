@@ -26,6 +26,7 @@
       nuclear
       qbittorrent
       kitty
+      kile
       inkscape
       xclip
       ytfzf
@@ -36,6 +37,9 @@
       exif
       exiftool
       cmake
+      pandoc
+      texliveSmall
+      vscodium
     ];
     sessionVariables = {
       EDITOR = "nvim";
