@@ -17,7 +17,7 @@ in{
           Run Cpu ["-t", " <total>%"] 10
         , Run Memory ["-t"," <used>m used"] 10
         , Run Date " %a %b %d [%r]" "date" 10
-        , Run BatteryP ["ACAD", "BAT0", "hidpp_battery_0"] ["-t", " <left>%"] 3
+        , Run BatteryP ["ACAD", "BAT0", "hidpp_battery_0"] ["-t", " <left>%"] 3
         , Run Uptime ["-t"," <hours>h <minutes>m"] 10
         , Run DiskU [("/"," <free> free")] [] 3000
         , Run UnsafeXMonadLog
