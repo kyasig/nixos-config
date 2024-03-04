@@ -5,6 +5,7 @@
     ./shell
     ./programs
   ];
+  nixpkgs.config.allowUnfree = true;
   home = {
     username = "ky";
     homeDirectory = "/home/ky";
@@ -20,7 +21,7 @@
       protonmail-bridge
       pass
       thunderbird
-      vesktop
+      discord
       vlc
       ghc
       nuclear
@@ -43,7 +44,7 @@
     ];
     sessionVariables = {
       EDITOR = "nvim";
-      NIXPKGS_ALLOW_UNFREE = "1"; 
+      NIXPKGS_ALLOW_UNFREE = "1";
     };
   };
   programs.home-manager.enable = true;
