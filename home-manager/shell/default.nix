@@ -4,6 +4,7 @@
     ./zsh.nix
     ./starship.nix
     ./yazi.nix
+    ./fzf.nix
 #    ./scripts
   ];
   home.packages = with pkgs;[
