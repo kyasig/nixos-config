@@ -5,6 +5,7 @@
     ./starship.nix
     ./yazi.nix
     ./fzf.nix
+    ./nixvim.nix
 #    ./scripts
   ];
   home.packages = with pkgs;[
