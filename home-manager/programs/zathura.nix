@@ -1,7 +1,4 @@
-{ pkgs, lib, config,inputs, nix-colors,scheme, ... }: 
-let 
-  colorScheme = inputs.nix-colors.colorSchemes.${scheme};
-in
+{ pkgs, lib, config,inputs, nix-colors, ... }: 
 {
   programs.zathura = {
     enable = true;
@@ -14,8 +11,8 @@ in
       d = "scroll half-down";
     };
     options = {
-      default-bg = "#${colorScheme.palette.base00}";
-      default-fg = "#${colorScheme.palette.base0E}";
+      default-bg = "#${config.colorScheme.palette.base00}";
+      default-fg = "#${config.colorScheme.palette.base0E}";
       page-padding = 1;
       adjust-open = "best-fit";
       selection-clipboard = "clipboard";

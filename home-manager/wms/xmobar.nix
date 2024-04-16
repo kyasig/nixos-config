@@ -1,7 +1,5 @@
-{config, pkgs, inputs, lib, scheme,font,...}:
-let 
-  colorScheme = inputs.nix-colors.colorSchemes.${scheme};
-in{
+{config, pkgs, inputs, lib, nix-colors,font,...}:
+{
   programs.xmobar = {
     extraConfig = ''
     Config
@@ -9,8 +7,8 @@ in{
       font = "${font} 12"
     , additionalFonts = ["xft:Inconsolata", "xft:FontAwesome"]
     , position = TopSize L 100 27
-    , bgColor = "#${colorScheme.palette.base00}"
-    , fgColor = "#${colorScheme.palette.base05}"
+    , bgColor = "#${config.colorScheme.palette.base00}"
+    , fgColor = "#${config.colorScheme.palette.base05}"
     , allDesktops = True
     , persistent = True
     , commands = [
@@ -24,7 +22,7 @@ in{
         ]
     , sepChar = "%"
     , alignSep = "}{"
-    , template = "  %UnsafeXMonadLog% }{ <box type=Bottom width=2 mb=2 color=#${colorScheme.palette.base0D}><fc=#${colorScheme.palette.base0D}>%memory%</fc></box> <box type=Bottom width=2 mb=2 color=#${colorScheme.palette.base0B}><fc=#${colorScheme.palette.base0B}>%cpu%</fc></box> <box type=Bottom width=2 mb=2 color=#${colorScheme.palette.base08}><fc=#${colorScheme.palette.base08}>%uptime%</fc></box> <box type=Bottom width=2 mb=2 color=#${colorScheme.palette.base0A}><fc=#${colorScheme.palette.base0A}>%disku%</fc></box> <box type=Bottom width=2 mb=2 color=#${colorScheme.palette.base0C}><fc=#${colorScheme.palette.base0C}>%battery%</fc></box> <box type=Bottom width=2 mb=2 color=#${colorScheme.palette.base0E}><fc=#${colorScheme.palette.base0E}>%date%</fc></box> "
+    , template = "  %UnsafeXMonadLog% }{ <box type=Bottom width=2 mb=2 color=#${config.colorScheme.palette.base0D}><fc=#${config.colorScheme.palette.base0D}>%memory%</fc></box> <box type=Bottom width=2 mb=2 color=#${config.colorScheme.palette.base0B}><fc=#${config.colorScheme.palette.base0B}>%cpu%</fc></box> <box type=Bottom width=2 mb=2 color=#${config.colorScheme.palette.base08}><fc=#${config.colorScheme.palette.base08}>%uptime%</fc></box> <box type=Bottom width=2 mb=2 color=#${config.colorScheme.palette.base0A}><fc=#${config.colorScheme.palette.base0A}>%disku%</fc></box> <box type=Bottom width=2 mb=2 color=#${config.colorScheme.palette.base0C}><fc=#${config.colorScheme.palette.base0C}>%battery%</fc></box> <box type=Bottom width=2 mb=2 color=#${config.colorScheme.palette.base0E}><fc=#${config.colorScheme.palette.base0E}>%date%</fc></box> "
 }
     '';
   };

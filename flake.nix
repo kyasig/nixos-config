@@ -28,7 +28,7 @@
     nvidia = true;
     user = "ky";
     host = "sig";
-		scheme = "dracula";
+		#scheme = "dracula";
     inherit (nixpkgs) lib;
   in{
     nixosConfigurations = {
@@ -54,7 +54,7 @@
         inherit font;
         inherit fontpkg;
 				inherit nix-colors;
-				inherit scheme;
+				#inherit scheme;
       };
       };
     };

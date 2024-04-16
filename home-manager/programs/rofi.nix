@@ -1,7 +1,5 @@
-{ config, pkgs, lib, inputs,scheme, font, ... }:
-let 
-  colorScheme = inputs.nix-colors.colorSchemes.${scheme};
-in{
+{ config, pkgs, lib, inputs,nix-colors, font, ... }:
+{
 
   programs.rofi = {
     enable = true;
@@ -20,16 +18,16 @@ in{
         highlight = "bold italic";
         scrollbar = true;
 
-        dark-bg0 = mkLiteral "#${colorScheme.palette.base00}";
-        dark-bg1 = mkLiteral "#${colorScheme.palette.base01}";
-        dark-bg2 = mkLiteral "#${colorScheme.palette.base02}";
-        dark-fg0 = mkLiteral "#${colorScheme.palette.base05}";
-        dark-fg1 = mkLiteral "#${colorScheme.palette.base06}";
-        dark-red-dark = mkLiteral "#${colorScheme.palette.base08}";
-        dark-red-light = mkLiteral "#${colorScheme.palette.base08}";
-        dark-yellow-dark = mkLiteral "#${colorScheme.palette.base0A}";
-        dark-yellow-light = mkLiteral "#${colorScheme.palette.base0A}";
-        dark-gray = mkLiteral "#${colorScheme.palette.base04}";
+        dark-bg0 = mkLiteral "#${config.colorScheme.palette.base00}";
+        dark-bg1 = mkLiteral "#${config.colorScheme.palette.base01}";
+        dark-bg2 = mkLiteral "#${config.colorScheme.palette.base02}";
+        dark-fg0 = mkLiteral "#${config.colorScheme.palette.base05}";
+        dark-fg1 = mkLiteral "#${config.colorScheme.palette.base06}";
+        dark-red-dark = mkLiteral "#${config.colorScheme.palette.base08}";
+        dark-red-light = mkLiteral "#${config.colorScheme.palette.base08}";
+        dark-yellow-dark = mkLiteral "#${config.colorScheme.palette.base0A}";
+        dark-yellow-light = mkLiteral "#${config.colorScheme.palette.base0A}";
+        dark-gray = mkLiteral "#${config.colorScheme.palette.base04}";
 
         # Theme colors
         background = mkLiteral "@dark-bg1";

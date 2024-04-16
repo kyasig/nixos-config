@@ -1,20 +1,18 @@
-{config, lib, pkgs, inputs, nix-colors, scheme,...}:
-let 
-   colorScheme = inputs.nix-colors.colorSchemes.${scheme};
-in{
+{config, lib, pkgs, inputs, nix-colors,...}:
+{
   programs.kitty = {
     enable = true;
     settings = {
-      foreground = "#${colorScheme.palette.base05}";
-      background = "#${colorScheme.palette.base00}";
-      color0 = "#${colorScheme.palette.base00}";
-      color1 = "#${colorScheme.palette.base08}";
-      color2 = "#${colorScheme.palette.base0B}";
-      color3 = "#${colorScheme.palette.base0A}";
-      color4 = "#${colorScheme.palette.base0D}";
-      color5 = "#${colorScheme.palette.base0E}";
-      color6 = "#${colorScheme.palette.base0C}";
-      color7 = "#${colorScheme.palette.base05}";
+      foreground = "#${config.colorScheme.palette.base05}";
+      background = "#${config.colorScheme.palette.base00}";
+      color0 = "#${config.colorScheme.palette.base00}";
+      color1 = "#${config.colorScheme.palette.base08}";
+      color2 = "#${config.colorScheme.palette.base0B}";
+      color3 = "#${config.colorScheme.palette.base0A}";
+      color4 = "#${config.colorScheme.palette.base0D}";
+      color5 = "#${config.colorScheme.palette.base0E}";
+      color6 = "#${config.colorScheme.palette.base0C}";
+      color7 = "#${config.colorScheme.palette.base05}";
     };
     font = {
       name = lib.mkForce "mononoki";
