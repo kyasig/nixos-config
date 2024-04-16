@@ -61,7 +61,7 @@ myKeys =
   , ("<F3>"          , spawn "brillo -q -A 10")
   , ("<F3>"          , spawn "brillo -q -U 10")
   , ("M-0"           , namedScratchpadAction scratchpads "term")
-  , ("M-e"           , namedScratchpadAction scratchpads "email")
+  --, ("M-e"           , namedScratchpadAction scratchpads "email")
   , ("M-p"           , namedScratchpadAction scratchpads "volume")
   , ("M-x"         , namedScratchpadAction scratchpads "top")
   , ("M-f"           , namedScratchpadAction scratchpads "file")
@@ -124,7 +124,7 @@ myLayout = smartBorders
 customFloat = customFloating $ W.RationalRect (1/12) (1/10) (5/6) (5/6)
 scratchpads = [
     NS "term" (myTerminal ++ " -T term") (title =? "term") customFloat,
-    NS "email" myEmail (className =? myEmail) customFloat,
+    --NS "email" myEmail (className =? myEmail) customFloat,
     NS "volume" (myTerminal ++ " -T volume -e pulsemixer") (title =? "volume") customFloat,
     NS "top" (myTerminal ++ " -T top -e btop") (title =? "top") customFloat,
     NS "file" (myTerminal ++ " -T file -e " ++ myFileMan) (title =? "file") customFloat
