@@ -5,11 +5,13 @@ dont try this lol i havent tested it (laughs out loud)
 Just for me in case I need to reinstall.
 
 
-Make sure flakes is enabled. 
+Make sure flakes is enabled.
 in ``configuration.nix``
 ```
 nix.settings.experimental-features = ["nix-command" "flakes"];
 ```
+note that git is not installed by default
+also install a good text editor lol
 
 Clone this repository
 ```
@@ -19,6 +21,10 @@ git clone https://github.com/kyasig/nixos-config.git
 Change directories into it. Copy ``hardware-configuration.nix`` into appropriate subdirectory. Then run
 ```
 sudo nixos-rebuild switch --flake .#sig
+```
+sometimes theres issues with the bootloader, if that is the case try
+```
+sudo nixos-rebuild switch --install-bootloader --flake .#sig
 ```
 
 Install Home Manager
@@ -31,7 +37,8 @@ There's this annoying bug where you have to reboot before running this
 ```
 nix-shell '<home-manager>' -A install
 ```
-Switch home-manager generations 
+Switch home-manager generations
 ```
 home-manager switch --flake .#ky
 ```
+
