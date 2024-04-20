@@ -5,5 +5,6 @@
     ./firefox.nix
     ./rofi.nix
     ./zathura.nix
+    ./neovim.nix
   ];
 }
