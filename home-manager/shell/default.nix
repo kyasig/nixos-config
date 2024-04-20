@@ -5,8 +5,6 @@
     ./starship.nix
     ./yazi.nix
     ./fzf.nix
-    ./nixvim.nix
-#    ./scripts
   ];
   home.packages = with pkgs;[
     ani-cli
@@ -18,12 +16,12 @@
     ripgrep
     killall
     tldr
-    bat 
+    bat
     eza
     pfetch-rs #nah i'd fetch
     neofetch
     cmatrix
-    asciiquarium 
+    asciiquarium
     yazi
     cbonsai
     fzf
