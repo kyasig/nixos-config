@@ -1,28 +1,29 @@
 **INSTALLATION**
 
-dont try this lol i havent tested it (laughs out loud)
-
-Just for me in case I need to reinstall.
+This has been tested and verified to work in a VM but not baremetal.
+This is primarily intended just for me in case I need to reinstall.
 
 
 Make sure flakes is enabled.
-in ``configuration.nix``
+in ``/etc/nixos/configuration.nix``
 ```
 nix.settings.experimental-features = ["nix-command" "flakes"];
 ```
-note that git is not installed by default
-also install a good text editor lol
+note that git is not installed by default for whatever reason
+install git and neovim (or whatever your preferred text editor is)
 
 Clone this repository
 ```
 git clone https://github.com/kyasig/nixos-config.git
 ```
 
-Change directories into it. Copy ``hardware-configuration.nix`` into appropriate subdirectory. Then run
+Change directories into it.
+Copy ``hardware-configuration.nix`` into ``nixos``. Then run
+
 ```
 sudo nixos-rebuild switch --flake .#sig
 ```
-sometimes theres issues with the bootloader, if that is the case try
+if installed with a desktop environment that doesn't use systemdboot, run
 ```
 sudo nixos-rebuild switch --install-bootloader --flake .#sig
 ```
@@ -41,4 +42,3 @@ Switch home-manager generations
 ```
 home-manager switch --flake .#ky
 ```
-
