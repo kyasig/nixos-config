@@ -1,4 +1,4 @@
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, user,...}:
 {
   imports = [
     ./configuration.nix
@@ -19,8 +19,10 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
       NIXPKGS_ALLOW_UNFREE = "1";
+      FLAKE = "/home/${user}/nixos-config";
     };
     systemPackages = with pkgs;[
+      firefox
       dmenu
       cups-toshiba-estudio
       cups-filters
@@ -33,6 +35,7 @@
       ripgrep
       usbutils
       ntfs3g
+      nh
     ];
   };
   programs.nano.enable = false;
