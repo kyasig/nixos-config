@@ -1,6 +1,5 @@
-{ config, pkgs, inputs, scheme,...}:
-let 
-  colorScheme = inputs.nix-colors.colorSchemes.${scheme};
+{ config, pkgs, inputs, ...}:
+let
   bookmarks = pkgs.writeShellApplication{
     name = "bm";
     text = ''
@@ -23,16 +22,15 @@ let
     bookmarks["overleaf"]="https://www.overleaf.com/project"
     bookmarks["mynixos"]="https://mynixos.com/"
     bookmarks["mypacific"]="https://my.pacific.edu/dashboard"
-    bookmarks["matlab online"]="https://matlab.mathworks.com/"    
-    
+    bookmarks["matlab online"]="https://matlab.mathworks.com/"
+
     site_names=$(for key in "''${!bookmarks[@]}"; do echo "$key"; done)
-    selected="''${bookmarks[$(echo "$site_names" | rofi -dmenu -i -l 7 -nb '#${colorScheme.palette.base00}' -nf '#${colorScheme.palette.base05}' -sb '#${colorScheme.palette.base0E}' -sf '#${colorScheme.palette.base00}' -p 'open bookmark: ')]}"
+    selected="''${bookmarks[$(echo "$site_names" | rofi -dmenu -i -l 7 -nb '#${config.colorScheme.palette.base00}' -nf '#${config.colorScheme.palette.base05}' -sb '#${config.colorScheme.palette.base0E}' -sf '#${config.colorScheme.palette.base00}' -p 'open bookmark: ')]}"
     $browser "$selected"
     '';
   };
 in{
   home.packages = [bookmarks];
-  programs.librewolf.enable = true; #guh
   programs.firefox = {
     enable = true;
     profiles.ky = {
@@ -48,13 +46,13 @@ in{
       userChrome = ''
               /* userChrome.css from: https://github.com/Dook97/firefox-qutebrowser-userchrome*/
           :root {
-            --tab-active-bg-color: #${colorScheme.palette.base02};
-            --tab-inactive-bg-color: #${colorScheme.palette.base00};
-            --tab-active-fg-fallback-color: #${colorScheme.palette.base06};
-            --tab-inactive-fg-fallback-color: #${colorScheme.palette.base04};
-            --urlbar-focused-bg-color: #${colorScheme.palette.base00};
-            --urlbar-not-focused-bg-color: #${colorScheme.palette.base00};
-            --toolbar-bgcolor: #${colorScheme.palette.base00} !important;
+            --tab-active-bg-color: #${config.colorScheme.palette.base02};
+            --tab-inactive-bg-color: #${config.colorScheme.palette.base00};
+            --tab-active-fg-fallback-color: #${config.colorScheme.palette.base06};
+            --tab-inactive-fg-fallback-color: #${config.colorScheme.palette.base04};
+            --urlbar-focused-bg-color: #${config.colorScheme.palette.base00};
+            --urlbar-not-focused-bg-color: #${config.colorScheme.palette.base00};
+            --toolbar-bgcolor: #${config.colorScheme.palette.base00} !important;
             --tab-font: 'JetbrainsMono Nerd Font';
             --urlbar-font: 'JetbrainsMono Nerd Font';
 
@@ -71,16 +69,16 @@ in{
             --toolbar-field-background-color: var(--urlbar-not-focused-bg-color) !important;
             --toolbar-field-focus-border-color: transparent !important;
 
-            --newtab-background-color: #${colorScheme.palette.base00};
-            --newtab-wordmark-color: #${colorScheme.palette.base06};
+            --newtab-background-color: #${config.colorScheme.palette.base00};
+            --newtab-wordmark-color: #${config.colorScheme.palette.base06};
           }
 
           :root[lwt-newtab-brighttext] {
-                --newtab-background-color-secondary: #${colorScheme.palette.base02};
+                --newtab-background-color-secondary: #${config.colorScheme.palette.base02};
           }
 
           .search-wrapper .search-handoff-button, .search-wrapper input {
-            background: #${colorScheme.palette.base02} !important;
+            background: #${config.colorScheme.palette.base02} !important;
           }
 
           /* --- GENERAL DEBLOAT ---------------------------------- */
