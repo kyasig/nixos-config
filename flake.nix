@@ -1,7 +1,7 @@
 {
   description = "kyasig's nixos flake";
   inputs = {
-    nixpkgs.url = "github:NixOs/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOs/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +19,7 @@
 		nix-colors,
 		firefox-addons,
     ...
-  }@inputs: 
+  }@inputs:
 	let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -28,7 +28,6 @@
     nvidia = true;
     user = "ky";
     host = "sig";
-		#scheme = "dracula";
     inherit (nixpkgs) lib;
   in{
     nixosConfigurations = {
@@ -54,7 +53,6 @@
         inherit font;
         inherit fontpkg;
 				inherit nix-colors;
-				#inherit scheme;
       };
       };
     };
