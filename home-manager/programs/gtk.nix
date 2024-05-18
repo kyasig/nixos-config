@@ -1,12 +1,12 @@
 { pkgs, lib, config,inputs, nix-colors, ... }:
 {
-  programs.gtk = {
+  gtk = {
     enable = true;
-    gtk3.extraconfig = {
+    gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
       gtk-error-bell = 0;
     };
-    gtk4.extraconfig = {
+    gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
       gtk-error-bell = 0;
     };
