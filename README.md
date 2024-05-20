@@ -12,6 +12,11 @@ nix.settings.experimental-features = ["nix-command" "flakes"];
 note that git is not installed by default for whatever reason
 install git and neovim (or whatever your preferred text editor is)
 
+rebuild the system with
+```
+sudo nixos-rebuild switch
+```
+
 Clone this repository
 ```
 git clone https://github.com/kyasig/nixos-config.git
@@ -40,5 +45,5 @@ nix-shell '<home-manager>' -A install
 ```
 Switch home-manager generations
 ```
-home-manager switch --flake .#ky
+nh os switch
 ```
