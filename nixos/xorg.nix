@@ -7,10 +7,10 @@
        enable = true;
        enableContribAndExtras = true;
       };
-      qtile.enable = false;  
+      qtile.enable = false;
     };
     resolutions = [
-      { 
+      {
         x = 1920; # for vms lol
         y = 1080;
       }
@@ -20,7 +20,7 @@
 
   services.xserver.displayManager.sessionCommands = ''
     xset -dpms  # Disable Energy Star, as we are going to suspend anyway and it may hide "success" on that
-    xset s blank # `noblank` may be useful for debugging 
+    xset s blank # `noblank` may be useful for debugging
     xset s 300 # seconds
     ${pkgs.lightlocker}/bin/light-locker --idle-hint &
   '';
@@ -29,7 +29,7 @@
     IdleAction=hybrid-sleep
     IdleActionSec=20s
   '';
-  services.xserver.libinput.enable = true; #trackpad support
+  services.libinput.enable = true; #trackpad support
   services.xserver.xkb.layout = "us";
 
   #for taffybar
