@@ -45,5 +45,5 @@ nix-shell '<home-manager>' -A install
 ```
 Switch home-manager generations
 ```
-nh os switch
+nh home switch
 ```
