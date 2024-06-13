@@ -7,11 +7,14 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "${host}"; 
-  networking.networkmanager.enable = true;  
+  networking.hostName = "${host}";
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.inputMethod.enabled = "ibus";
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [libpinyin];
 
   powerManagement.enable = true;
   services.tlp.enable = true;
@@ -23,7 +26,7 @@
     users.${user} = {
       isNormalUser = true;
       initialPassword = "xd";
-      extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"]; 
+      extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"];
     };
   };
   programs.fzf.keybindings = true;
@@ -32,7 +35,7 @@
     enable = true;
     enableSSHSupport = true;
    };
-  
+
   services.openssh.enable = true;
 
   system.activationScripts.diff = {
@@ -43,5 +46,5 @@
   };
 
   system.stateVersion = "23.11"; # dont change lol
-  
+
 }
