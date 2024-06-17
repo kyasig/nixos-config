@@ -20,7 +20,8 @@
       time = {
         disabled = false;
         format = "[ 󰅐 $time ]($style)";
-        time_format = "%T";
+        time_format = "%r";
+        use_12hr = true;
         style = "fg:bg  bg:cyan bold";
       };
       username = {
