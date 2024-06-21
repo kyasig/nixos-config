@@ -23,6 +23,7 @@
     };
     systemPackages = with pkgs;[
       firefox
+      fastfetch
       dmenu
       cups-toshiba-estudio
       cups-filters
