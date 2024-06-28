@@ -27,5 +27,8 @@
     fzf
     fd
     platformio
+    urlscan
+    lazygit
+    lean
   ];
 }

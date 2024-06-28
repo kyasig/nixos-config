@@ -111,24 +111,6 @@
         renamed = " 󱙓";
         staged = " 󰎜";
       };
-      palettes.solarized = {
-        fg = "#93a1a1";
-        fg2 = "#839496";
-        fg3 = "#657b83";
-        fg4 = "#586e75";
-        bg = "#282828";
-        bg2 = "#073642";
-        red = "#dc322f";
-        green = "#b8bb26";
-        blue = "#268bd2";
-        cyan = "#2aa198";
-        dark-cyan = "#2aa198";
-        yellow = "#b58900";
-        purple = "#6c71c4";
-        magenta = "#d33682";
-        brwhite = "#fbf1c7";
-        white = "#eee8d5";
-      };
       palettes.dynamic = {
         fg = "#${config.colorScheme.palette.base06}";
         bg = "#${config.colorScheme.palette.base00}";

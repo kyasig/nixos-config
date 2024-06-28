@@ -1,12 +1,12 @@
 { config, lib,  pkgs, ...}:
 
-let 
+let
   myAliases = {
       "c" = "clear";
       "listgens" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
       "deletegens" = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations";
       "vim" = "nvim";
-      "ls" = "eza --icons -l -T -L=1";
+      "ls" = "eza -lab --header --color=always --group-directories-first --long --git --icons";
       "cat" = "bat --style=plain";
       "grep" = "rg";
       "rm" = "rm -v";
@@ -23,7 +23,7 @@ let
       "setwal" = "feh --bg-fil";
       "z" = "zathura";
   };
-in 
+in
 {
 
  imports = [./starship.nix];
