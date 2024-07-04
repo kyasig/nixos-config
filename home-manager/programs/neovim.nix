@@ -40,6 +40,12 @@
       nnoremap <leader>nc :NERDTreeClose<CR>
       nnoremap <leader>gg :Goyo<CR>
 
+      inoremap { {}<Esc>ha
+      inoremap ( ()<Esc>ha
+      inoremap [ []<Esc>ha
+      inoremap " ""<Esc>ha
+      inoremap ' ' '<Esc>hxi
+      inoremap ` ``<Esc>ha
     '';
 		extraLuaConfig = ''
 			local builtin = require('telescope.builtin')
@@ -51,6 +57,7 @@
 			telescope-nvim
       nerdtree
       goyo-vim
+      lean-nvim
 		];
   };
 }
