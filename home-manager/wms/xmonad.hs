@@ -60,7 +60,7 @@ myKeys =
   , ("<F3>"          , spawn "brillo -q -A 10")
   , ("<F2>"          , spawn "brillo -q -U 10")
   , ("M-0"           , namedScratchpadAction scratchpads "term")
-  , ("M-e"           , namedScratchpadAction scratchpads "passman")
+  , ("M-S-p"           , namedScratchpadAction scratchpads "passman")
   , ("M-p"           , namedScratchpadAction scratchpads "volume")
   , ("M-x"         , namedScratchpadAction scratchpads "top")
   , ("M-f"           , namedScratchpadAction scratchpads "file")
@@ -155,7 +155,7 @@ myStartupHook = do
 
 mySB = let myPP = filterOutWsPP[scratchpadWorkspaceTag] $ def{
                    ppHiddenNoWindows = xmobarColor color03 ""
-                 , ppCurrent = xmobarColor color0E "" . wrap ("<box type=Bottom width=2 mb=1 color=" ++ color0E ++ ">") "</box>"
+                 , ppCurrent = xmobarColor color05 "" . wrap ("<box type=Bottom width=2 mb=1 color=" ++ color0E ++ ">") "</box>"
                  , ppHidden = xmobarColor color05  ""
                  , ppTitle = xmobarColor color0E "" . shorten 30
                  --, ppSep =  "<fc=" ++ color0E ++ "> <fn=1>:</fn> </fc>" , ppLayout = xmobarColor color0E ""
