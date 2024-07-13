@@ -16,11 +16,11 @@
     self,
     nixpkgs,
     home-manager,
-		nix-colors,
-		firefox-addons,
+    nix-colors,
+    firefox-addons,
     ...
   }@inputs:
-	let
+  let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     font = "mononoki";
@@ -52,7 +52,7 @@
         inherit inputs;
         inherit font;
         inherit fontpkg;
-				inherit nix-colors;
+	inherit nix-colors;
       };
       };
     };
