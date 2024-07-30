@@ -30,5 +30,6 @@
     urlscan
     lazygit
     lean
+    pipes-rs
   ];
 }
