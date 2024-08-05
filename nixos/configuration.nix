@@ -20,6 +20,7 @@
   services.tlp.enable = true;
 
   services.printing.enable = true;
+  services.udev.packages = with pkgs; [platformio-core.udev];
 
   users ={
     defaultUserShell = pkgs.zsh;
@@ -29,6 +30,11 @@
       extraGroups = [ "wheel" "libvirt" "video" "audio" "networkmanager"];
     };
   };
+
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
   programs.fzf.keybindings = true;
 
   programs.gnupg.agent = {
