@@ -7,7 +7,7 @@
 		nix-colors.homeManagerModules.default
   ];
 
-	colorScheme = nix-colors.colorSchemes.dracula;
+	colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
   nixpkgs.config.allowUnfree = true;
   home = {
@@ -29,7 +29,6 @@
       qbittorrent
       kitty
       xclip
-      ytfzf
       ranger
       platformio
       lxappearance
