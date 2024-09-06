@@ -4,63 +4,45 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
-      add_newline = false;
       palette = "dynamic";
-      format = ''
-        $os$username$hostname$rust$python$node$lua$git_branch$git_status$git_state$fill$nix_shell$time$line_break$directory$sudo$character
-      '';
       scan_timeout = 10;
       character = {
-        success_symbol = "[ ](blue)";
-        error_symbol = "[ ](red)";
-      };
-      fill = {
-        symbol = " ";
+        success_symbol =" [╰─⮞  ](bold magenta)";
+        error_symbol =" [╰─⮞  ](bold red)";
       };
       time = {
-        disabled = false;
-        format = "[ 󰅐 $time ]($style)";
+        disabled = true;
+        format = " 🕙 $time($style)\n";
         time_format = "%r";
         use_12hr = true;
-        style = "fg:bg  bg:cyan bold";
+        style = "fg:cyan bold";
       };
       username = {
         disabled = false;
-        style_user = "fg:bg bg:blue bold";
+        style_user = "fg:magenta";
         style_root = "fg:red bg:blue  italic";
-        format = "[ $user ]($style)";
+        format = " [╭─$user]($style)@";
         show_always = true;
       };
       hostname = {
         ssh_only = false;
         ssh_symbol = "󰣀 ";
-        format = "[ $hostname ]($style)";
-        style = " fg:bg bg:dark-cyan bold";
+        format = "[$hostname]($style) in ";
+        style = " fg:yellow";
         disabled = false;
-      };
-      memory_usage = {
-        disabled = false;
-        threshold = -1;
-        symbol = " 󰍛 ";
-        format = "[$symbol]($style)[$ram( | $swap) ]($style)";
-        style = " fg:bg bg:green";
       };
       directory = {
         read_only = " ";
-        home_symbol = " ~";
-        truncation_length = 4;
+        #home_symbol = "~";
+        truncation_length = 0;
         truncation_symbol = "…/";
         truncate_to_repo = true;
-      };
-      directory.substitutions = {
-        "Documents" = "󰈙 ";
-        "Downloads" = " ";
-        "Music" = "󰝚 ";
-        "Pictures" = " ";
-        "Org" = "";
-        "Repos" = "";
-        "Projects" = "";
-        "Mail" = "";
+        substitutions = {
+          "Documents" = "󰈙 ";
+          "Downloads" = " ";
+          "Music" = "󰝚 ";
+          "Pictures" = " ";
+        };
       };
       rust = {
         symbol = "🦀";
@@ -70,10 +52,10 @@
         symbol = "";
         format = "[ $symbol $version ](bg:yellow fg:bg )";
       };
-      c = {
-        symbol = "";
-        detect_extensions = ''["c", "h", "cpp"]'';
-      };
+     # c = {
+     #   symbol = "";
+     #   detect_extensions = ''["c", "h", "cpp"]'';
+     # };
       lua = {
         symbol = "";
         format = "[ $symbol $version ](bg:blue fg:bg)";
@@ -95,21 +77,23 @@
         format = "[ $symbol $state ](bg:blue fg:bg bold)";
       };
       cmd_duration = {
-        min_time = 500;
-        format = "[ $duration ](fg:yellow bg:dark-gray)";
+        min_time = 1;
+        format = "took [$duration](fg:yellow)";
       };
       git_branch = {
-        format = "[ $symbol$branch(:$remote_branch) ](bg:purple fg:bg bold)";
+        format = "[$symbol$branch(:$remote_branch) ](fg:purple bold)";
         symbol = " ";
+        disabled = false;
       };
       git_status = {
-        format = "([$all_status ](bg:purple fg:bg bold))";
+        disabled = true;
         stashed = " 󰿺";
         modified = " 󱞁";
         untracked = " 󱙓";
         deleted = " 󱙑";
         renamed = " 󱙓";
         staged = " 󰎜";
+        style = "white";
       };
       palettes.dynamic = {
         fg = "#${config.colorScheme.palette.base06}";
