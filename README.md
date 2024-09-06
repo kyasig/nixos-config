@@ -1,7 +1,6 @@
 **INSTALLATION**
 
-This has been tested and verified to work in a VM but not baremetal.
-This is primarily intended just for me in case I need to reinstall.
+This has been tested on real hardware and a VM, but this is primarily intended just for me in case I need to reinstall.
 
 
 Make sure flakes is enabled.
