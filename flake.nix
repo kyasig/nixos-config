@@ -33,28 +33,53 @@
     nixosConfigurations = {
       ${host} = lib.nixosSystem{
         inherit system;
-        modules = [./nixos/default.nix];
+        modules = [
+          ./nixos/default.nix
+
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+
+              extraSpecialArgs = {
+                inherit user;
+                inherit host;
+                inherit inputs;
+                inherit font;
+                inherit fontpkg;
+              	inherit nix-colors;
+              };
+              users.${user} = {
+                imports = [
+                  ./home-manager/default.nix
+                ];
+              };
+            };
+          }
+        ];
         specialArgs = {
           inherit host;
           inherit user;
         };
       };
     };
-    homeConfigurations = {
-      ${user} = home-manager.lib.homeManagerConfiguration{
-        inherit pkgs;
-        modules = [
-        ./home-manager/default.nix
-        ];
-      extraSpecialArgs = {
-        inherit user;
-        inherit host;
-        inherit inputs;
-        inherit font;
-        inherit fontpkg;
-	inherit nix-colors;
-      };
-      };
-    };
+    #homeConfigurations = {
+    #  ${user} = home-manager.lib.homeManagerConfiguration{
+    #    inherit pkgs;
+    #    modules = [
+    #    ./home-manager/default.nix
+
+    #    ];
+    #  extraSpecialArgs = {
+    #    inherit user;
+    #    inherit host;
+    #    inherit inputs;
+    #    inherit font;
+    #    inherit fontpkg;
+    #  	inherit nix-colors;
+    #  };
+    #  };
+    #};
   };
 }
