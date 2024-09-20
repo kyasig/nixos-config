@@ -1,63 +1,84 @@
-{ config, pkgs,inputs, ...}:
-{
-  programs.neovim = {
+  {config, ...}:
+  {
+  programs.nixvim = {
     enable = true;
-    extraConfig = ''
-			set mouse=a
-			syntax on
-			set number
-    	set relativenumber
-			set termguicolors
-			set cursorline
-			set cursorcolumn
 
-			set backspace=indent,eol,start
-			set confirm
-      set autoindent
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
-			set expandtab
-			set shiftwidth=2
-			set tabstop=2
+    globals = {
+      mapleader = " ";
+      maplocalleader = " ";
+    };
 
-			set ignorecase
-			set smartcase
-			set showmode
-			set hlsearch
-			set wildmenu
+    opts = {
+      number = true;
+      relativenumber = true;
+      cursorline = true;
+      cursorcolumn = true;
+      confirm = true;
+      smartindent = true;
+      expandtab = true;
+      shiftwidth = 2;
+      tabstop = 2;
+      ignorecase = true;
+      smartcase = true;
+      showmode = true;
+      hlsearch = true;
+      wildmenu = true;
+    };
+    autoCmd = [
+      {
+        event = "BufWritePre";
+        pattern = "*";
+        command = "silent! %s/\\s\\+$//e";
+      }
+      {
+        event = "InsertEnter";
+        pattern = "*";
+        command = "norm zz";
+      }
+    ];
+    plugins = {
+      autoclose.enable = true;
+      vimtex = {
+        enable = true;
+        settings = {
+          compiler_method = "latexrun";
+          view_method = "zathura";
+        };
+      };
+      lsp = {
+        enable = true;
+        servers = {
+          rust-analyzer.enable = true;
+          nixd.enable = true;
+          texlab.enable = true;
+        };
+      };
+    };
 
-			autocmd InsertEnter * norm zz
-			autocmd BufWritePre * %s/\s\+$//e
-
-      map <A-h> <C-w>h
-      map <A-j> <C-w>j
-      map <A-k> <C-w>k
-      map <A-l> <C-w>l
-
-      nnoremap S :%s//gI<Left><Left><Left>
-
-			:let mapleader = "\<Space>"
-      nnoremap <leader>nn :NERDTree<CR>
-      nnoremap <leader>nc :NERDTreeClose<CR>
-      nnoremap <leader>gg :Goyo<CR>
-
-      inoremap { {}<Esc>ha
-      inoremap ( ()<Esc>ha
-      inoremap [ []<Esc>ha
-      inoremap " ""<Esc>ha
-      inoremap ' ' '<Esc>hxi
-      inoremap ` ``<Esc>ha
-    '';
-		extraLuaConfig = ''
-			local builtin = require('telescope.builtin')
-			vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-			vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-		'';
-		plugins = with pkgs.vimPlugins;[
-			vim-airline
-			telescope-nvim
-      nerdtree
-      goyo-vim
-      lean-nvim
-		];
+    colorschemes.base16 = {
+      enable = true;
+      colorscheme = {
+        base00 = "#${config.colorScheme.palette.base00}";
+        base01 = "#${config.colorScheme.palette.base01}";
+        base02 = "#${config.colorScheme.palette.base02}";
+        base03 = "#${config.colorScheme.palette.base03}";
+        base04 = "#${config.colorScheme.palette.base04}";
+        base05 = "#${config.colorScheme.palette.base05}";
+        base06 = "#${config.colorScheme.palette.base06}";
+        base07 = "#${config.colorScheme.palette.base07}";
+        base08 = "#${config.colorScheme.palette.base08}";
+        base09 = "#${config.colorScheme.palette.base09}";
+        base0A = "#${config.colorScheme.palette.base0A}";
+        base0B = "#${config.colorScheme.palette.base0B}";
+        base0C = "#${config.colorScheme.palette.base0C}";
+        base0D = "#${config.colorScheme.palette.base0D}";
+        base0E = "#${config.colorScheme.palette.base0E}";
+        base0F = "#${config.colorScheme.palette.base0F}";
+      };
+    };
   };
 }
