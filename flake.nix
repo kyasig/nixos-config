@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs ={ self, nixpkgs, ... }@inputs:
+  outputs ={ self, nixpkgs, nix-colors,... }@inputs:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -32,13 +32,12 @@
     user = "ky";
     host = "sig";
     inherit (nixpkgs) lib;
-    inherit (self) outputs;
   in{
     nixosConfigurations = {
       ${host} = lib.nixosSystem{
         inherit system;
         specialArgs = {
-          inherit self host user inputs outputs;
+          inherit self host user inputs ;
         };
         modules = [
           ./nixos/default.nix
@@ -53,7 +52,7 @@
                 inherit font;
                 inherit fontpkg;
                 inherit inputs;
-                inherit outputs;
+                inherit nix-colors;
               };
               users.${user} = {
                 imports = [
