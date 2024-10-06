@@ -24,7 +24,7 @@ git clone https://github.com/kyasig/nixos-config.git
 Change directories into it.
 Copy ``hardware-configuration.nix`` into ``nixos``.
 
-```
+
 Install Home Manager
 ```
 sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
@@ -34,6 +34,7 @@ sudo nix-channel --update
 There's this annoying bug where you have to reboot before running this
 ```
 nix-shell '<home-manager>' -A install
+```
 rebuild the system
 ```
 sudo nixos-rebuild switch --flake .#sig
