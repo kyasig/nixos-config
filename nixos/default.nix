@@ -1,4 +1,4 @@
-{config, lib, pkgs, user,...}:
+{inputs, pkgs, user,...}:
 {
   imports = [
     ./configuration.nix
@@ -11,6 +11,8 @@
     ./virtualization.nix
     ./xorg.nix
   ];
+
+  nvidia.enable = true;
 
   programs.zsh.enable = true;
   environment = {
@@ -37,6 +39,7 @@
       usbutils
       ntfs3g
       nh
+      inputs.wfetch.packages.${pkgs.system}.default
     ];
   };
   programs.nano.enable = false;
