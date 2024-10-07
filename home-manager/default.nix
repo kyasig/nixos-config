@@ -1,13 +1,13 @@
-{ config, pkgs, nix-colors, inputs,... }:
+{ pkgs,  inputs,... }:
 {
   imports = [
     ./wms
     ./shell
     ./programs
-		nix-colors.homeManagerModules.default
+		inputs.nix-colors.homeManagerModules.default
   ];
 
-	colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
+	colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
 
   nixpkgs.config.allowUnfree = true;
   home = {
@@ -15,13 +15,12 @@
     homeDirectory = "/home/ky";
     stateVersion = "23.11"; #dont change xd
     packages = with pkgs; [
-      bitwarden
-			neomutt
+      fwupd
+      neomutt
       dmenu
       mpv
       obs-studio
       pulsemixer
-      pass
       thunderbird
       discord
       vlc
@@ -30,8 +29,6 @@
       kitty
       xclip
       ranger
-      platformio
-      lxappearance
       zathura
 			telegram-desktop
       exif
@@ -39,8 +36,13 @@
       cmake
       pandoc
       texliveSmall
-      vscodium
 			vesktop
+      freetube
+      texliveSmall
+      texlivePackages.latexmk
+      latexrun
+      gimp
+      mousam
     ];
     sessionVariables = {
       EDITOR = "nvim";
