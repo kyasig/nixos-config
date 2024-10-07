@@ -27,8 +27,6 @@
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    font = "mononoki";
-    fontpkg = pkgs.mononoki;
     user = "ky";
     host = "sig";
     inherit (nixpkgs) lib;
@@ -40,18 +38,15 @@
           inherit self host user inputs ;
         };
         modules = [
-          ./nixos/default.nix
+            #./nixos/default.nix
+            ./hosts/victus/default.nix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               extraSpecialArgs = {
-                inherit user;
-                inherit host;
-                inherit font;
-                inherit fontpkg;
-                inherit inputs;
+                inherit user host inputs;
               };
               users.${user} = {
                 imports = [
