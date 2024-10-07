@@ -1,9 +1,9 @@
-{ config, pkgs, lib, inputs,nix-colors, font, ... }:
+{ config, pkgs,   ... }:
 {
 
   programs.rofi = {
     enable = true;
-    font = lib.mkDefault "${font}";
+    font = "mononoki";
     extraConfig = {
       modi = "drun";
       display-drun = "Spawn";

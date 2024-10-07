@@ -1,10 +1,10 @@
-{config, pkgs,lib,font,...}:
+{config, ...}:
 {
   programs.xmobar = {
     extraConfig = ''
     Config
     {
-      font = "${font} 12"
+      font = "mononoki 12"
     , additionalFonts = ["xft:Inconsolata", "xft:FontAwesome"]
     , position = TopSize L 100 27
     , bgColor = "#${config.colorScheme.palette.base00}"
