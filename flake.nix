@@ -58,6 +58,31 @@
           }
         ];
       };
+      vm = lib.nixosSystem{
+        inherit system;
+        specialArgs = {
+          inherit self user inputs ;
+        };
+        modules = [
+          ./hosts/vm/default.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {
+                inherit user host inputs;
+              };
+              users.${user} = {
+                imports = [
+                  inputs.nixvim.homeManagerModules.nixvim
+                  ./home-manager/default.nix
+                ];
+              };
+            };
+          }
+        ];
+      };
     };
   };
 }
