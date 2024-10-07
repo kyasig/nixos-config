@@ -4,10 +4,10 @@
     ./wms
     ./shell
     ./programs
-		inputs.nix-colors.homeManagerModules.default
+    inputs.nix-colors.homeManagerModules.default
   ];
 
-	colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
 
   nixpkgs.config.allowUnfree = true;
   home = {
@@ -30,13 +30,13 @@
       xclip
       ranger
       zathura
-			telegram-desktop
+      telegram-desktop
       exif
       exiftool
       cmake
       pandoc
       texliveSmall
-			vesktop
+      vesktop
       freetube
       texliveSmall
       texlivePackages.latexmk
