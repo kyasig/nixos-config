@@ -1,4 +1,4 @@
-{inputs, pkgs, user,...}:
+{inputs, pkgs, user,lib,...}:
 {
   imports = [
     ./configuration.nix
@@ -12,8 +12,7 @@
     ./xorg.nix
   ];
 
-  nvidia.enable = true;
-
+  nvidia.enable = lib.mkDefault false;
   programs.zsh.enable = true;
   environment = {
     shells = [pkgs.zsh];

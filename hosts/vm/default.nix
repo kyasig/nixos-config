@@ -5,17 +5,16 @@
   ];
 
   nvidia.enable = false;
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-    };
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-    systemd-boot.enable = false;
-  };
 
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 5;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+  };
   networking.hostName = "vm";
+
 }
