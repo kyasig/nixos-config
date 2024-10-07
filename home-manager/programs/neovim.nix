@@ -42,6 +42,7 @@
     ];
     plugins = {
       autoclose.enable = true;
+      web-devicons.enable = true;
       vimtex = {
         enable = true;
         settings = {
@@ -52,30 +53,59 @@
       lsp = {
         enable = true;
         servers = {
-          rust-analyzer.enable = true;
+          rust-analyzer = {
+            enable = true;
+            installCargo = false;
+            installRustc = false;
+          };
           nixd.enable = true;
           texlab.enable = true;
+          pylsp.enable = true;
+          ccls.enable = true;
+        };
+      };
+      treesitter = {
+        enable = true;
+        settings = {
+          indent.enable = true;
+          ensure_installed = [
+            "c"
+            "haskell"
+            "rust"
+            "python"
+            "latex"
+            "cpp"
+            "vim"
+            "bash"
+            "diff"
+            "nix"
+          ];
+          highlight.enable = true;
         };
       };
       lualine = {
         enable = true;
-        alwaysDivideMiddle = true;
-        componentSeparators = {
-          left = "|";
-          right = "|";
-        };
-        sections = {
-          lualine_a = ["mode"];
-          lualine_b = [
-            "branch"
-            "diff"
-            "diagnostics"
-          ];
-          lualine_c = ["filename"];
-          lualine_x = ["filetype"];
-          lualine_y = ["progress"];
-          lualine_z = [''" " .. os.date("%R")''];
-        };
+        settings = {
+          sections = {
+            lualine_a = ["mode"];
+            lualine_b = [
+              "branch"
+              "diff"
+              "diagnostics"
+            ];
+            lualine_c = ["filename"];
+            lualine_x = ["filetype"];
+            lualine_y = ["progress"];
+            lualine_z = [''" " .. os.date("%R")''];
+          };
+          options = {
+           alwaysDivideMiddle = true;
+           componentSeparators = {
+             left = "|";
+             right = "|";
+           };
+          };
+         };
       };
       telescope = {
         enable = true;
