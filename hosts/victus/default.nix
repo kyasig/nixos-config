@@ -23,6 +23,9 @@
   };
   networking.hostName = "${host}";
 
+  i18n.inputMethod.type = "ibus";
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [libpinyin];
+
   services.udev.packages = with pkgs; [
     platformio-core.udev
     android-udev-rules
