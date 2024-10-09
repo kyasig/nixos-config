@@ -51,7 +51,7 @@
               users.${user} = {
                 imports = [
                   inputs.nixvim.homeManagerModules.nixvim
-                  ./home-manager/default.nix
+                  ./hosts/victus/home.nix
                 ];
               };
             };

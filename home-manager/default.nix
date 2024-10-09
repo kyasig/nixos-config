@@ -16,33 +16,19 @@
     stateVersion = "23.11"; #dont change xd
     packages = with pkgs; [
       fwupd
-      neomutt
       dmenu
       mpv
-      obs-studio
       pulsemixer
-      thunderbird
-      discord
-      vlc
       ghc
       qbittorrent
-      kitty
       xclip
-      ranger
       zathura
-      telegram-desktop
       exif
       exiftool
-      cmake
       pandoc
-      texliveSmall
-      vesktop
-      freetube
       texliveSmall
       texlivePackages.latexmk
       latexrun
-      gimp
-      mousam
     ];
     sessionVariables = {
       EDITOR = "nvim";
