@@ -1,4 +1,4 @@
-{ config, libs, pkgs, ...}:
+{  pkgs, ...}:
 {
   services.xserver = {
     enable = true;
@@ -6,6 +6,10 @@
       xmonad = {
        enable = true;
        enableContribAndExtras = true;
+       ghcArgs = [
+        "-hidir /tmp"
+        "-odir /tmp"
+       ];
       };
       qtile.enable = false;
     };

@@ -27,7 +27,7 @@ import XMonad.Hooks.SetWMName
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 
-import Colors.Colors
+import Colors
 
 --variables
 myMod = mod4Mask
