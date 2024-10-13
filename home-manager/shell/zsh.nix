@@ -1,4 +1,4 @@
-{ config, lib,  pkgs, ...}:
+{ config, ...}:
 
 let
   myAliases = {
@@ -6,7 +6,7 @@ let
       "listgens" = "sudo nix-env -p /nix/var/nix/profiles/system --list-generations";
       "deletegens" = "sudo nix-env -p /nix/var/nix/profiles/system --delete-generations";
       "vim" = "nvim";
-      "ls" = "eza -lab --header --color=always --group-directories-first --long --git --icons";
+      "ls" = "eza -lho --group-directories-first --no-time --no-filesize --icons";
       "cat" = "bat --style=plain";
       "grep" = "rg";
       "rm" = "rm -v";
@@ -17,24 +17,25 @@ let
       "y" = "yazi";
       "nf" = "fd -H -tf | fzf  --prompt='edit file: ' --preview 'bat --style=numbers --color=always {}' --border-label='╢Edit File╟'| xargs -r $EDITOR";
       "fpdf" = "fd -tf --glob '*.pdf' | fzf --border=double --prompt='Open PDF: ' | xargs  -r zathura";
-      "wall" = "fd -tf --full-path /home/ky/Wallpapers | fzf --preview 'feh --bg-scale {}' --border-label='╢Change Wallpaper╟' --prompt='select wallpaper: '";
+      "wall" = "fd -tf --full-path /home/ky/Pictures/Wallpapers | fzf --preview 'feh --no-fehbg --bg-scale {}' --border-label='╢Change Wallpaper╟' --prompt='select wallpaper: '";
       "fy" = "yazi $(fd -t d | fzf)";
       "ac" = "ani-cli";
       "setwal" = "feh --bg-fil";
-      "z" = "zathura";
   };
 in
 {
-
- imports = [./starship.nix];
-
  programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
     syntaxHighlighting.enable= true;
     shellAliases = myAliases;
+    history = {
+     size = 10000;
+     path = "${config.xdg.dataHome}/zsh/history";
+    };
     initExtra = ''
+    wfetch --waifu
     set -o vi
     zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
     '';

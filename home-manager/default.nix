@@ -7,9 +7,9 @@
     inputs.nix-colors.homeManagerModules.default
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
 
   nixpkgs.config.allowUnfree = true;
+
   home = {
     username = "ky";
     homeDirectory = "/home/ky";
@@ -33,6 +33,14 @@
     sessionVariables = {
       EDITOR = "nvim";
       NIXPKGS_ALLOW_UNFREE = "1";
+    };
+  };
+
+  xdg = {
+    enable = true;
+    userDirs = {
+      enable = true;
+      createDirectories = true;
     };
   };
 
