@@ -1,10 +1,11 @@
-{config, pkgs, ...}:
+{pkgs, ...}:
 {
   imports = [
     ./zsh.nix
     ./starship.nix
     ./yazi.nix
     ./fzf.nix
+    ./screenshot.nix
   ];
   home.packages = with pkgs;[
     ani-cli
