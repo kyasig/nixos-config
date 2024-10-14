@@ -26,13 +26,10 @@
       firefox
       fastfetch
       dmenu
-      cups-toshiba-estudio
-      cups-filters
       git
       neovim
       wget
       unzip
-      vim
       killall
       ripgrep
       usbutils

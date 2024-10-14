@@ -30,4 +30,10 @@
     platformio-core.udev
     android-udev-rules
   ];
+  environment = {
+    systemPackages = with pkgs;[
+      cups-toshiba-estudio
+      cups-filters
+    ];
+  };
 }
