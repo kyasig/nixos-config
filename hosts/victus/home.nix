@@ -4,7 +4,7 @@
     ../../home-manager/default.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.kanagawa;
+  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
 
   home.packages = with pkgs; [
     obs-studio
@@ -15,6 +15,9 @@
     mousam
     vlc
     thunderbird
-    chromium
+    texliveSmall
+    texlivePackages.latexmk
+    latexrun
+    qbittorrent
   ];
 }

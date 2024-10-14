@@ -19,16 +19,11 @@
       dmenu
       mpv
       pulsemixer
-      ghc
-      qbittorrent
       xclip
       zathura
       exif
       exiftool
       pandoc
-      texliveSmall
-      texlivePackages.latexmk
-      latexrun
     ];
     sessionVariables = {
       EDITOR = "nvim";
