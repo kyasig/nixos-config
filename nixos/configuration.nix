@@ -3,6 +3,8 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = ["btrfs" "ext4"];
 
+  boot.tmp.cleanOnBoot = true; #this is somehow not on by default
+
   nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
