@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  inputs,
-  nix-colors,
-  ...
-}:
+{ config, ... }:
 {
   programs.zathura = {
     enable = true;

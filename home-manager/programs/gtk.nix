@@ -1,11 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  inputs,
-  nix-colors,
-  ...
-}:
+{ ... }:
 {
   gtk = {
     enable = true;
