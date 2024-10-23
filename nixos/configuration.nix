@@ -1,4 +1,4 @@
-{ pkgs, user, ... }:
+{ pkgs, user, host, ... }:
 {
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = [
@@ -11,6 +11,7 @@
   nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
+  networking.hostName = "${host}";
 
   time.timeZone = "America/Los_Angeles";
   i18n.defaultLocale = "en_US.UTF-8";

@@ -15,6 +15,5 @@
       efi.canTouchEfiVariables = true;
     };
   };
-  networking.hostName = "vm";
 
 }

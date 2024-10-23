@@ -1,4 +1,4 @@
-{ pkgs, host, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../nixos/default.nix
@@ -21,7 +21,6 @@
       efi.canTouchEfiVariables = true;
     };
   };
-  networking.hostName = "${host}";
 
   i18n.inputMethod.type = "ibus";
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
