@@ -1,4 +1,4 @@
-{ pkgs,  inputs,... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./wms
@@ -7,13 +7,12 @@
     inputs.nix-colors.homeManagerModules.default
   ];
 
-
   nixpkgs.config.allowUnfree = true;
 
   home = {
     username = "ky";
     homeDirectory = "/home/ky";
-    stateVersion = "23.11"; #dont change xd
+    stateVersion = "23.11"; # dont change xd
     packages = with pkgs; [
       fwupd
       dmenu
@@ -38,6 +37,8 @@
       createDirectories = true;
     };
   };
+
+  systemd.user.startServices = "sd-switch";
 
   programs.home-manager.enable = true;
 }

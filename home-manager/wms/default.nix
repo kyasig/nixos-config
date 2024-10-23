@@ -1,10 +1,10 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   imports = [
     ./xmobar.nix
-		./picom.nix
+    ./picom.nix
   ];
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     brillo
     brightnessctl
     feh # using this as an image viewer xd
@@ -13,7 +13,6 @@
     pcmanfm
     xdotool
   ];
-  programs.xmobar.enable = true;
 
   xsession.windowManager.xmonad = {
     enable = true;

@@ -1,10 +1,10 @@
-{inputs,pkgs, ...}:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../../home-manager/default.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
 
   home.packages = with pkgs; [
     obs-studio

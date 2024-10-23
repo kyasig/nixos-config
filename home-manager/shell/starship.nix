@@ -7,8 +7,8 @@
       palette = "dynamic";
       scan_timeout = 10;
       character = {
-        success_symbol =" [╰─⮞  ](bold magenta)";
-        error_symbol =" [╰─⮞  ](bold red)";
+        success_symbol = " [╰─⮞  ](bold magenta)";
+        error_symbol = " [╰─⮞  ](bold red)";
       };
       time = {
         disabled = true;
@@ -52,10 +52,10 @@
         symbol = "";
         format = "[ $symbol $version ](bg:yellow fg:bg )";
       };
-     # c = {
-     #   symbol = "";
-     #   detect_extensions = ''["c", "h", "cpp"]'';
-     # };
+      # c = {
+      #   symbol = "";
+      #   detect_extensions = ''["c", "h", "cpp"]'';
+      # };
       lua = {
         symbol = "";
         format = "[ $symbol $version ](bg:blue fg:bg)";

@@ -1,5 +1,5 @@
-  {config, ...}:
-  {
+{ config, ... }:
+{
   programs.nixvim = {
     enable = true;
 
@@ -87,25 +87,25 @@
         enable = true;
         settings = {
           sections = {
-            lualine_a = ["mode"];
+            lualine_a = [ "mode" ];
             lualine_b = [
               "branch"
               "diff"
               "diagnostics"
             ];
-            lualine_c = ["filename"];
-            lualine_x = ["filetype"];
-            lualine_y = ["progress"];
-            lualine_z = [''" " .. os.date("%R")''];
+            lualine_c = [ "filename" ];
+            lualine_x = [ "filetype" ];
+            lualine_y = [ "progress" ];
+            lualine_z = [ ''" " .. os.date("%R")'' ];
           };
           options = {
-           alwaysDivideMiddle = true;
-           componentSeparators = {
-             left = "|";
-             right = "|";
-           };
+            alwaysDivideMiddle = true;
+            componentSeparators = {
+              left = "|";
+              right = "|";
+            };
           };
-         };
+        };
       };
       telescope = {
         enable = true;

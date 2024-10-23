@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   imports = [
     ./zsh.nix
@@ -7,7 +7,7 @@
     ./fzf.nix
     ./screenshot.nix
   ];
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     ani-cli
     atool
     cowsay
@@ -19,8 +19,9 @@
     tldr
     bat
     eza
-    pfetch-rs #nah i'd fetch
+    pfetch-rs # nah i'd fetch
     neofetch
+    ghc
     cmatrix
     asciiquarium
     yazi

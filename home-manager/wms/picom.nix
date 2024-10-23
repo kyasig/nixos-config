@@ -1,11 +1,16 @@
-{ config, lib, pkgs, ... }:
 {
-services.picom = {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  services.picom = {
     enable = true;
     vSync = true;
     backend = "glx";
-    settings =  {
-      blur ={
+    settings = {
+      blur = {
         method = "dual_kawase";
         #size = 3.0;
         strength = 8;
@@ -14,4 +19,3 @@ services.picom = {
     };
   };
 }
-

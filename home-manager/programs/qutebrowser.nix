@@ -1,9 +1,14 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   programs.qutebrowser = {
     enable = true;
     searchEngines = {
-     DEFAULT = "https://startpage.com/search?q={}";
+      DEFAULT = "https://startpage.com/search?q={}";
     };
     settings = {
       scrolling.smooth = false;
@@ -65,5 +70,5 @@
         };
       };
     };
-   };
- }
+  };
+}

@@ -1,15 +1,15 @@
-{  pkgs, ...}:
+{ pkgs, ... }:
 {
   services.xserver = {
     enable = true;
     windowManager = {
       xmonad = {
-       enable = true;
-       enableContribAndExtras = true;
-       ghcArgs = [
-        "-hidir /tmp"
-        "-odir /tmp"
-       ];
+        enable = true;
+        enableContribAndExtras = true;
+        ghcArgs = [
+          "-hidir /tmp"
+          "-odir /tmp"
+        ];
       };
       qtile.enable = false;
     };
@@ -33,7 +33,7 @@
     IdleAction=hybrid-sleep
     IdleActionSec=20s
   '';
-  services.libinput.enable = true; #trackpad support
+  services.libinput.enable = true; # trackpad support
   services.xserver.xkb.layout = "us";
 
   #for taffybar

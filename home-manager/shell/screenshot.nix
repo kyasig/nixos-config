@@ -1,6 +1,6 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 let
-  screenshot = pkgs.writeShellApplication{
+  screenshot = pkgs.writeShellApplication {
     name = "scrnsht";
     text = ''
       name='%Y-%m-%d-%T-screenshot.png'
@@ -10,7 +10,8 @@ let
       esac
     '';
   };
-in{
+in
+{
   home.packages = [
     pkgs.scrot
     screenshot

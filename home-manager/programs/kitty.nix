@@ -1,4 +1,11 @@
-{config, lib, pkgs, inputs, nix-colors,...}:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  nix-colors,
+  ...
+}:
 {
   programs.kitty = {
     enable = true;

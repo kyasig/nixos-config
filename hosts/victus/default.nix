@@ -1,4 +1,4 @@
-{pkgs, host,...}:
+{ pkgs, host, ... }:
 {
   imports = [
     ../../nixos/default.nix
@@ -24,14 +24,14 @@
   networking.hostName = "${host}";
 
   i18n.inputMethod.type = "ibus";
-  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [libpinyin];
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
 
   services.udev.packages = with pkgs; [
     platformio-core.udev
     android-udev-rules
   ];
   environment = {
-    systemPackages = with pkgs;[
+    systemPackages = with pkgs; [
       cups-toshiba-estudio
       cups-filters
     ];
