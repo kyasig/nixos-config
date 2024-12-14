@@ -4,7 +4,13 @@
     ../../nixos/default.nix
   ];
 
+
   nvidia.enable = true;
+
+  stylix = {
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    image = ./wall.jpg;
+  };
 
   hardware = {
     cpu.amd.updateMicrocode = true;
@@ -33,6 +39,7 @@
     systemPackages = with pkgs; [
       cups-toshiba-estudio
       cups-filters
+      canon-cups-ufr2
     ];
   };
 }

@@ -1,4 +1,10 @@
-{ pkgs, user, host, ... }:
+{
+  pkgs,
+  user,
+  host,
+  config,
+  ...
+}:
 {
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.supportedFilesystems = [
@@ -42,6 +48,24 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+  };
+
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    fonts = {
+      sizes = {
+        applications = 10;
+        popups = 10;
+      };
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetbBrains Mono";
+      };
+      serif = config.stylix.fonts.monospace;
+      sansSerif = config.stylix.fonts.monospace;
+      emoji = config.stylix.fonts.monospace;
+    };
   };
 
   services.openssh.enable = true;

@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.ManageHook
 import Data.Maybe
 import qualified XMonad.StackSet as W
 import XMonad.Actions.DwmPromote
@@ -23,6 +24,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.WindowSwallowing
 import XMonad.Hooks.ManageDocks
+import qualified XMonad.Hooks.ManageHelpers as MH
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
@@ -34,13 +36,13 @@ myMod = mod4Mask
 myTerminal = "kitty"
 myBrowser = "firefox"
 myFileMan = "yazi"
-myEmail = "thunderbird"
 myPassMan = "bitwarden"
 
 --myRunCmd = "dmenu_run -i -l 7 -p 'spawn: ' -nb '" ++ color00  ++ "' -nf '" ++ color05 ++ "' -sb '" ++ color0E ++ "' -sf '" ++ color00 ++ "'" :: String
 myRunCmd = "rofi -show drun"
 
-myWorkspaces = ["壹","貳","叄","肆","伍","陸","柒","捌","玖"]
+--myWorkspaces = ["壹","貳","叄","肆","伍","陸","柒","捌","玖"]
+myWorkspaces = show <$> [1..9]
 
 myBorderWidth = 3
 myNormalBorderColor = color00
@@ -61,9 +63,9 @@ myKeys =
   , ("<F3>"          , spawn "brightnessctl set +5")
   , ("<F2>"          , spawn "brightnessctl set 5-")
   , ("M-0"           , namedScratchpadAction scratchpads "term")
-  , ("M-S-p"           , namedScratchpadAction scratchpads "passman")
+  --, ("M-S-p"         , namedScratchpadAction scratchpads "passman")
   , ("M-p"           , namedScratchpadAction scratchpads "volume")
-  , ("M-x"         , namedScratchpadAction scratchpads "top")
+  , ("M-x"           , namedScratchpadAction scratchpads "top")
   , ("M-f"           , namedScratchpadAction scratchpads "file")
   , ("M-<Backspace>" , kill)
   , ("M-<Tab>"       , sendMessage NextLayout)
@@ -83,8 +85,8 @@ myKeys =
   , ("M-<U>"         , sendMessage $ pullGroup U)
   , ("M-<D>"         , sendMessage $ pullGroup D)
   , ("M-u"           , withFocused $ sendMessage . UnMerge)
-  , ("M-C-j"           , onGroup W.focusDown')
-  , ("M-C-k"           , onGroup W.focusDown')
+  , ("M-C-j"         , onGroup W.focusDown')
+  , ("M-C-k"         , onGroup W.focusDown')
   , ("M-s"           , dwmpromote)
   , ("M-S-f"         , sendMessage $ JumpToLayout "Full")
   , ("M-S-t"         , sendMessage $ JumpToLayout "Tall")
@@ -96,7 +98,7 @@ myKeys =
 myLayout = let full = R.renamed [R.Replace "Full"] Full --for jumpToLayout
 
                dwind = R.renamed [R.Replace "Dwindle"]
-                    $ mySpacing 6
+                     $ mySpacing 6
                      $ Dwindle R CW 1.1 1.1
 
                wide = R.renamed [R.Replace "Wide"]
@@ -142,26 +144,33 @@ myManageHook = composeAll
                , className =? "download" --> doFloat
                , className =? "error" --> doFloat
                , title     =? "vencorddesktop" --> doShift (myWorkspaces !! 1)
-               ] <+> namedScratchpadManageHook scratchpads
+               , className =? "float" --> MH.doRectFloat ( W.RationalRect 0.25 0.25 0.5 0.5)
+               ]
+               <+>
+               namedScratchpadManageHook scratchpads
+
 
 --eventhook
 myHandleEventHook = swallowEventHook (className =? myTerminal <||> className =? "Termite") $ return True
 
 --startuphook
 myStartupHook = do
-  spawnOnce "~/.fehbg &"
+  --spawnOnce "setbg&"
   setWMName "LG3D"
 
 --statusbar
 
 mySB = let myPP = filterOutWsPP[scratchpadWorkspaceTag] $ def{
-                   ppHiddenNoWindows = xmobarColor color03 ""
-                 , ppCurrent = xmobarColor color05 "" . wrap ("<box type=Bottom width=2 mb=1 color=" ++ color0E ++ ">") "</box>"
+                   --ppHiddenNoWindows = xmobarColor color03 ""
+                  --ppCurrent = xmobarColor color05 "" . wrap ("<box type=Bottom width=2 mb=1 color=" ++ color0E ++ ">") "</box>"
+                  ppCurrent = xmobarColor color00 color0E . pad
+                  --ppCurrent = xmobarBorder "Full" color05 2
                  , ppHidden = xmobarColor color05  ""
-                 , ppTitle = xmobarColor color0E "" . shorten 30
-                 --, ppSep =  "<fc=" ++ color0E ++ "> <fn=1>:</fn> </fc>" , ppLayout = xmobarColor color0E ""
-                 , ppSep = "  "
-                 , ppOrder = \(ws:l:_:_)  -> [ws,l] -- ++ [t]
+                 , ppTitle = xmobarColor color05 "" . shorten 30
+                 , ppLayout = xmobarColor color00 color0E . pad
+                 --, ppSep =  "<fc=" ++ color05 ++ "> <fn=1>|<fn> </fc>"
+                 , ppSep =  "<fc=" ++ color0E ++ "> <fn=1>|</fn> </fc>"
+                 , ppOrder = \(ws:l:t:_)  -> [ws,l,t] -- ++ [t]
                  }
        in statusBarProp "xmobar" $ clickablePP myPP
 
