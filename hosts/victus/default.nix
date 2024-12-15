@@ -9,7 +9,7 @@
 
   stylix = {
     base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-    image = ./wall.jpg;
+    image = ../../home-manager/wall.jpg;
   };
 
   hardware = {
