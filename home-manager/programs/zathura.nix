@@ -1,4 +1,3 @@
-{ config, ... }:
 {
   programs.zathura = {
     enable = true;
@@ -11,8 +10,6 @@
       d = "scroll half-down";
     };
     options = {
-      default-bg = "#${config.colorScheme.palette.base00}";
-      default-fg = "#${config.colorScheme.palette.base0E}";
       page-padding = 1;
       adjust-open = "best-fit";
       selection-clipboard = "clipboard";

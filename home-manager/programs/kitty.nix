@@ -3,6 +3,11 @@
   programs.kitty = {
     enable = true;
     settings = {
+      window_padding_width = 10;
+      confirm_os_window_close = 0;
+      disable_ligatures = "never";
+      tab_bar_edge = "bottom";
+
       foreground = "#${config.colorScheme.palette.base05}";
       background = "#${config.colorScheme.palette.base00}";
       color0 = "#${config.colorScheme.palette.base00}";
@@ -15,17 +20,16 @@
       color7 = "#${config.colorScheme.palette.base05}";
     };
     font = {
-      name = lib.mkForce "mononoki";
-      size = lib.mkForce 16;
+      name = lib.mkForce "JetBrainsMono Nerd Font Mono";
+      size = lib.mkForce 14;
     };
     shellIntegration = {
       enableZshIntegration = true;
     };
     extraConfig = ''
-      window_padding_width 10
       background_opacity 0.85
-      confirm_os_window_close 0
       enable_audio_bell no
+      allow_remote_control yes
     '';
   };
 }
