@@ -8,7 +8,6 @@
 {
   imports = [
     ./configuration.nix
-    ./hardware-configuration.nix
     ./auth.nix
     ./audio.nix
     ./fonts.nix
