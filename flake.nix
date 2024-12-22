@@ -68,6 +68,7 @@
       nixosConfigurations = {
         sig = mkNixosConfig "sig" ./hosts/victus/default.nix ./hosts/victus/home.nix;
         vm = mkNixosConfig "vm" ./hosts/victus/default.nix ./hosts/victus/home.nix;
+        thinkpad = mkNixosConfig "swag" ./hosts/thinkpad/default.nix ./hosts/thinkpad/home.nix;
       };
     };
 }
