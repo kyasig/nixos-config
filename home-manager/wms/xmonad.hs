@@ -3,6 +3,9 @@ import Data.Maybe
 import XMonad
 import XMonad.Actions.CycleWorkspaceByScreen
 import XMonad.Actions.DwmPromote
+import XMonad.Actions.FindEmptyWorkspace
+import XMonad.Actions.WithAll
+import XMonad.Actions.MouseResize
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -21,8 +24,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.SimpleDecoration
 import XMonad.Layout.Simplest
 import XMonad.Layout.Spacing
-import XMonad.Layout.SubLayouts
-import XMonad.Layout.Tabbed
+import XMonad.Layout.ThreeColumns
 import XMonad.ManageHook
 import qualified XMonad.StackSet as W
 import XMonad.Util.ClickableWorkspaces
@@ -43,10 +45,9 @@ myPassMan = "bitwarden"
 
 myRunCmd = "rofi -show drun"
 
--- myWorkspaces = ["壹","貳","叄","肆","伍","陸","柒","捌","玖"]
 myWorkspaces = show <$> [1 .. 9]
 
-myBorderWidth = 3
+myBorderWidth = 4
 
 myNormalBorderColor = color00
 
@@ -63,13 +64,16 @@ myKeys =
     ("M-C-b", spawn "bm"),
     ("M-C-s", spawn "scrnsht save"),
     ("M-C-c", spawn "scrnsht copy"),
-    ("<F3>", spawn "brightnessctl set +5"),
-    ("<F2>", spawn "brightnessctl set 5-"),
+    ("M-<F3>", spawn "brightnessctl set +5"),
+    ("M-<F2>", spawn "brightnessctl set 5-"),
+    ("M-<F7>", spawn "amixer set Master 2%+"),
+    ("M-<F6>", spawn "amixer set Master 2%-"),
     ("M-0", namedScratchpadAction scratchpads "term"),
     ("M-p", namedScratchpadAction scratchpads "volume"),
     ("M-x", namedScratchpadAction scratchpads "top"),
     ("M-f", namedScratchpadAction scratchpads "file"),
     ("M-<Backspace>", kill),
+    ("M-S-<Backspace>", killAll),
     ("M-<Tab>", sendMessage NextLayout),
     ("M-h", sendMessage Shrink),
     ("M-l", sendMessage Expand),
@@ -85,39 +89,33 @@ myKeys =
     ("M-s", dwmpromote),
     ("M-S-f", sendMessage $ JumpToLayout "Full"),
     ("M-S-t", sendMessage $ JumpToLayout "Tall"),
-    ("M-S-d", sendMessage $ JumpToLayout "Dwindle"),
+    ("M-S-d", sendMessage $ JumpToLayout "Dwind"),
     ("M-S-w", sendMessage $ JumpToLayout "Wide"),
-    ("M-v", cycleWorkspaceOnCurrentScreen [xK_c] xK_v xK_grave)
+    ("M-S-m", sendMessage $ JumpToLayout "Threecol"),
+    ("M-v", cycleWorkspaceOnCurrentScreen [xK_c] xK_v xK_grave),
+    ("M-n", viewEmptyWorkspace),
+    ("M-C-n", tagToEmptyWorkspace),
+    ("M-C-t", sinkAll)
   ]
 
 -- layouts
 myLayout =
-  let full = R.renamed [R.Replace "Full"] Full -- for jumpToLayout
+  let full = R.named "Full" $ noBorders Full -- for jumpToLayout
       dwind =
-        R.renamed [R.Replace "Dwindle"] $
-          mySpacing 6 $
-            Dwindle R CW 1.1 1.1
+        R.named "Dwind" $ Dwindle R CW 1.1 1.1
       wide =
-        R.renamed [R.Replace "Wide"] $
-          Mirror tall
+        R.named "Wide" $ Mirror tall
       tall =
-        R.renamed [R.Replace "Tall"] $
-          mySpacing 6 $
-            ResizableTall 1 (3 / 100) (1 / 2) []
-
-      mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+        R.named "Tall" $ ResizableTall 1 (3 / 100) (1 / 2) []
+      threecol = R.named "Threecol" $ ThreeColMid 1 (3/100) (1/2)
    in lessBorders OnlyScreenFloat $
-        avoidStruts (tall ||| dwind ||| wide) ||| noBorders full
+        avoidStruts
+          ( R.renamed [R.CutWordsLeft 1] $
+              spacingRaw False (Border 6 6 6 6) True (Border 6 6 6 6) True $
+                tall ||| dwind ||| wide ||| threecol
+          )
+          ||| full
 
--- scratchpads-
-scratchpads =
-  let customFloat = customFloating $ W.RationalRect (1 / 12) (1 / 10) (5 / 6) (5 / 6)
-   in [ NS "term" (myTerminal ++ " -T term") (title =? "term") customFloat,
-        NS "passman" myPassMan (className =? myPassMan) customFloat,
-        NS "volume" (myTerminal ++ " -T volume -e pulsemixer") (title =? "volume") customFloat,
-        NS "top" (myTerminal ++ " -T top -e btop") (title =? "top") customFloat,
-        NS "file" (myTerminal ++ " -T file -e " ++ myFileMan) (title =? "file") customFloat
-      ]
 
 -- managehook
 myManageHook =
@@ -127,10 +125,20 @@ myManageHook =
       className =? "dialog" --> doFloat,
       className =? "download" --> doFloat,
       className =? "error" --> doFloat,
+      className =? "freetube" --> MH.doSink,
       className =? "vesktop" --> doShift (myWorkspaces !! 1),
       className =? "float" --> MH.doRectFloat (W.RationalRect 0.25 0.25 0.5 0.5)
     ]
     <+> namedScratchpadManageHook scratchpads
+  where
+scratchpads =
+  let customFloat = customFloating $ W.RationalRect (1 / 12) (1 / 10) (5 / 6) (5 / 6)
+   in [ NS "term" (myTerminal ++ " -T term") (title =? "term") customFloat,
+        NS "passman" myPassMan (className =? myPassMan) customFloat,
+        NS "volume" (myTerminal ++ " -T volume -e pulsemixer") (title =? "volume") customFloat,
+        NS "top" (myTerminal ++ " -T top -e btop") (title =? "top") customFloat,
+        NS "file" (myTerminal ++ " -T file -e " ++ myFileMan) (title =? "file") customFloat
+      ]
 
 -- eventhook
 myHandleEventHook = swallowEventHook (className =? myTerminal) $ return True
@@ -144,19 +152,20 @@ myStartupHook = do
 mySB =
   statusBarProp "xmobar" $
     clickablePP $ -- lifts pp to X pp
-      filterOutWsPP [scratchpadWorkspaceTag] $
+      filterOutWsPP [scratchpadWorkspaceTag] $ --xmobarPP
         def
           { ppCurrent = xmobarColor color00 color0E . pad,
             ppHidden = xmobarColor color05 "",
-            ppTitle = xmobarColor color05 "",
+            ppTitle = xmobarColor color05 "" . shorten 40,
             ppLayout =
               ( \x -> case x of
                   "Tall" -> "[]="
                   "Wide" -> "TTT"
-                  "Dwindle" -> "[@]"
+                  "Dwind" -> "[@]"
+                  "Threecol" -> "|||"
                   _ -> x
               ),
-            ppSep = "<fc=" ++ color0E ++ "> <fn=1>|</fn> </fc>",
+            ppSep = "  ",
             ppOrder = \(ws : l : t : _) -> [ws, l, t] -- ++ [t]
           }
 
