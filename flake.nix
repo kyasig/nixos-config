@@ -14,10 +14,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     };
     nix-colors.url = "github:misterio77/nix-colors";
-    wfetch = {
-      url = "github:iynaix/wfetch";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,8 +42,8 @@
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
+                #useGlobalPkgs = true;
+                #useUserPackages = true;
                 backupFileExtension = ".bak";
                 extraSpecialArgs = {
                   inherit user inputs;

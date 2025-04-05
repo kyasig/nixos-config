@@ -41,7 +41,7 @@
       ntfs3g
       nh
       nixfmt-rfc-style
-      inputs.wfetch.packages.${pkgs.system}.default
+      #inputs.wfetch.packages.${pkgs.system}.default
     ];
   };
   programs.nano.enable = false;
