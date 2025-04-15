@@ -14,7 +14,6 @@
 
   boot.tmp.cleanOnBoot = true; # this is somehow not on by default
 
-  nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
   networking.hostName = "${host}";
@@ -57,6 +56,7 @@
       sizes = {
         applications = 10;
         popups = 10;
+        terminal = 14;
       };
       monospace = {
         package = pkgs.nerd-fonts.jetbrains-mono;
@@ -65,6 +65,10 @@
       serif = config.stylix.fonts.monospace;
       sansSerif = config.stylix.fonts.monospace;
       emoji = config.stylix.fonts.monospace;
+    };
+    opacity.terminal = 0.90;
+    override = {
+      #base0E = "f3b8e4";
     };
   };
 

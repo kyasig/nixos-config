@@ -12,6 +12,7 @@
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
     nixvim = {
@@ -23,11 +24,15 @@
     { self, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       user = "ky";
       mkNixosConfig =
         host: conf: home:
         lib.nixosSystem {
-          inherit system;
+          inherit pkgs;
           specialArgs = {
             inherit
               self
@@ -42,8 +47,8 @@
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
-                #useGlobalPkgs = true;
-                #useUserPackages = true;
+                useGlobalPkgs = true;
+                useUserPackages = true;
                 backupFileExtension = ".bak";
                 extraSpecialArgs = {
                   inherit user inputs;

@@ -5,12 +5,13 @@
     ./hardware-configuration.nix
   ];
 
+  #nixpkgs.config.allowUnfree = true;
 
   nvidia.enable = true;
 
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
-    image = ../../home-manager/wall.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    image = ./wall.jpg;
   };
 
   hardware = {
@@ -33,14 +34,14 @@
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
 
   services.udev.packages = with pkgs; [
-    platformio-core.udev
+    #platformio-core.udev
     android-udev-rules
   ];
   environment = {
     systemPackages = with pkgs; [
-      cups-toshiba-estudio
-      cups-filters
-      canon-cups-ufr2
+      #cups-toshiba-estudio
+      #cups-filters
+      #canon-cups-ufr2
     ];
   };
 }
