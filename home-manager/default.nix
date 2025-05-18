@@ -1,23 +1,22 @@
-{ pkgs, inputs, ... }:
+{ pkgs, user, inputs,... }:
 {
   imports = [
     ./wms
     ./shell
     ./programs
-    inputs.nix-colors.homeManagerModules.default
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   home = {
-    username = "ky";
-    homeDirectory = "/home/ky";
+    username = user;
+    homeDirectory = "/home/${user}";
     stateVersion = "23.11"; # dont change xd
     packages = with pkgs; [
+      texliveSmall
       fwupd
       dmenu
       mpv
       pulsemixer
+      alsa-utils
       xclip
       zathura
       exif
@@ -35,6 +34,11 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+    };
+  };
+  stylix = {
+    targets = {
+      neovim.enable = false;
     };
   };
 
