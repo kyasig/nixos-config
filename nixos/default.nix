@@ -25,7 +25,7 @@
       EDITOR = "nvim";
       VISUAL = "nvim";
       NIXPKGS_ALLOW_UNFREE = "1";
-      FLAKE = "/home/${user}/nixos-config";
+      NH_FLAKE = "/home/${user}/nixos-config";
     };
     systemPackages = with pkgs; [
       firefox
