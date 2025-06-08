@@ -1,4 +1,3 @@
-{ ... }:
 {
   imports = [
     ./kitty.nix
@@ -8,5 +7,6 @@
     ./qutebrowser.nix
     ./gtk.nix
     ./firefox
+    ./notifications.nix
   ];
 }
