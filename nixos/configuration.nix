@@ -6,13 +6,22 @@
   ...
 }:
 {
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.supportedFilesystems = [
-    "btrfs"
-    "ext4"
-  ];
+  boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    supportedFilesystems = [
+      "btrfs"
+      "ext4"
+    ];
+    kernelModules = ["v4l2loopback"];
+    extraModulePackages = with config.boot.kernelPackages; [
+     v4l2loopback
+    ];
+    tmp.cleanOnBoot = true; # this is somehow not on by default
+    extraModprobeConfig = ''
+    options v4l2loopback video_nr=2 card_label="OBS Virtual Camera" exclusive_caps=1
+  '';
+  };
 
-  boot.tmp.cleanOnBoot = true; # this is somehow not on by default
 
 
   networking.networkmanager.enable = true;
