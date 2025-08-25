@@ -5,13 +5,12 @@
     ./hardware-configuration.nix
   ];
 
-  #nixpkgs.config.allowUnfree = true;
-
   nvidia.enable = true;
 
   stylix = {
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    image = ./wall.jpg;
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+    image = ../../home-manager/wall.jpg;
   };
 
   hardware = {

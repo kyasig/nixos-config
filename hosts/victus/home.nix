@@ -1,23 +1,26 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../home-manager/default.nix
   ];
 
-  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-hard;
+
+  stylix = {
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/oxocarbon-dark.yaml";
+  };
 
   home.packages = with pkgs; [
     obs-studio
-    vesktop
+    v4l-utils
+    #vesktop
+    discord
     telegram-desktop
     freetube
-    gimp
-    mousam
     vlc
     thunderbird
-    texliveSmall
-    texlivePackages.latexmk
-    latexrun
+    #texliveSmall
+    #texlivePackages.latexmk
+    #latexrun
     qbittorrent
   ];
 }
