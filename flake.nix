@@ -56,7 +56,7 @@
                 };
                 users.${user} = {
                   imports = [
-                    inputs.nixvim.homeManagerModules.nixvim
+                    inputs.nixvim.homeModules.nixvim
                     inputs.nixmobar.homeModules.mainmodule
                     home
                   ];
