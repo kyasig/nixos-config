@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
   ];
 
-  nvidia.enable = true;
+  nvidia.enable = false;
 
   stylix = {
     enable = true;
@@ -34,7 +34,6 @@
 
   services.udev.packages = with pkgs; [
     #platformio-core.udev
-    android-udev-rules
   ];
   environment = {
     systemPackages = with pkgs; [

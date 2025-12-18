@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   programs.rofi = {
     enable = true;
@@ -22,21 +27,21 @@
           #highlight = "bold italic";
           scrollbar = false;
 
-          #background-color = mkLiteral "#${config.colorScheme.palette.base00}";
-          #background2 = mkLiteral "#${config.colorScheme.palette.base01}";
-          #foreground-color = mkLiteral "#${config.colorScheme.palette.base06}";
-          #highlight = mkLiteral "#${config.colorScheme.palette.base0E}";
+          background-color = lib.mkDefault(mkLiteral "#${config.lib.stylix.colors.base00}");
+          background2 = lib.mkDefault ( mkLiteral "#${config.lib.stylix.colors.base01}");
+          foreground-color = lib.mkDefault (mkLiteral "#${config.lib.stylix.colors.base06}");
+          highlight = lib.mkDefault (mkLiteral "#${config.lib.stylix.colors.base0E}");
         };
         "window" = {
           #background-color = mkLiteral "@background-color";
-          border = 1;
+          border = 2;
           padding = 2;
-          #border-color = mkLiteral "@highlight";
+          border-color = mkLiteral "@highlight";
         };
-        "mainbox" = {
-          border = 0;
-          padding = 0;
-        };
+        #"mainbox" = {
+        #  border = 0;
+        #  padding = 0;
+        #};
 
         "message" = {
           #border = mkLiteral "2px 0 0";
@@ -50,11 +55,11 @@
         };
 
         "listview" = {
-          border = mkLiteral "2px solid 0 0";
-          padding = mkLiteral "2px 0 0";
-          #border-color = mkLiteral "@background2";
-          spacing = mkLiteral "2px";
-          scrollbar = mkLiteral "@scrollbar";
+          #border = mkLiteral "2px solid 0 0";
+          #padding = mkLiteral "2px 0 0";
+          ##border-color = mkLiteral "@background2";
+          #pacing = mkLiteral "2px";
+          #scrollbar = mkLiteral "@scrollbar";
         };
 
         "element" = {
@@ -62,69 +67,71 @@
           padding = mkLiteral "2px";
           orientation = mkLiteral "horizontal";
           spacing = mkLiteral "5px";
+          children = mkLiteral "[element-text ]";
+          #text-color = mkLiteral "@foreground-color";
         };
 
         "element.normal.normal" = {
-          #background-color = mkLiteral "@background-color";
-          #text-color = mkLiteral "@foreground-color";
+          background-color = mkLiteral "@background-color";
+          text-color = mkLiteral "@foreground-color";
         };
 
-        #"element.normal.urgent" = {
-        #  background-color = mkLiteral "@urgent-background";
-        #  text-color = mkLiteral "@urgent-foreground";
-        #};
+        "element.normal.urgent" = {
+          background-color = mkLiteral "@urgent-background";
+          text-color = mkLiteral "@urgent-foreground";
+        };
 
         "element.normal.active" = {
-          #background-color = mkLiteral "@background-color";
-          #text-color = mkLiteral "@foreground-color";
+          background-color = mkLiteral "@background-color";
+          text-color = mkLiteral "@foreground-color";
         };
 
         "element.selected.normal" = {
-          #background-color = mkLiteral "@highlight";
-          #text-color = mkLiteral "@foreground-color";
+          background-color = mkLiteral "@highlight";
+          text-color = mkLiteral "@foreground-color";
         };
 
         "element.selected.active" = {
-          #background-color = mkLiteral "@background-color";
+          background-color = mkLiteral "@background-color";
           #text-color = mkLiteral "@foreground-color";
         };
 
         "element.alternate.normal" = {
-          #background-color = mkLiteral "@background-color";
-          #text-color = mkLiteral "@foreground-color";
+          background-color = mkLiteral "@background-color";
+          text-color = mkLiteral "@foreground-color";
         };
 
         "element.alternate.active" = {
-          #background-color = mkLiteral "@background-color";
-          #text-color = mkLiteral "@foreground-color";
+          background-color = mkLiteral "@background-color";
+          text-color = mkLiteral "@foreground-color";
         };
 
-        #"mode-switcher" = {
-        #  border = mkLiteral "2px 0 0";
-        #  border-color = mkLiteral "@separatorcolor";
-        #};
+        "mode-switcher" = {
+          border = mkLiteral "2px 0 0";
+          border-color = mkLiteral "@separatorcolor";
+        };
 
         "inputbar" = {
-          spacing = mkLiteral "0";
-          #text-color = mkLiteral "@foreground-color";
+          #spacing = mkLiteral "0";
+          # text-color = mkLiteral "@foreground-color";
           padding = mkLiteral "2px";
           children = mkLiteral "[ prompt, textbox-prompt-sep, entry, case-indicator ]";
         };
 
         "case-indicator,\nentry,\nprompt,\nbutton" = {
           spacing = mkLiteral "0";
-          #text-color = mkLiteral "@foreground-color";
+          text-color = mkLiteral "@foreground-color";
         };
 
         "textbox-prompt-sep" = {
           expand = false;
           str = mkLiteral ''":"'';
-          #text-color = mkLiteral "@foreground-color";
+          text-color = mkLiteral "@foreground-color";
           margin = mkLiteral "0 0.3em 0 0";
         };
         "element-text" = {
-          #background-color = mkLiteral "inherit";
-          #text-color = mkLiteral "inherit";
+          kackground-color = mkLiteral "inherit";
+          text-color = mkLiteral "inherit";
         };
       };
     terminal = "${pkgs.kitty}";

@@ -7,6 +7,7 @@
 }:
 {
   boot = {
+    loader.generationsDir.copyKernels = false;
     kernelPackages = pkgs.linuxPackages_zen;
     supportedFilesystems = [
       "btrfs"
@@ -59,7 +60,6 @@
   };
 
   stylix = {
-    enable = true;
     polarity = "dark";
     fonts = {
       sizes = {

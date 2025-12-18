@@ -1,10 +1,10 @@
-{ config, ... }:
+{ config, lib,... }:
 {
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
     settings = {
-      palette = "dynamic";
+      palette = lib.mkForce "dynamic";
       scan_timeout = 10;
       character = {
         success_symbol = " [╰─⮞  ](bold magenta)";
@@ -86,32 +86,32 @@
         disabled = false;
       };
       git_status = {
-        disabled = true;
-        stashed = " 󰿺";
-        modified = " 󱞁";
-        untracked = " 󱙓";
-        deleted = " 󱙑";
-        renamed = " 󱙓";
-        staged = " 󰎜";
-        style = "white";
+        disabled = false;
+        #stashed = " 󰿺";
+        #modified = " 󱞁";
+        #untracked = " 󱙓";
+        #deleted = " 󱙑";
+        #renamed = " 󱙓";
+        #staged = " 󰎜";
+        #style = "white";
       };
       palettes.dynamic = {
-        fg = "#${config.colorScheme.palette.base06}";
-        bg = "#${config.colorScheme.palette.base00}";
-        red = "#${config.colorScheme.palette.base08}";
-        yellow = "#${config.colorScheme.palette.base0A}";
-        dark-yellow = "#${config.colorScheme.palette.base0A}";
-        green = "#${config.colorScheme.palette.base0B}";
-        dark-green = "#${config.colorScheme.palette.base0B}";
-        cyan = "#${config.colorScheme.palette.base0C}";
-        dark-cyan = "#${config.colorScheme.palette.base0C}";
-        blue = "#${config.colorScheme.palette.base0D}";
-        dark-blue = "#${config.colorScheme.palette.base0D}";
-        magenta = "#${config.colorScheme.palette.base0E}";
-        dark-magenta = "#${config.colorScheme.palette.base0E}";
-        orange = "#${config.colorScheme.palette.base09}";
-        gray = "#${config.colorScheme.palette.base03}";
-        dark-gray = "#${config.colorScheme.palette.base02}";
+        fg = "#${config.lib.stylix.colors.base06}";
+        bg = "#${config.lib.stylix.colors.base00}";
+        red = "#${config.lib.stylix.colors.base08}";
+        yellow = "#${config.lib.stylix.colors.base0A}";
+        dark-yellow = "#${config.lib.stylix.colors.base0A}";
+        green = "#${config.lib.stylix.colors.base0B}";
+        dark-green = "#${config.lib.stylix.colors.base0B}";
+        cyan = "#${config.lib.stylix.colors.base0C}";
+        dark-cyan = "#${config.lib.stylix.colors.base0C}";
+        blue = "#${config.lib.stylix.colors.base0D}";
+        dark-blue = "#${config.lib.stylix.colors.base0D}";
+        magenta = "#${config.lib.stylix.colors.base0E}";
+        dark-magenta = "#${config.lib.stylix.colors.base0E}";
+        orange = "#${config.lib.stylix.colors.base09}";
+        gray = "#${config.lib.stylix.colors.base03}";
+        dark-gray = "#${config.lib.stylix.colors.base02}";
       };
     };
   };
